@@ -3,14 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيق الطائف - محمد هشام لإدارة الذهب القديم</title>
-    <!-- Tailwind CSS -->
+    <title>الطائف - إدارة الحسابات</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Font Cairo -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
     <script>
         tailwind.config = {
             theme: {
@@ -33,7 +29,7 @@
         ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col pb-20 md:pb-0">
+<body class="min-h-screen flex flex-col">
 
     <!-- LOGIN OVERLAY -->
     <div id="loginModal" class="fixed inset-0 z-50 bg-dark-900 flex items-center justify-center p-4">
@@ -42,77 +38,66 @@
                 <i class="fa-solid fa-gem"></i>
             </div>
             <div>
-                <h2 class="text-2xl font-black gold-text-gradient">تطبيق الطائف للذهب القديم</h2>
-                <p class="text-xs text-gray-400 mt-1">إدارة أ. محمد هشام المحاسبية</p>
+                <h2 class="text-2xl font-black gold-text-gradient">الطائف</h2>
+                <p class="text-xs text-gray-400 mt-1">تسجيل الدخول للنظام</p>
             </div>
             <div class="space-y-4 text-right">
                 <div>
-                    <label class="block text-xs font-bold text-gray-300 mb-2">كلمة المرور (الافتراضية: 1234)</label>
-                    <input type="password" id="loginPasswordInput" placeholder="أدخل كلمة المرور..." 
-                        class="w-full bg-dark-900 border border-gray-700 focus:border-gold rounded-xl p-3 text-center text-lg font-bold text-white focus:outline-none">
+                    <label class="block text-xs font-bold text-gray-300 mb-1">اسم المستخدم (Username)</label>
+                    <input type="text" id="loginUsernameInput" value="mohamed" class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-white font-bold focus:outline-none">
                 </div>
-                <button onclick="handleLogin()" class="w-full gold-gradient text-dark-900 font-extrabold py-3.5 rounded-xl shadow-lg transition">
-                    تسجيل الدخول <i class="fa-solid fa-right-to-bracket mr-2"></i>
-                </button>
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 mb-1">كلمة المرور (Password)</label>
+                    <input type="password" id="loginPasswordInput" placeholder="1234" class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-center text-lg font-bold text-white focus:outline-none">
+                </div>
+                <button onclick="handleLogin()" class="w-full gold-gradient text-dark-900 font-extrabold py-3.5 rounded-xl shadow-lg transition">دخول النظام</button>
             </div>
         </div>
     </div>
 
     <!-- INITIAL CAPITAL SETUP MODAL -->
-    <div id="capitalModal" class="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div id="capitalModal" class="fixed inset-0 z-40 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-dark-800 border border-emerald-500/40 rounded-2xl p-8 max-w-md w-full shadow-2xl text-center space-y-6">
             <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full mx-auto flex items-center justify-center text-3xl font-extrabold">
                 <i class="fa-solid fa-vault"></i>
             </div>
             <div>
-                <h2 class="text-2xl font-black text-white">تحديد رأس المال الافتتاحي</h2>
-                <p class="text-xs text-gray-400 mt-1">يرجى تسجيل المبلغ النقدي الابتدائي المتاح في خزينة المحل (EGP)</p>
+                <h2 class="text-2xl font-black text-white">رأس المال الافتتاحي للخزينة</h2>
+                <p class="text-xs text-gray-400 mt-1">المبلغ النقدي المتاح لبدء الحسابات (EGP)</p>
             </div>
             <div class="space-y-4 text-right">
-                <div>
-                    <label class="block text-xs font-bold text-gray-300 mb-2">المبلغ بالجنيه المصري</label>
-                    <input type="number" id="initialCapitalInput" value="100000" step="1000"
-                        class="w-full bg-dark-900 border border-emerald-500/50 focus:border-emerald-400 rounded-xl p-3 text-center text-xl font-black text-emerald-400 focus:outline-none">
-                </div>
-                <button onclick="saveInitialCapital()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3.5 rounded-xl shadow-lg transition">
-                    تأكيد وبدء العمل <i class="fa-solid fa-check-circle mr-2"></i>
-                </button>
+                <input type="number" id="initialCapitalInput" value="100000" step="1000" class="w-full bg-dark-900 border border-emerald-500/50 rounded-xl p-3 text-center text-xl font-black text-emerald-400">
+                <button onclick="saveInitialCapital()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3.5 rounded-xl transition">بدء العمل</button>
             </div>
         </div>
     </div>
 
-    <!-- MAIN HEADER -->
-    <header class="bg-dark-800 border-b border-gold/30 sticky top-0 z-30 shadow-xl">
+    <!-- HEADER WITH TOP NAVIGATION -->
+    <header class="bg-dark-800 border-b border-gold/35 sticky top-0 z-30 shadow-xl">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
-            
             <div class="flex items-center space-x-3 space-x-reverse">
                 <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center text-dark-900 font-bold text-xl shadow-md">
                     <i class="fa-solid fa-coins"></i>
                 </div>
                 <div>
-                    <h1 class="font-extrabold text-lg gold-text-gradient leading-none">الطائف - إدارة الذهب القديم</h1>
-                    <span class="text-xs text-gray-400">حسابات: أ. محمد هشام</span>
+                    <h1 class="font-extrabold text-lg gold-text-gradient leading-none">الطائف</h1>
+                    <span class="text-xs text-gray-400">إدارة: أ. محمد هشام</span>
                 </div>
             </div>
 
-            <!-- Master Prices Ticker (C21 Anchor) -->
-            <div class="flex items-center gap-3 bg-dark-900 px-4 py-2 rounded-xl border border-gold/30 flex-1 max-w-xl justify-around">
+            <div class="flex items-center gap-3 bg-dark-900 px-4 py-2 rounded-xl border border-gold/30">
                 <div class="flex items-center gap-2">
-                    <label for="priceK21" class="text-xs font-bold text-gold flex items-center gap-1">
-                        <i class="fa-solid fa-crown text-[10px]"></i> عيار 21:
-                    </label>
-                    <input type="number" id="priceK21" value="3800" step="0.1"
-                        class="w-24 bg-dark-800 border border-gold/50 text-gold font-extrabold text-center rounded px-2 py-1 text-sm focus:outline-none"
-                        oninput="updateKaratPricesFrom21(this.value)">
+                    <label class="text-xs font-bold text-gold">عيار 21:</label>
+                    <input type="number" id="priceK21" value="3800" step="0.1" class="w-20 bg-dark-800 border border-gold/50 text-gold font-extrabold text-center rounded px-2 py-1 text-sm" oninput="updateKaratPricesFrom21(this.value)">
                     <span class="text-xs text-gray-400">ج.م</span>
                 </div>
-                <div class="text-center">
+                <div class="text-center px-2 border-r border-gray-700">
                     <span class="text-[10px] text-gray-400 block">عيار 24</span>
-                    <span id="priceK24Display" class="font-bold text-sm text-gray-200">4342.86</span>
+                    <span id="priceK24Display" class="font-bold text-xs text-gray-200">4342.86</span>
                 </div>
-                <div class="text-center">
+                <div class="text-center px-2 border-r border-gray-700">
                     <span class="text-[10px] text-gray-400 block">عيار 18</span>
-                    <span id="priceK18Display" class="font-bold text-sm text-gray-200">3257.14</span>
+                    <span id="priceK18Display" class="font-bold text-xs text-gray-200">3257.14</span>
                 </div>
             </div>
 
@@ -120,298 +105,406 @@
                 <i class="fa-solid fa-power-off"></i> خروج
             </button>
         </div>
+
+        <!-- TOP NAVIGATION -->
+        <div class="bg-dark-900 border-t border-gray-800 px-4 py-2 flex overflow-x-auto gap-2 justify-start md:justify-center" id="topNav">
+            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-gold text-dark-900 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-chart-pie"></i> الرئيسية</button>
+            <button onclick="switchTab('buy')" id="nav-buy" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-cart-plus text-emerald-400"></i> شراء</button>
+            <button onclick="switchTab('sell')" id="nav-sell" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-cash-register text-blue-400"></i> بيع</button>
+            <button onclick="switchTab('inventory')" id="nav-inventory" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-boxes-stacked text-gold"></i> المخزون</button>
+            <button onclick="switchTab('vault')" id="nav-vault" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-vault text-purple-400"></i> الخزينة</button>
+            <button onclick="switchTab('calc')" id="nav-calc" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-calculator text-amber-400"></i> الآلة الحاسبة</button>
+            <button onclick="switchTab('rent')" id="nav-rent" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-file-invoice-dollar text-emerald-400"></i> إيجار المحل</button>
+        </div>
     </header>
 
-    <div class="flex-1 max-w-7xl w-full mx-auto flex flex-col md:flex-row gap-6 p-4">
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 space-y-6">
         
-        <!-- SIDEBAR NAVIGATION -->
-        <aside class="w-full md:w-64 bg-dark-800 rounded-2xl p-4 border border-gray-800 hidden md:block shrink-0 h-fit">
-            <nav class="space-y-2" id="desktopNav">
-                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition text-right font-semibold bg-gold text-dark-900">
-                    <i class="fa-solid fa-chart-pie w-5 text-center"></i>
-                    <span>لوحة التحكم والأرباح</span>
-                </button>
-                <button onclick="switchTab('buy')" id="nav-buy" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition text-right font-semibold text-gray-300 hover:bg-dark-700">
-                    <i class="fa-solid fa-cart-plus w-5 text-center text-emerald-400"></i>
-                    <span>شراء ذهب (سريع ويدوي)</span>
-                </button>
-                <button onclick="switchTab('sell')" id="nav-sell" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition text-right font-semibold text-gray-300 hover:bg-dark-700">
-                    <i class="fa-solid fa-cash-register w-5 text-center text-blue-400"></i>
-                    <span>بيع قطع من المخزون</span>
-                </button>
-                <button onclick="switchTab('inventory')" id="nav-inventory" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition text-right font-semibold text-gray-300 hover:bg-dark-700">
-                    <i class="fa-solid fa-boxes-stacked w-5 text-center text-gold"></i>
-                    <span>جرد المخزون الفعلي</span>
-                </button>
-                <button onclick="switchTab('vault')" id="nav-vault" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition text-right font-semibold text-gray-300 hover:bg-dark-700">
-                    <i class="fa-solid fa-vault w-5 text-center text-purple-400"></i>
-                    <span>سجل الخزينة والأرباح</span>
-                </button>
-            </nav>
-        </aside>
+        <!-- DASHBOARD TAB -->
+        <section id="tab-dashboard" class="tab-content space-y-6">
+            <div class="bg-gradient-to-r from-dark-800 to-dark-700 p-6 rounded-2xl border border-gold/30 flex justify-between items-center flex-wrap gap-4 shadow-xl">
+                <div>
+                    <h2 class="text-2xl font-black text-white mb-1">أهلاً بك يا أستاذ محمد 👋</h2>
+                    <p class="text-xs text-gray-400">لوحة المتابعة الشاملة وأرباح المحل (تحكم يدوي مباشر)</p>
+                </div>
+                <div class="bg-dark-900/90 px-4 py-2 rounded-xl border border-gold/20 text-center">
+                    <span class="text-xs text-gray-400 block">إجمالي أوزان المخزون</span>
+                    <span id="dashTotalWeight" class="text-xl font-extrabold text-gold">0.00 جم</span>
+                </div>
+            </div>
 
-        <!-- MAIN CONTENT PANELS -->
-        <main class="flex-1 min-w-0">
-            
-            <!-- SECTION 1: DASHBOARD & PROFITS -->
-            <section id="tab-dashboard" class="tab-content space-y-6">
-                <div class="bg-gradient-to-r from-dark-800 to-dark-700 p-6 rounded-2xl border border-gold/30 flex justify-between items-center flex-wrap gap-4">
-                    <div>
-                        <h2 class="text-2xl font-black text-white mb-1">أهلاً بك، أ. محمد هشام 👋</h2>
-                        <p class="text-xs text-gray-400">لوحة المتابعة الشاملة وحسابات الأرباح الصافية</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-dark-800 p-5 rounded-2xl border border-emerald-500/40 shadow-lg space-y-2">
+                    <div class="flex justify-between items-start">
+                        <span class="text-gray-400 text-xs font-semibold">إجمالي الأرباح الصافية (تحكم يدوي)</span>
+                        <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-xl"><i class="fa-solid fa-chart-line"></i></div>
                     </div>
-                    <div class="bg-dark-900/80 px-4 py-2 rounded-xl border border-gold/20 text-center">
-                        <span class="text-xs text-gray-400 block">إجمالي أوزان المخزون</span>
-                        <span id="dashTotalWeight" class="text-xl font-extrabold text-gold">0.00 جرام</span>
-                    </div>
+                    <input type="number" id="manualTotalNetProfitInput" value="0" step="1" oninput="saveManualProfit(this.value)" class="w-full bg-dark-900 border border-emerald-500/50 text-emerald-400 font-black text-xl rounded-xl p-2.5 text-center focus:outline-none">
+                    <p class="text-[10px] text-gray-500">يمكنك كتابة وتعديل القيمة يدوياً في أي وقت</p>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="bg-dark-800 p-5 rounded-2xl border border-emerald-500/40 shadow-md">
-                        <div class="flex justify-between items-start mb-3">
-                            <span class="text-gray-400 text-xs font-semibold">إجمالي الأرباح الصافية المحققة</span>
-                            <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-xl"><i class="fa-solid fa-chart-line"></i></div>
-                        </div>
-                        <div id="dashTotalNetProfit" class="text-2xl font-black text-emerald-400">0 ج.م</div>
-                        <p class="text-[11px] text-gray-500 mt-2">صافي الربح من عمليات البيع</p>
+                <div onclick="switchTab('vault')" class="bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-emerald-500/50 cursor-pointer transition shadow-lg">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-gray-400 text-xs font-semibold">رصيد الخزينة النقدي</span>
+                        <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-xl"><i class="fa-solid fa-money-bill-wave"></i></div>
                     </div>
-
-                    <div onclick="switchTab('vault')" class="bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-emerald-500/50 cursor-pointer transition shadow-md">
-                        <div class="flex justify-between items-start mb-3">
-                            <span class="text-gray-400 text-xs font-semibold">رصيد الخزينة النقدي</span>
-                            <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-xl"><i class="fa-solid fa-money-bill-wave"></i></div>
-                        </div>
-                        <div id="dashVaultCash" class="text-2xl font-black text-emerald-400">0 ج.م</div>
-                        <p class="text-[11px] text-gray-500 mt-2">انقر لعرض حركة الخزينة</p>
-                    </div>
-
-                    <div onclick="switchTab('inventory')" class="bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-gold/50 cursor-pointer transition shadow-md">
-                        <div class="flex justify-between items-start mb-3">
-                            <span class="text-gray-400 text-xs font-semibold">قطع الذهب بالمخزون</span>
-                            <div class="p-2 bg-gold/10 text-gold rounded-xl"><i class="fa-solid fa-boxes-stacked"></i></div>
-                        </div>
-                        <div id="dashItemCount" class="text-2xl font-black text-white">0 قطعة</div>
-                        <p class="text-[11px] text-gray-500 mt-2">انقر لاستعراض الجرد</p>
-                    </div>
-
-                    <div onclick="switchTab('vault')" class="bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-purple-500/50 cursor-pointer transition shadow-md">
-                        <div class="flex justify-between items-start mb-3">
-                            <span class="text-gray-400 text-xs font-semibold">رأس المال المعتمد</span>
-                            <div class="p-2 bg-purple-500/10 text-purple-400 rounded-xl"><i class="fa-solid fa-building-columns"></i></div>
-                        </div>
-                        <div id="dashCapital" class="text-2xl font-black text-purple-300">0 ج.م</div>
-                        <p class="text-[11px] text-gray-500 mt-2">المبلغ الابتدائي للخزينة</p>
-                    </div>
+                    <div id="dashVaultCash" class="text-2xl font-black text-emerald-400">0 ج.م</div>
+                    <p class="text-[11px] text-gray-500 mt-2">اضغط لعرض السجل</p>
                 </div>
-            </section>
 
-            <!-- SECTION 2: BUY FORM -->
-            <section id="tab-buy" class="tab-content hidden space-y-6">
-                <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800">
-                    <h2 class="text-xl font-black text-white mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-cart-plus text-emerald-400"></i> شراء ذهب (تعديل سريع والكتابة اليدوية)
-                    </h2>
-                    <form id="buyForm" onsubmit="handleBuyGold(event)" class="space-y-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-bold text-gray-300 mb-1">عيار القطعة</label>
-                                <select id="buyKarat" onchange="calculateBuyTotal()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-bold">
-                                    <option value="21">عيار 21</option>
-                                    <option value="18">عيار 18</option>
-                                    <option value="24">عيار 24</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-gray-300 mb-1">الوزن القائم (جرام)</label>
-                                <input type="number" id="buyWeight" step="0.01" min="0.01" placeholder="مثال: 2.67" required oninput="calculateBuyTotal()"
-                                    class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-black text-lg">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-gold mb-1">اسم/وصف القطعة (كتابة يدوية)</label>
-                                <input type="text" id="buyManualItemName" placeholder="اكتب اسم القطعة هنا..." required
-                                    class="w-full bg-dark-900 border border-gold/60 text-white rounded-xl p-3">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-emerald-400 mb-1">تعديل مباشر: إجمالي السعر المدفوع (ج.م)</label>
-                                <input type="number" id="buyCustomTotalOverride" step="1" placeholder="اتركه فارغاً للحساب التلقائي" oninput="manualTotalChanged = true; calculateBuyTotal();"
-                                    class="w-full bg-dark-900 border border-emerald-500/60 text-emerald-400 rounded-xl p-3 font-black text-lg">
-                            </div>
-                        </div>
-
-                        <div class="bg-dark-900 p-4 rounded-xl border border-gold/30 my-4 space-y-2 text-xs">
-                            <div class="flex justify-between"><span class="text-gray-400">سعر السوق التلقائي:</span> <span id="buyGramMarketPrice" class="font-bold text-white">0 ج.م</span></div>
-                            <div class="flex justify-between"><span class="text-gray-400">الوزن الصافي (ع 24):</span> <span id="buyPureGoldWeight" class="font-bold text-gold">0.00 جم</span></div>
-                            <div class="flex justify-between text-base font-black pt-2 border-t border-gray-800"><span class="text-gold">الإجمالي النهائي:</span> <span id="buyTotalPrice" class="text-gold">0 ج.م</span></div>
-                        </div>
-
-                        <button type="submit" class="w-full gold-gradient text-dark-900 font-extrabold py-3.5 rounded-xl shadow-lg">تأكيد الشراء</button>
-                    </form>
+                <div onclick="switchTab('inventory')" class="bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-gold/50 cursor-pointer transition shadow-lg">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-gray-400 text-xs font-semibold">قطع الذهب بالمخزون</span>
+                        <div class="p-2 bg-gold/10 text-gold rounded-xl"><i class="fa-solid fa-boxes-stacked"></i></div>
+                    </div>
+                    <div id="dashItemCount" class="text-2xl font-black text-white">0 قطعة</div>
+                    <p class="text-[11px] text-gray-500 mt-2">استعراض الجرد</p>
                 </div>
-            </section>
 
-            <!-- SECTION 3: SELL FORM -->
-            <section id="tab-sell" class="tab-content hidden space-y-6">
-                <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800">
-                    <h2 class="text-xl font-black text-white mb-6 flex items-center gap-2">
-                        <i class="fa-solid fa-cash-register text-blue-400"></i> بيع قطعة من المخزون
-                    </h2>
-                    <form id="sellForm" onsubmit="handleSellGold(event)" class="space-y-4">
+                <div onclick="switchTab('vault')" class="bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-purple-500/50 cursor-pointer transition shadow-lg">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-gray-400 text-xs font-semibold">رأس المال المعتمد</span>
+                        <div class="p-2 bg-purple-500/10 text-purple-400 rounded-xl"><i class="fa-solid fa-building-columns"></i></div>
+                    </div>
+                    <div id="dashCapital" class="text-2xl font-black text-purple-300">0 ج.م</div>
+                    <p class="text-[11px] text-gray-500 mt-2">الرصيد الابتدائي</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- BUY TAB -->
+        <section id="tab-buy" class="tab-content hidden space-y-6">
+            <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h2 class="text-xl font-black text-white mb-2 flex items-center gap-2"><i class="fa-solid fa-cart-plus text-emerald-400"></i> تسجيل شراء قطعة ذهب</h2>
+                <form id="buyForm" onsubmit="handleBuyGold(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-gray-300 mb-1">اختر القطعة المراد بيعها</label>
-                            <select id="sellItemSelect" onchange="updateSellFormDetails()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-bold">
-                                <option value="">-- اختر قطعة --</option>
+                            <label class="block text-xs font-bold text-gray-300 mb-1">عيار القطعة</label>
+                            <select id="buyKarat" onchange="calculateBuyTotal()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-bold">
+                                <option value="21">عيار 21</option><option value="18">عيار 18</option><option value="24">عيار 24</option>
                             </select>
                         </div>
-
-                        <div id="sellItemDetailsBox" class="hidden bg-dark-900 p-4 rounded-xl border border-gray-800 text-xs">
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                                <div><span class="text-gray-400">الكود:</span> <span id="sellDetailCode" class="font-bold text-white">-</span></div>
-                                <div><span class="text-gray-400">العيار:</span> <span id="sellDetailKarat" class="font-bold text-gold">-</span></div>
-                                <div><span class="text-gray-400">الوزن:</span> <span id="sellDetailWeight" class="font-bold text-white">-</span></div>
-                                <div><span class="text-gray-400">التكلفة:</span> <span id="sellDetailCost" class="font-bold text-emerald-400">-</span></div>
-                            </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 mb-1">الوزن القائم (جرام)</label>
+                            <input type="number" id="buyWeight" step="0.01" min="0.01" placeholder="مثال: 2.67" required oninput="calculateBuyTotal()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-black text-lg">
                         </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-bold text-gray-300 mb-1">سعر بيع الجرام (ج.م)</label>
-                                <input type="number" id="sellGramPrice" step="1" required oninput="calculateSellTotal()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-bold">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-gray-300 mb-1">المصنعية/الربح للجرام (ج.م)</label>
-                                <input type="number" id="sellWorkmanshipPerGram" value="100" step="1" oninput="calculateSellTotal()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3">
-                            </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gold mb-1">اسم/وصف القطعة (كتابة يدوية)</label>
+                            <input type="text" id="buyManualItemName" placeholder="وصف القطعة..." required class="w-full bg-dark-900 border border-gold/60 text-white rounded-xl p-3">
                         </div>
-
-                        <div class="bg-dark-900 p-4 rounded-xl border border-blue-500/30 text-xs space-y-2">
-                            <div class="flex justify-between"><span class="text-gray-400">إجمالي المبلغ المحصل:</span> <span id="sellTotalFinal" class="font-bold text-blue-400 text-base">0 ج.م</span></div>
-                            <div class="flex justify-between font-bold text-emerald-400"><span>الربح الصافي:</span> <span id="sellNetProfit">0 ج.م</span></div>
+                        <div>
+                            <label class="block text-xs font-bold text-emerald-400 mb-1">إجمالي السعر المدفوع (تعديل مباشر)</label>
+                            <input type="number" id="buyCustomTotalOverride" step="1" placeholder="تلقائي أو يدوي..." oninput="manualTotalChanged = true; calculateBuyTotal();" class="w-full bg-dark-900 border border-emerald-500/60 text-emerald-400 rounded-xl p-3 font-black text-lg">
                         </div>
-
-                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold py-3.5 rounded-xl shadow-lg">إتمام البيع وتسجيل الأرباح</button>
-                    </form>
-                </div>
-            </section>
-
-            <!-- SECTION 4: INVENTORY -->
-            <section id="tab-inventory" class="tab-content hidden space-y-6">
-                <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800">
-                    <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
-                        <h2 class="text-xl font-black text-white flex items-center gap-2"><i class="fa-solid fa-boxes-stacked text-gold"></i> جرد الذهب</h2>
-                        <span id="inventoryCountBadge" class="bg-gold/10 text-gold border border-gold/30 px-3 py-1 rounded-full text-xs font-bold">0 قطعة</span>
                     </div>
+
+                    <div class="bg-dark-900 p-4 rounded-xl border border-gold/30 text-xs space-y-2">
+                        <div class="flex justify-between"><span class="text-gray-400">سعر سوق الجرام:</span> <span id="buyGramMarketPrice" class="font-bold text-white">0 ج.م</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">الوزن الصافي (ع 24):</span> <span id="buyPureGoldWeight" class="font-bold text-gold">0.00 جم</span></div>
+                        <div class="flex justify-between text-base font-black pt-2 border-t border-gray-800"><span class="text-gold">إجمالي السعر النهائي:</span> <span id="buyTotalPrice" class="text-gold text-lg">0 ج.م</span></div>
+                    </div>
+
+                    <button type="submit" class="w-full gold-gradient text-dark-900 font-extrabold py-3.5 rounded-xl shadow-lg transition">تأكيد الشراء</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- SELL TAB -->
+        <section id="tab-sell" class="tab-content hidden space-y-6">
+            <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h2 class="text-xl font-black text-white mb-6 flex items-center gap-2"><i class="fa-solid fa-cash-register text-blue-400"></i> بيع قطعة من المخزون</h2>
+                <form id="sellForm" onsubmit="handleSellGold(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 mb-1">اختر القطعة المراد بيعها</label>
+                        <select id="sellItemSelect" onchange="updateSellFormDetails()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-bold">
+                            <option value="">-- اختر قطعة --</option>
+                        </select>
+                    </div>
+
+                    <div id="sellItemDetailsBox" class="hidden bg-dark-900 p-4 rounded-xl border border-gray-800 text-xs space-y-2">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                            <div><span class="text-gray-400 block">الكود:</span> <span id="sellDetailCode" class="font-bold text-white">-</span></div>
+                            <div><span class="text-gray-400 block">العيار:</span> <span id="sellDetailKarat" class="font-bold text-gold">-</span></div>
+                            <div><span class="text-gray-400 block">الوزن:</span> <span id="sellDetailWeight" class="font-bold text-white">-</span></div>
+                            <div><span class="text-gray-400 block">تكلفة الشراء:</span> <span id="sellDetailCost" class="font-bold text-emerald-400">-</span></div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 mb-1">سعر بيع الجرام الخام (ج.م)</label>
+                            <input type="number" id="sellGramPrice" step="1" required oninput="calculateSellTotal()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-bold">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 mb-1">المصنعية/الربح للجرام (ج.م)</label>
+                            <input type="number" id="sellWorkmanshipPerGram" value="100" step="1" oninput="calculateSellTotal()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-blue-400 mb-1">إجمالي سعر البيع (تعديل مباشر)</label>
+                            <input type="number" id="sellCustomTotalOverride" step="1" placeholder="تلقائي أو يدوي..." oninput="sellTotalManuallyEdited = true; calculateSellTotal();" class="w-full bg-dark-900 border border-blue-500/60 text-blue-400 rounded-xl p-3 font-black text-base">
+                        </div>
+                    </div>
+
+                    <div id="sellErrorWarning" class="hidden bg-rose-500/10 border border-rose-500/50 p-3 rounded-xl text-rose-400 text-xs font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-base"></i> تنبيه خطأ: سعر البيع أقل من تكلفة الشراء الأصلية!
+                    </div>
+
+                    <div class="bg-dark-900 p-4 rounded-xl border border-blue-500/30 text-xs space-y-2">
+                        <div class="flex justify-between"><span class="text-gray-400">إجمالي المبلغ المحصل:</span> <span id="sellTotalFinal" class="font-bold text-blue-400 text-base">0 ج.م</span></div>
+                        <div class="flex justify-between font-bold text-emerald-400"><span>الربح الصافي المحقق:</span> <span id="sellNetProfit">0 ج.م</span></div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold py-3.5 rounded-xl shadow-lg transition">إتمام البيع</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- INVENTORY TAB -->
+        <section id="tab-inventory" class="tab-content hidden space-y-6">
+            <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+                    <h2 class="text-xl font-black text-white flex items-center gap-2"><i class="fa-solid fa-boxes-stacked text-gold"></i> جرد المخزون</h2>
+                    <span id="inventoryCountBadge" class="bg-gold/10 text-gold border border-gold/30 px-3 py-1 rounded-full text-xs font-bold">0 قطعة</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-xs">
+                        <thead class="bg-dark-900 text-gray-400 font-bold border-b border-gray-800">
+                            <tr><th class="p-3">الكود</th><th class="p-3">الاسم</th><th class="p-3">العيار</th><th class="p-3">الوزن</th><th class="p-3">صافي 24</th><th class="p-3">التكلفة</th><th class="p-3">إجراء</th></tr>
+                        </thead>
+                        <tbody id="inventoryTableBody" class="divide-y divide-gray-800/60"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VAULT TAB -->
+        <section id="tab-vault" class="tab-content hidden space-y-6">
+            <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h2 class="text-xl font-black text-white mb-6 flex items-center gap-2"><i class="fa-solid fa-vault text-purple-400"></i> حركة الخزينة وسجل الحركات</h2>
+                <div class="bg-dark-900 p-6 rounded-xl border border-purple-500/30 mb-6">
+                    <span class="text-xs text-gray-400 block mb-1">الرصيد النقدي الحالي</span>
+                    <span id="vaultCurrentCash" class="text-3xl font-black text-purple-400">0 ج.م</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-xs">
+                        <thead class="bg-dark-900 text-gray-400 font-bold border-b border-gray-800">
+                            <tr><th class="p-3">التاريخ</th><th class="p-3">النوع</th><th class="p-3">البيان</th><th class="p-3">المبلغ</th><th class="p-3">إجراء</th></tr>
+                        </thead>
+                        <tbody id="vaultTransactionsBody" class="divide-y divide-gray-800/60"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SMART CALCULATOR TAB (10+ ROWS FOR BUY & ADVANCED SWAP) -->
+        <section id="tab-calc" class="tab-content hidden space-y-6">
+            <div class="bg-dark-800 p-6 rounded-2xl border border-gold/30 shadow-xl space-y-8">
+                <div class="flex items-center gap-3 border-b border-gray-800 pb-4">
+                    <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-calculator"></i></div>
+                    <div>
+                        <h2 class="text-xl font-black text-white">الآلة الحاسبة الذكية (متعددة الصفوف)</h2>
+                        <p class="text-xs text-gray-400">حسابات الشراء لقطع متعددة وحاسبة البدل المتقدمة</p>
+                    </div>
+                </div>
+
+                <!-- 1. MULTI-ROW BUY CALCULATOR (10+ ROWS) -->
+                <div class="bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h3 class="font-bold text-amber-400 text-sm border-b border-gray-800 pb-2"><i class="fa-solid fa-cart-shopping ml-1"></i> 1. حاسبة الشراء (أكثر من 10 صفوف لحساب كل قطعة لوحدها والإجمالي في النهاية)</h3>
+                    
                     <div class="overflow-x-auto">
                         <table class="w-full text-right text-xs">
-                            <thead class="bg-dark-900 text-gray-400 font-bold border-b border-gray-800">
+                            <thead class="bg-dark-800 text-gray-400 font-bold border-b border-gray-700">
                                 <tr>
-                                    <th class="p-3">الكود</th><th class="p-3">الاسم</th><th class="p-3">العيار</th><th class="p-3">الوزن</th><th class="p-3">صافي 24</th><th class="p-3">التكلفة</th><th class="p-3">إجراء</th>
+                                    <th class="p-2 w-12">#</th>
+                                    <th class="p-2">وصف القطعة</th>
+                                    <th class="p-2 w-24">العيار</th>
+                                    <th class="p-2 w-28">الوزن (جم)</th>
+                                    <th class="p-2 w-28">سعر الجرام</th>
+                                    <th class="p-2 w-28">المصنعية</th>
+                                    <th class="p-2 w-32">الإجمالي (ج.م)</th>
                                 </tr>
                             </thead>
-                            <tbody id="inventoryTableBody" class="divide-y divide-gray-800/60"></tbody>
+                            <tbody id="calcBuyRowsBody" class="divide-y divide-gray-800/50">
+                                <!-- Generated via JS -->
+                            </tbody>
                         </table>
                     </div>
-                </div>
-            </section>
 
-            <!-- SECTION 5: VAULT LEDGER -->
-            <section id="tab-vault" class="tab-content hidden space-y-6">
-                <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800">
-                    <h2 class="text-xl font-black text-white mb-6 flex items-center gap-2"><i class="fa-solid fa-vault text-purple-400"></i> حركة الخزينة وسجل المبيعات القابلة للتعديل</h2>
-                    <div class="bg-dark-900 p-6 rounded-xl border border-purple-500/30 mb-6">
-                        <span class="text-xs text-gray-400 block mb-1">الرصيد النقدي المتوفر حالياً</span>
-                        <span id="vaultCurrentCash" class="text-3xl font-black text-purple-400">0 ج.م</span>
-                    </div>
-
-                    <h3 class="font-bold text-white mb-3 text-sm">سجل العمليات (يمكنك التعديل أو التراجع عن أي عملية بيع بالخطأ)</h3>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-right text-xs">
-                            <thead class="bg-dark-900 text-gray-400 font-bold border-b border-gray-800">
-                                <tr>
-                                    <th class="p-3">التاريخ</th><th class="p-3">النوع</th><th class="p-3">البيان</th><th class="p-3">المبلغ</th><th class="p-3">خيارات وسرعة التعديل</th>
-                                </tr>
-                            </thead>
-                            <tbody id="vaultTransactionsBody" class="divide-y divide-gray-800/60"></tbody>
-                        </table>
+                    <div class="bg-dark-800 p-4 rounded-xl border border-amber-500/30 flex justify-between items-center">
+                        <span class="text-sm font-bold text-amber-300">التوتال الإجمالي لجميع القطع:</span>
+                        <span id="calcBuyGrandTotal" class="text-2xl font-black text-amber-400">0 ج.م</span>
                     </div>
                 </div>
-            </section>
 
-        </main>
-    </div>
+                <!-- 2. ADVANCED SWAP / EXCHANGE CALCULATOR -->
+                <div class="bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h3 class="font-bold text-emerald-400 text-sm border-b border-gray-800 pb-2"><i class="fa-solid fa-scale-balanced ml-1"></i> 2. حاسبة مقايضة البدل (مقارنة الذهب الجديد والقديم وطرحهما)</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Old Gold (Customer) -->
+                        <div class="bg-dark-800 p-4 rounded-xl border border-gray-700 space-y-3">
+                            <h4 class="text-xs font-bold text-gold">أولاً: ذهب الزبون (القديم / المستعمل)</h4>
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-1">الوزن (جرام)</label>
+                                <input type="number" id="swapOldWeight" value="15" step="0.01" oninput="calcAdvancedSwap()" class="w-full bg-dark-900 border border-gray-700 rounded-lg p-2.5 text-white font-bold text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-1">سعر الجرام الخام</label>
+                                <input type="number" id="swapOldPrice" value="3800" step="1" oninput="calcAdvancedSwap()" class="w-full bg-dark-900 border border-gray-700 rounded-lg p-2.5 text-white font-bold text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-1">الخصم من الجرام</label>
+                                <input type="number" id="swapOldDiscount" value="30" step="1" oninput="calcAdvancedSwap()" class="w-full bg-dark-900 border border-gray-700 rounded-lg p-2.5 text-white font-bold text-sm">
+                            </div>
+                            <div class="text-left pt-2 border-t border-gray-700">
+                                <span class="text-[11px] text-gray-400">إجمالي قيمة ذهب الزبون:</span>
+                                <span id="swapOldTotalRes" class="text-base font-black text-gold block">0 ج.م</span>
+                            </div>
+                        </div>
+
+                        <!-- New Gold (Shop) -->
+                        <div class="bg-dark-800 p-4 rounded-xl border border-gray-700 space-y-3">
+                            <h4 class="text-xs font-bold text-emerald-400">ثانياً: الذهب الجديد المشتراة من المحل</h4>
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-1">الوزن (جرام)</label>
+                                <input type="number" id="swapNewWeight" value="10" step="0.01" oninput="calcAdvancedSwap()" class="w-full bg-dark-900 border border-gray-700 rounded-lg p-2.5 text-white font-bold text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-1">سعر الجرام</label>
+                                <input type="number" id="swapNewPrice" value="3800" step="1" oninput="calcAdvancedSwap()" class="w-full bg-dark-900 border border-gray-700 rounded-lg p-2.5 text-white font-bold text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-1">المصنعية للجرام</label>
+                                <input type="number" id="swapNewWorkmanship" value="100" step="1" oninput="calcAdvancedSwap()" class="w-full bg-dark-900 border border-gray-700 rounded-lg p-2.5 text-white font-bold text-sm">
+                            </div>
+                            <div class="text-left pt-2 border-t border-gray-700">
+                                <span class="text-[11px] text-gray-400">إجمالي قيمة القطعة الجديدة:</span>
+                                <span id="swapNewTotalRes" class="text-base font-black text-emerald-400 block">0 ج.م</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Final Swap Result -->
+                    <div class="bg-dark-800 p-5 rounded-xl border border-emerald-500/40 text-center space-y-1">
+                        <span id="swapFinalStatusLabel" class="text-xs text-gray-400 block">صافي الفارق بعد الطرح:</span>
+                        <span id="swapFinalResult" class="text-2xl font-black text-emerald-400">0 ج.م</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RENT TAB -->
+        <section id="tab-rent" class="tab-content hidden space-y-6">
+            <div class="bg-dark-800 p-6 rounded-2xl border border-emerald-500/30 shadow-xl space-y-6">
+                <div class="flex items-center gap-3 border-b border-gray-800 pb-4">
+                    <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                    <div>
+                        <h2 class="text-xl font-black text-white">إيجار المحل والأيام</h2>
+                        <p class="text-xs text-gray-400">تحقّق من المتبقي والمتوسطات اليومية</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 mb-1">إجمالي إيجار الشهر المطلوب (ج.م)</label>
+                        <input type="number" id="rentTotalAmount" value="5000" step="100" oninput="saveRentData()" class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-white font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 mb-1">عدد أيام الشهر</label>
+                        <input type="number" id="rentTotalDays" value="30" step="1" oninput="saveRentData()" class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-white font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-emerald-400 mb-1">المبلغ اليومي (تحكم كامل)</label>
+                        <input type="number" id="rentTodayInput" value="200" step="10" class="w-full bg-dark-900 border border-emerald-500/60 text-emerald-400 rounded-xl p-3 font-black text-lg">
+                    </div>
+                </div>
+
+                <button onclick="addRentDailyPayment()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3.5 rounded-xl shadow-lg transition">تسجيل المبلغ اليومي</button>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-gray-800">
+                    <div class="bg-dark-900 p-4 rounded-xl border border-gray-800 text-center"><span class="text-xs text-gray-400 block mb-1">إجمالي ما تم دفعه</span><span id="rentPaidTotal" class="text-2xl font-black text-emerald-400">0 ج.م</span></div>
+                    <div class="bg-dark-900 p-4 rounded-xl border border-gray-800 text-center"><span class="text-xs text-gray-400 block mb-1">المتبقي للإيجار</span><span id="rentRemainingTotal" class="text-2xl font-black text-rose-400">0 ج.م</span></div>
+                    <div class="bg-dark-900 p-4 rounded-xl border border-gray-800 text-center"><span class="text-xs text-gray-400 block mb-1">متوسط المبلغ اليومي</span><span id="rentDailyAverageNeeded" class="text-2xl font-black text-gold">0 ج.م / يوم</span></div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-xs">
+                        <thead class="bg-dark-900 text-gray-400 font-bold border-b border-gray-800"><tr><th class="p-3">التاريخ والوقت</th><th class="p-3">المبلغ</th><th class="p-3">إجراء</th></tr></thead>
+                        <tbody id="rentLogTableBody" class="divide-y divide-gray-800/60"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <!-- EDIT SALE MODAL -->
     <div id="editSaleModal" class="fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4">
-        <div class="bg-dark-800 border border-blue-500/50 rounded-2xl p-6 max-w-md w-full space-y-4 text-right">
-            <h3 class="text-lg font-black text-blue-400">تعديل معاملة بيع أو إلغائها</h3>
-            <p class="text-xs text-gray-400">إذا دست بالغلط أو أردت تصحيح السعر أو التراجع عن البيع:</p>
+        <div class="bg-dark-800 border border-blue-500/50 rounded-2xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl">
+            <h3 class="text-lg font-black text-blue-400">تعديل معاملة بيع أو إلغاؤها</h3>
             <input type="hidden" id="editSaleTxId">
-            <div>
-                <label class="block text-xs font-bold text-gray-300 mb-1">المبلغ المحصل الجديد (ج.م)</label>
-                <input type="number" id="editSaleAmountInput" class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-white font-black text-lg">
-            </div>
+            <div><label class="block text-xs font-bold text-gray-300 mb-1">المبلغ المحصل الجديد</label><input type="number" id="editSaleAmountInput" class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-white font-black text-lg"></div>
             <div class="flex gap-2 pt-2">
-                <button onclick="saveEditedSale()" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl font-bold">حفظ التعديل</button>
-                <button onclick="revertSaleTransaction()" class="flex-1 bg-rose-600 hover:bg-rose-500 text-white py-3 rounded-xl font-bold">إلغاء البيع تماماً واستعادة القطعة</button>
+                <button onclick="saveEditedSale()" class="flex-1 bg-blue-600 text-white py-3 rounded-xl font-bold">حفظ التعديل</button>
+                <button onclick="revertSaleTransaction()" class="flex-1 bg-rose-600 text-white py-3 rounded-xl font-bold">إلغاء البيع</button>
             </div>
             <button onclick="document.getElementById('editSaleModal').classList.add('hidden')" class="w-full bg-dark-700 text-gray-300 py-2 rounded-xl text-xs">إغلاق</button>
         </div>
     </div>
 
-    <!-- MOBILE NAVIGATION -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-dark-800 border-t border-gold/30 px-2 py-2 z-30 flex justify-around items-center">
-        <button onclick="switchTab('dashboard')" class="mobile-nav-btn flex flex-col items-center text-gold"><i class="fa-solid fa-chart-pie text-base"></i><span class="text-[10px]">الرئيسية</span></button>
-        <button onclick="switchTab('buy')" class="mobile-nav-btn flex flex-col items-center text-gray-400"><i class="fa-solid fa-cart-plus text-base"></i><span class="text-[10px]">شراء</span></button>
-        <button onclick="switchTab('sell')" class="mobile-nav-btn flex flex-col items-center text-gray-400"><i class="fa-solid fa-cash-register text-base"></i><span class="text-[10px]">بيع</span></button>
-        <button onclick="switchTab('inventory')" class="mobile-nav-btn flex flex-col items-center text-gray-400"><i class="fa-solid fa-boxes-stacked text-base"></i><span class="text-[10px]">المخزون</span></button>
-        <button onclick="switchTab('vault')" class="mobile-nav-btn flex flex-col items-center text-gray-400"><i class="fa-solid fa-vault text-base"></i><span class="text-[10px]">الخزينة</span></button>
-    </div>
-
-    <!-- APPLICATION LOGIC -->
+    <!-- SCRIPT LOGIC -->
     <script>
         let state = {
-            authenticated: false,
-            k21Price: 3800,
-            capital: 0,
-            vaultCash: 0,
-            inventory: [],
-            transactions: [],
-            sales: []
+            authenticated: false, k21Price: 3800, capital: 0, vaultCash: 0, inventory: [], transactions: [], sales: [],
+            manualProfit: 0,
+            rent: { totalAmount: 5000, days: 30, payments: [] }
         };
-
         let manualTotalChanged = false;
+        let sellTotalManuallyEdited = false;
 
         window.onload = function() {
-            const savedState = localStorage.getItem('altaif_gold_state');
-            if (savedState) { try { state = JSON.parse(savedState); } catch(e) {} }
-            if (state.authenticated) {
+            const saved = localStorage.getItem('altaif_gold_state_v4');
+            if(saved) { try { state = JSON.parse(saved); } catch(e){} }
+            if(state.authenticated) {
                 document.getElementById('loginModal').classList.add('hidden');
-                if (state.capital === 0) document.getElementById('capitalModal').classList.remove('hidden');
+                if(!state.capital || state.capital === 0) document.getElementById('capitalModal').classList.remove('hidden');
             }
             document.getElementById('priceK21').value = state.k21Price || 3800;
             updateKaratPricesFrom21(state.k21Price || 3800);
+            
+            document.getElementById('manualTotalNetProfitInput').value = state.manualProfit || 0;
+
+            if(state.rent) {
+                document.getElementById('rentTotalAmount').value = state.rent.totalAmount || 5000;
+                document.getElementById('rentTotalDays').value = state.rent.days || 30;
+            }
+
+            buildCalcBuyRows();
             renderAllData();
+            calculateBuyTotal();
+            calcAdvancedSwap();
         };
 
-        function saveState() { localStorage.setItem('altaif_gold_state', JSON.stringify(state)); }
+        function saveState() { localStorage.setItem('altaif_gold_state_v4', JSON.stringify(state)); }
 
         function handleLogin() {
-            if (document.getElementById('loginPasswordInput').value === '1234') {
+            if(document.getElementById('loginPasswordInput').value.trim() === '1234') {
                 state.authenticated = true;
                 document.getElementById('loginModal').classList.add('hidden');
-                if (!state.capital || state.capital === 0) document.getElementById('capitalModal').classList.remove('hidden');
+                if(!state.capital || state.capital === 0) document.getElementById('capitalModal').classList.remove('hidden');
                 saveState();
-            } else { alert('كلمة المرور غير صحيحة!'); }
+            } else { alert('كلمة المرور غير صحيحة (1234)'); }
         }
 
         function logout() { state.authenticated = false; saveState(); location.reload(); }
 
         function saveInitialCapital() {
             const cap = parseFloat(document.getElementById('initialCapitalInput').value) || 0;
-            if (cap <= 0) return alert('يرجى كتابة مبلغ صحيح');
+            if(cap <= 0) return alert('أدخل مبلغ صحيح');
             state.capital = cap; state.vaultCash = cap;
             state.transactions.push({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'capital', desc: 'رأس المال الافتتاحي', amount: cap });
-            document.getElementById('capitalModal').classList.add('hidden');
-            saveState(); renderAllData();
+            document.getElementById('capitalModal').classList.add('hidden'); saveState(); renderAllData();
         }
 
         function updateKaratPricesFrom21(val) {
@@ -423,34 +516,108 @@
 
         function getMarketPriceForKarat(karat) {
             const k21 = state.k21Price;
-            if (karat === '24') return (k21 * 24) / 21;
-            if (karat === '18') return (k21 * 6) / 7;
+            if(karat === '24') return (k21 * 24) / 21;
+            if(karat === '18') return (k21 * 6) / 7;
             return k21;
         }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById('tab-' + tabId).classList.remove('hidden');
-            document.querySelectorAll('#desktopNav .nav-btn').forEach(btn => {
+            document.querySelectorAll('#topNav .nav-btn').forEach(btn => {
                 btn.classList.remove('bg-gold', 'text-dark-900'); btn.classList.add('text-gray-300');
             });
-            const desktopBtn = document.getElementById('nav-' + tabId);
-            if (desktopBtn) { desktopBtn.classList.add('bg-gold', 'text-dark-900'); desktopBtn.classList.remove('text-gray-300'); }
+            document.getElementById('nav-' + tabId).classList.add('bg-gold', 'text-dark-900');
+            document.getElementById('nav-' + tabId).classList.remove('text-gray-300');
         }
 
+        function saveManualProfit(val) {
+            state.manualProfit = parseFloat(val) || 0;
+            saveState();
+        }
+
+        // 10+ ROWS CALCULATOR FOR BUY
+        function buildCalcBuyRows() {
+            const tbody = document.getElementById('calcBuyRowsBody');
+            tbody.innerHTML = '';
+            for(let i=1; i<=10; i++) {
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="p-2 font-bold text-gray-500">${i}</td>
+                        <td class="p-2"><input type="text" id="cb_name_${i}" placeholder="قطعة ${i}" class="w-full bg-dark-800 border border-gray-700 rounded px-2 py-1 text-white"></td>
+                        <td class="p-2">
+                            <select id="cb_karat_${i}" onchange="calcMultiBuyRows()" class="w-full bg-dark-800 border border-gray-700 rounded px-2 py-1 text-white">
+                                <option value="21">ع 21</option><option value="18">ع 18</option><option value="24">ع 24</option>
+                            </select>
+                        </td>
+                        <td class="p-2"><input type="number" id="cb_weight_${i}" value="" step="0.01" placeholder="0.00" oninput="calcMultiBuyRows()" class="w-full bg-dark-800 border border-gray-700 rounded px-2 py-1 text-white"></td>
+                        <td class="p-2"><input type="number" id="cb_price_${i}" value="${Math.round(state.k21Price)}" step="1" oninput="calcMultiBuyRows()" class="w-full bg-dark-800 border border-gray-700 rounded px-2 py-1 text-white"></td>
+                        <td class="p-2"><input type="number" id="cb_work_${i}" value="0" step="1" oninput="calcMultiBuyRows()" class="w-full bg-dark-800 border border-gray-700 rounded px-2 py-1 text-white"></td>
+                        <td class="p-2 font-black text-amber-400" id="cb_total_${i}">0 ج.م</td>
+                    </tr>
+                `;
+            }
+        }
+
+        function calcMultiBuyRows() {
+            let grandTotal = 0;
+            for(let i=1; i<=10; i++) {
+                const w = parseFloat(document.getElementById(`cb_weight_${i}`).value) || 0;
+                const p = parseFloat(document.getElementById(`cb_price_${i}`).value) || 0;
+                const work = parseFloat(document.getElementById(`cb_work_${i}`).value) || 0;
+                const tot = (w * p) + (w * work);
+                grandTotal += tot;
+                document.getElementById(`cb_total_${i}`).innerText = Math.round(tot).toLocaleString('ar-EG') + ' ج.م';
+            }
+            document.getElementById('calcBuyGrandTotal').innerText = Math.round(grandTotal).toLocaleString('ar-EG') + ' ج.م';
+        }
+
+        // ADVANCED SWAP CALCULATOR
+        function calcAdvancedSwap() {
+            const oW = parseFloat(document.getElementById('swapOldWeight').value) || 0;
+            const oP = parseFloat(document.getElementById('swapOldPrice').value) || 0;
+            const oD = parseFloat(document.getElementById('swapOldDiscount').value) || 0;
+
+            const nW = parseFloat(document.getElementById('swapNewWeight').value) || 0;
+            const nP = parseFloat(document.getElementById('swapNewPrice').value) || 0;
+            const nWk = parseFloat(document.getElementById('swapNewWorkmanship').value) || 0;
+
+            const oldEffPrice = Math.max(0, oP - oD);
+            const oldTotal = oW * oldEffPrice;
+
+            const newTotal = (nW * nP) + (nW * nWk);
+
+            document.getElementById('swapOldTotalRes').innerText = Math.round(oldTotal).toLocaleString('ar-EG') + ' ج.م';
+            document.getElementById('swapNewTotalRes').innerText = Math.round(newTotal).toLocaleString('ar-EG') + ' ج.م';
+
+            const diff = newTotal - oldTotal;
+            const lbl = document.getElementById('swapFinalStatusLabel');
+            const res = document.getElementById('swapFinalResult');
+
+            if(diff > 0) {
+                lbl.innerText = "الزبون سيقوم بدفع (فارق السعر نقداً للمحل):";
+                res.className = "text-2xl font-black text-rose-400";
+                res.innerText = Math.round(diff).toLocaleString('ar-EG') + ' ج.م (دفع الزبون)';
+            } else {
+                lbl.innerText = "الزبون سيأخذ (فارق السعر نقداً من المحل):";
+                res.className = "text-2xl font-black text-emerald-400";
+                res.innerText = Math.round(Math.abs(diff)).toLocaleString('ar-EG') + ' ج.م (قبض الزبون)';
+            }
+        }
+
+        // STANDARD FUNCTIONS
         function calculateBuyTotal() {
             const karat = document.getElementById('buyKarat').value;
             const weight = parseFloat(document.getElementById('buyWeight').value) || 0;
             const marketGram = getMarketPriceForKarat(karat);
             let total = weight * marketGram;
             if (manualTotalChanged) {
-                const customVal = parseFloat(document.getElementById('buyCustomTotalOverride').value);
-                if (!isNaN(customVal)) total = customVal;
-            } else { document.getElementById('buyCustomTotalOverride').value = total.toFixed(0); }
-
-            document.getElementById('buyGramMarketPrice').innerText = marketGram.toFixed(2) + ' ج.م';
+                const custom = parseFloat(document.getElementById('buyCustomTotalOverride').value);
+                if (!isNaN(custom)) total = custom;
+            } else { document.getElementById('buyCustomTotalOverride').value = Math.round(total); }
+            document.getElementById('buyGramMarketPrice').innerText = Math.round(marketGram) + ' ج.م';
             document.getElementById('buyPureGoldWeight').innerText = ((weight * parseInt(karat)) / 24).toFixed(2) + ' جم';
-            document.getElementById('buyTotalPrice').innerText = total.toLocaleString('ar-EG', {maximumFractionDigits:2}) + ' ج.م';
+            document.getElementById('buyTotalPrice').innerText = Math.round(total).toLocaleString('ar-EG') + ' ج.م';
         }
 
         function handleBuyGold(e) {
@@ -460,8 +627,8 @@
             const itemName = document.getElementById('buyManualItemName').value.trim() || 'قطعة ذهب';
             let totalCost = weight * getMarketPriceForKarat(karat);
             if (manualTotalChanged) {
-                const customVal = parseFloat(document.getElementById('buyCustomTotalOverride').value);
-                if (!isNaN(customVal)) totalCost = customVal;
+                const custom = parseFloat(document.getElementById('buyCustomTotalOverride').value);
+                if (!isNaN(custom)) totalCost = custom;
             }
             if (totalCost > state.vaultCash) return alert('عفواً، لا توجد نقدية كافية بالخزينة!');
 
@@ -480,14 +647,13 @@
             if (!selectedId) { detailsBox.classList.add('hidden'); return; }
             const item = state.inventory.find(i => i.id === selectedId);
             if (!item) return;
-
             detailsBox.classList.remove('hidden');
             document.getElementById('sellDetailCode').innerText = item.id + ' (' + item.itemName + ')';
             document.getElementById('sellDetailKarat').innerText = 'عيار ' + item.karat;
             document.getElementById('sellDetailWeight').innerText = item.weight.toFixed(2) + ' جم';
-            document.getElementById('sellDetailCost').innerText = item.purchaseCost.toLocaleString('ar-EG') + ' ج.م';
-            document.getElementById('sellGramPrice').value = getMarketPriceForKarat(item.karat).toFixed(0);
-            calculateSellTotal();
+            document.getElementById('sellDetailCost').innerText = Math.round(item.purchaseCost).toLocaleString('ar-EG') + ' ج.م';
+            document.getElementById('sellGramPrice').value = Math.round(getMarketPriceForKarat(item.karat));
+            sellTotalManuallyEdited = false; calculateSellTotal();
         }
 
         function calculateSellTotal() {
@@ -497,11 +663,18 @@
             if (!item) return;
             const gramPrice = parseFloat(document.getElementById('sellGramPrice').value) || 0;
             const workmanship = parseFloat(document.getElementById('sellWorkmanshipPerGram').value) || 0;
-            const finalTotal = (item.weight * gramPrice) + (item.weight * workmanship);
-            const netProfit = finalTotal - item.purchaseCost;
+            let finalTotal = (item.weight * gramPrice) + (item.weight * workmanship);
+            if (sellTotalManuallyEdited) {
+                const custom = parseFloat(document.getElementById('sellCustomTotalOverride').value);
+                if (!isNaN(custom)) finalTotal = custom;
+            } else { document.getElementById('sellCustomTotalOverride').value = Math.round(finalTotal); }
 
-            document.getElementById('sellTotalFinal').innerText = finalTotal.toLocaleString('ar-EG', {maximumFractionDigits: 2}) + ' ج.م';
-            document.getElementById('sellNetProfit').innerText = netProfit.toLocaleString('ar-EG', {maximumFractionDigits: 2}) + ' ج.م';
+            const netProfit = finalTotal - item.purchaseCost;
+            const warningBox = document.getElementById('sellErrorWarning');
+            if (finalTotal < item.purchaseCost) { warningBox.classList.remove('hidden'); } else { warningBox.classList.add('hidden'); }
+
+            document.getElementById('sellTotalFinal').innerText = Math.round(finalTotal).toLocaleString('ar-EG') + ' ج.م';
+            document.getElementById('sellNetProfit').innerText = Math.round(netProfit).toLocaleString('ar-EG') + ' ج.م';
         }
 
         function handleSellGold(e) {
@@ -510,146 +683,137 @@
             if (!itemId) return;
             const itemIndex = state.inventory.findIndex(i => i.id === itemId);
             if (itemIndex === -1) return;
-
             const item = state.inventory[itemIndex];
             const gramPrice = parseFloat(document.getElementById('sellGramPrice').value) || 0;
             const workmanship = parseFloat(document.getElementById('sellWorkmanshipPerGram').value) || 0;
-            const finalTotal = (item.weight * gramPrice) + (item.weight * workmanship);
-            const netProfit = finalTotal - item.purchaseCost;
+            let finalTotal = (item.weight * gramPrice) + (item.weight * workmanship);
+            if (sellTotalManuallyEdited) {
+                const custom = parseFloat(document.getElementById('sellCustomTotalOverride').value);
+                if (!isNaN(custom)) finalTotal = custom;
+            }
+            const netProfit = Math.round(finalTotal - item.purchaseCost);
 
             state.inventory.splice(itemIndex, 1);
             state.vaultCash += finalTotal;
-            
             const txId = Date.now();
-            state.sales.push({ txId, netProfit, originalItem: item });
-            state.transactions.unshift({
-                id: txId, date: new Date().toLocaleString('ar-EG'), type: 'sell', desc: `بيع ${item.itemName} (${item.id})`, amount: finalTotal, itemSnapshot: item, netProfit
-            });
-
-            document.getElementById('sellForm').reset();
-            document.getElementById('sellItemDetailsBox').classList.add('hidden');
-            saveState(); renderAllData(); switchTab('dashboard');
+            state.sales.push({ txId, netProfit });
+            state.transactions.unshift({ id: txId, date: new Date().toLocaleString('ar-EG'), type: 'sell', desc: `بيع ${item.itemName} (${item.id})`, amount: finalTotal, itemSnapshot: item, netProfit });
+            document.getElementById('sellForm').reset(); document.getElementById('sellItemDetailsBox').classList.add('hidden');
+            sellTotalManuallyEdited = false; saveState(); renderAllData(); switchTab('dashboard');
         }
 
         function openEditSaleModal(txId) {
             const tx = state.transactions.find(t => t.id === txId);
             if (!tx || tx.type !== 'sell') return;
             document.getElementById('editSaleTxId').value = txId;
-            document.getElementById('editSaleAmountInput').value = tx.amount;
+            document.getElementById('editSaleAmountInput').value = Math.round(tx.amount);
             document.getElementById('editSaleModal').classList.remove('hidden');
         }
 
         function saveEditedSale() {
             const txId = parseInt(document.getElementById('editSaleTxId').value);
             const newAmount = parseFloat(document.getElementById('editSaleAmountInput').value) || 0;
-            const txIndex = state.transactions.findIndex(t => t.id === txId);
-            if (txIndex === -1) return;
-
-            const tx = state.transactions[txIndex];
-            const oldAmount = tx.amount;
-            const diff = newAmount - oldAmount;
-
-            state.vaultCash += diff;
-            tx.amount = newAmount;
-            
-            // Adjust profit proportionally or recalculate
-            const profitDiff = diff; 
-            tx.netProfit += profitDiff;
-            const saleObj = state.sales.find(s => s.txId === txId);
-            if (saleObj) saleObj.netProfit = tx.netProfit;
-
-            document.getElementById('editSaleModal').classList.add('hidden');
-            saveState(); renderAllData();
-            alert('تم تعديل السعر وتحديث الخزينة بنجاح!');
+            const tx = state.transactions.find(t => t.id === txId);
+            if (!tx) return;
+            const diff = newAmount - tx.amount;
+            state.vaultCash += diff; tx.amount = newAmount; tx.netProfit += diff;
+            const sale = state.sales.find(s => s.txId === txId);
+            if(sale) sale.netProfit = tx.netProfit;
+            document.getElementById('editSaleModal').classList.add('hidden'); saveState(); renderAllData(); alert('تم التعديل بنجاح');
         }
 
         function revertSaleTransaction() {
             const txId = parseInt(document.getElementById('editSaleTxId').value);
             const txIndex = state.transactions.findIndex(t => t.id === txId);
             if (txIndex === -1) return;
-
             const tx = state.transactions[txIndex];
-            if (tx.type !== 'sell' || !tx.itemSnapshot) return;
-
-            if (confirm('هل أنت متأكد من إلغاء هذه البيعة واستعادة القطعة للمخزون؟')) {
+            if (!tx.itemSnapshot) return;
+            if (confirm('تأكيد إلغاء البيع واستعادة القطعة؟')) {
                 state.vaultCash -= tx.amount;
                 state.inventory.push(tx.itemSnapshot);
                 state.transactions.splice(txIndex, 1);
                 state.sales = state.sales.filter(s => s.txId !== txId);
-
-                document.getElementById('editSaleModal').classList.add('hidden');
-                saveState(); renderAllData();
-                alert('تم التراجع عن البيع وإرجاع القطعة للمخزون واستقطاع المبلغ من الخزينة!');
+                document.getElementById('editSaleModal').classList.add('hidden'); saveState(); renderAllData(); alert('تم استعادة القطعة');
             }
         }
 
         function deleteInventoryItem(id) {
-            if(confirm('هل أنت تأكد من الحذف؟')) {
+            if(confirm('الحذف نهائي؟')) {
                 state.inventory = state.inventory.filter(i => i.id !== id);
                 saveState(); renderAllData();
             }
         }
 
+        function saveRentData() {
+            state.rent.totalAmount = parseFloat(document.getElementById('rentTotalAmount').value) || 5000;
+            state.rent.days = parseFloat(document.getElementById('rentTotalDays').value) || 30;
+            saveState(); renderRentSummary();
+        }
+
+        function addRentDailyPayment() {
+            const amt = parseFloat(document.getElementById('rentTodayInput').value) || 0;
+            if(amt <= 0) return alert('أدخل مبلغ صحيح');
+            if(!state.rent.payments) state.rent.payments = [];
+            state.rent.payments.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), amount: amt });
+            saveState(); renderRentSummary(); alert('تم تسجيل الدفعة بنجاح');
+        }
+
+        function deleteRentPayment(id) {
+            state.rent.payments = state.rent.payments.filter(p => p.id !== id);
+            saveState(); renderRentSummary();
+        }
+
+        function renderRentSummary() {
+            const tot = parseFloat(document.getElementById('rentTotalAmount').value) || 5000;
+            const days = parseFloat(document.getElementById('rentTotalDays').value) || 30;
+            let paid = 0; const tbody = document.getElementById('rentLogTableBody'); tbody.innerHTML = '';
+            if(state.rent && state.rent.payments) {
+                state.rent.payments.forEach(p => {
+                    paid += p.amount;
+                    tbody.innerHTML += `<tr class="hover:bg-dark-700/50"><td class="p-3 text-gray-400">${p.date}</td><td class="p-3 font-bold text-emerald-400">+${Math.round(p.amount).toLocaleString('ar-EG')} ج.م</td><td class="p-3"><button onclick="deleteRentPayment(${p.id})" class="text-rose-400"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+                });
+            }
+            const rem = Math.max(0, tot - paid);
+            const passed = state.rent.payments ? state.rent.payments.length : 0;
+            const left = Math.max(1, days - passed);
+            document.getElementById('rentPaidTotal').innerText = Math.round(paid).toLocaleString('ar-EG') + ' ج.م';
+            document.getElementById('rentRemainingTotal').innerText = Math.round(rem).toLocaleString('ar-EG') + ' ج.م';
+            document.getElementById('rentDailyAverageNeeded').innerText = Math.round(rem / left).toLocaleString('ar-EG') + ' ج.م / يوم';
+        }
+
         function renderDashboard() {
-            let totalWeight = 0; state.inventory.forEach(i => totalWeight += i.weight);
-            let totalNetProfit = 0; state.sales.forEach(s => totalNetProfit += s.netProfit);
-            document.getElementById('dashTotalWeight').innerText = totalWeight.toFixed(2) + ' جرام';
-            document.getElementById('dashVaultCash').innerText = state.vaultCash.toLocaleString('ar-EG', {maximumFractionDigits:2}) + ' ج.م';
+            let tw = 0; state.inventory.forEach(i => tw += i.weight);
+            document.getElementById('dashTotalWeight').innerText = tw.toFixed(2) + ' جم';
+            document.getElementById('dashVaultCash').innerText = Math.round(state.vaultCash).toLocaleString('ar-EG') + ' ج.م';
             document.getElementById('dashItemCount').innerText = state.inventory.length + ' قطعة';
-            document.getElementById('dashCapital').innerText = state.capital.toLocaleString('ar-EG') + ' ج.م';
-            document.getElementById('dashTotalNetProfit').innerText = totalNetProfit.toLocaleString('ar-EG', {maximumFractionDigits:2}) + ' ج.م';
+            document.getElementById('dashCapital').innerText = Math.round(state.capital).toLocaleString('ar-EG') + ' ج.م';
         }
 
         function renderInventoryTable() {
-            const tbody = document.getElementById('inventoryTableBody');
-            const sellSelect = document.getElementById('sellItemSelect');
-            tbody.innerHTML = ''; sellSelect.innerHTML = '<option value="">-- اختر قطعة --</option>';
+            const tbody = document.getElementById('inventoryTableBody'); const sellSel = document.getElementById('sellItemSelect');
+            tbody.innerHTML = ''; sellSel.innerHTML = '<option value="">-- اختر قطعة --</option>';
             document.getElementById('inventoryCountBadge').innerText = state.inventory.length + ' قطعة';
-
-            state.inventory.forEach(item => {
-                tbody.innerHTML += `
-                    <tr class="hover:bg-dark-700/50">
-                        <td class="p-3 font-mono text-gold font-bold">${item.id}</td>
-                        <td class="p-3 font-bold text-white">${item.itemName}</td>
-                        <td class="p-3">عيار ${item.karat}</td>
-                        <td class="p-3">${item.weight.toFixed(2)} جم</td>
-                        <td class="p-3 text-gold">${item.pureGoldWeight.toFixed(2)} جم</td>
-                        <td class="p-3 text-emerald-400 font-bold">${item.purchaseCost.toLocaleString('ar-EG')} ج.م</td>
-                        <td class="p-3"><button onclick="deleteInventoryItem('${item.id}')" class="text-rose-400"><i class="fa-solid fa-trash"></i></button></td>
-                    </tr>`;
-                sellSelect.innerHTML += `<option value="${item.id}">${item.id} - ${item.itemName} (${item.weight.toFixed(2)} جم)</option>`;
+            state.inventory.forEach(i => {
+                tbody.innerHTML += `<tr class="hover:bg-dark-700/50"><td class="p-3 font-mono text-gold font-bold">${i.id}</td><td class="p-3 font-bold text-white">${i.itemName}</td><td class="p-3">ع ${i.karat}</td><td class="p-3">${i.weight.toFixed(2)} جم</td><td class="p-3 text-gold">${i.pureGoldWeight.toFixed(2)} جم</td><td class="p-3 text-emerald-400 font-bold">${Math.round(i.purchaseCost).toLocaleString('ar-EG')} ج.م</td><td class="p-3"><button onclick="deleteInventoryItem('${i.id}')" class="text-rose-400"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+                sellSel.innerHTML += `<option value="${i.id}">${i.id} - ${i.itemName} (${i.weight.toFixed(2)} جم)</option>`;
             });
         }
 
         function renderVaultTransactions() {
-            const tbody = document.getElementById('vaultTransactionsBody');
-            tbody.innerHTML = '';
-            document.getElementById('vaultCurrentCash').innerText = state.vaultCash.toLocaleString('ar-EG', {maximumFractionDigits:2}) + ' ج.م';
-
+            const tbody = document.getElementById('vaultTransactionsBody'); tbody.innerHTML = '';
+            document.getElementById('vaultCurrentCash').innerText = Math.round(state.vaultCash).toLocaleString('ar-EG') + ' ج.م';
             state.transactions.forEach(t => {
                 let badge = '<span class="text-xs bg-gray-700 px-2 py-1 rounded">حركة</span>';
-                if (t.type === 'buy') badge = '<span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded font-bold">شراء</span>';
-                if (t.type === 'sell') badge = '<span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded font-bold">بيع</span>';
-                if (t.type === 'capital') badge = '<span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded font-bold">رأس مال</span>';
-
-                let actionBtn = '-';
-                if (t.type === 'sell') {
-                    actionBtn = `<button onclick="openEditSaleModal(${t.id})" class="bg-blue-600/30 hover:bg-blue-600 text-blue-300 px-3 py-1.5 rounded-lg text-xs font-bold transition"><i class="fa-solid fa-pen-to-square ml-1"></i> تعديل / إلغاء البيع</button>`;
-                }
-
-                const color = t.amount > 0 ? 'text-emerald-400' : 'text-rose-400';
-                tbody.innerHTML += `
-                    <tr class="hover:bg-dark-700/50">
-                        <td class="p-3 text-gray-400">${t.date}</td>
-                        <td class="p-3">${badge}</td>
-                        <td class="p-3 font-semibold text-white">${t.desc}</td>
-                        <td class="p-3 font-black ${color}">${t.amount > 0 ? '+' : ''}${t.amount.toLocaleString('ar-EG')} ج.م</td>
-                        <td class="p-3">${actionBtn}</td>
-                    </tr>`;
+                if(t.type === 'buy') badge = '<span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded font-bold">شراء</span>';
+                if(t.type === 'sell') badge = '<span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded font-bold">بيع</span>';
+                if(t.type === 'capital') badge = '<span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded font-bold">رأس مال</span>';
+                let btn = t.type === 'sell' ? `<button onclick="openEditSaleModal(${t.id})" class="bg-blue-600/30 text-blue-300 px-3 py-1 rounded text-xs font-bold">تعديل / إلغاء</button>` : '-';
+                const col = t.amount > 0 ? 'text-emerald-400' : 'text-rose-400';
+                tbody.innerHTML += `<tr class="hover:bg-dark-700/50"><td class="p-3 text-gray-400">${t.date}</td><td class="p-3">${badge}</td><td class="p-3 font-semibold text-white">${t.desc}</td><td class="p-3 font-black ${col}">${t.amount > 0 ? '+' : ''}${Math.round(t.amount).toLocaleString('ar-EG')} ج.م</td><td class="p-3">${btn}</td></tr>`;
             });
         }
 
-        function renderAllData() { renderDashboard(); renderInventoryTable(); renderVaultTransactions(); }
+        function renderAllData() { renderDashboard(); renderInventoryTable(); renderVaultTransactions(); renderRentSummary(); }
     </script>
 </body>
 </html>
