@@ -231,21 +231,21 @@
             </div>
         </section>
 
-        <!-- SMART CALCULATOR TAB (5 ROWS FOR BUY & 5 ROWS FOR SWAP WITH CORRECT WEIGHING RULE) -->
+        <!-- SMART CALCULATOR TAB (WIDE SPACED WIDE ROWS) -->
         <section id="tab-calc" class="tab-content hidden space-y-6">
             <div class="bg-dark-800 p-6 rounded-2xl border border-gold/30 shadow-xl space-y-8">
                 <div class="flex items-center gap-3 border-b border-gray-800 pb-4">
                     <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-calculator"></i></div>
                     <div>
-                        <h2 class="text-xl font-black text-white">الآلة الحاسبة الذكية (أصناف متعددة بقواعد الميزان)</h2>
-                        <p class="text-xs text-gray-400">أقل من جرام (ضرب الوزن ثم جمع المصنعية) | أكبر من جرام (ضرب المصنعية في الوزن ثم جمع السعر)</p>
+                        <h2 class="text-xl font-black text-white">الآلة الحاسبة الذكية (خانات واسعة ومريحة)</h2>
+                        <p class="text-xs text-gray-400">أقل من جرام (ضرب الوزن + المصنعية) | أكبر من جرام (جمع السعر والمصنعية × الوزن)</p>
                     </div>
                 </div>
 
-                <!-- 1. SIMPLE BUY CALCULATOR (5 ROWS) -->
+                <!-- 1. WIDE BUY CALCULATOR (5 ROWS) -->
                 <div class="bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-4">
-                    <h3 class="font-bold text-amber-400 text-sm border-b border-gray-800 pb-2">1. حاسبة الشراء البسيطة (5 أصناف)</h3>
-                    <div class="space-y-3" id="calcBuyRowsContainer">
+                    <h3 class="font-bold text-amber-400 text-sm border-b border-gray-800 pb-2">1. حاسبة الشراء (5 أصناف - مساحات واسعة)</h3>
+                    <div class="space-y-4" id="calcBuyRowsContainer">
                         <!-- Generated via JS -->
                     </div>
                     <div class="bg-dark-800 p-4 rounded-xl border border-amber-500/30 flex justify-between items-center">
@@ -254,26 +254,28 @@
                     </div>
                 </div>
 
-                <!-- 2. SIMPLE SWAP CALCULATOR (5 ROWS FOR OLD & 5 FOR NEW) -->
+                <!-- 2. WIDE SWAP CALCULATOR (5 ROWS OLD & NEW) -->
                 <div class="bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-4">
-                    <h3 class="font-bold text-emerald-400 text-sm border-b border-gray-800 pb-2">2. حاسبة مقايضة البدل (مقارنة 5 أصناف قديمة بـ 5 جديدة)</h3>
+                    <h3 class="font-bold text-emerald-400 text-sm border-b border-gray-800 pb-2">2. حاسبة مقايضة البدل (مقارنة 5 أصناف واسعة)</h3>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-dark-800 p-4 rounded-xl border border-gray-700 space-y-3">
-                            <h4 class="text-xs font-bold text-gold">أولاً: الذهب القديم (المستعمل) - 5 أصناف</h4>
-                            <div id="swapOldRowsContainer" class="space-y-2"></div>
-                            <div class="text-left pt-2 border-t border-gray-700">
-                                <span class="text-[11px] text-gray-400">إجمالي قيمة القديم:</span>
-                                <span id="swapOldTotalRes" class="text-lg font-black text-gold">0 ج.م</span>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Old Gold -->
+                        <div class="bg-dark-800 p-5 rounded-2xl border border-gray-700 space-y-4">
+                            <h4 class="text-sm font-bold text-gold border-b border-gray-700 pb-2">أولاً: الذهب القديم (المستعمل)</h4>
+                            <div id="swapOldRowsContainer" class="space-y-3"></div>
+                            <div class="text-left pt-3 border-t border-gray-700">
+                                <span class="text-xs text-gray-400">إجمالي قيمة القديم:</span>
+                                <span id="swapOldTotalRes" class="text-xl font-black text-gold block">0 ج.م</span>
                             </div>
                         </div>
 
-                        <div class="bg-dark-800 p-4 rounded-xl border border-gray-700 space-y-3">
-                            <h4 class="text-xs font-bold text-emerald-400">ثانياً: الذهب الجديد - 5 أصناف</h4>
-                            <div id="swapNewRowsContainer" class="space-y-2"></div>
-                            <div class="text-left pt-2 border-t border-gray-700">
-                                <span class="text-[11px] text-gray-400">إجمالي قيمة الجديد:</span>
-                                <span id="swapNewTotalRes" class="text-lg font-black text-emerald-400">0 ج.م</span>
+                        <!-- New Gold -->
+                        <div class="bg-dark-800 p-5 rounded-2xl border border-gray-700 space-y-4">
+                            <h4 class="text-sm font-bold text-emerald-400 border-b border-gray-700 pb-2">ثانياً: الذهب الجديد</h4>
+                            <div id="swapNewRowsContainer" class="space-y-3"></div>
+                            <div class="text-left pt-3 border-t border-gray-700">
+                                <span class="text-xs text-gray-400">إجمالي قيمة الجديد:</span>
+                                <span id="swapNewTotalRes" class="text-xl font-black text-emerald-400 block">0 ج.م</span>
                             </div>
                         </div>
                     </div>
@@ -316,7 +318,7 @@
         let sellTotalManuallyEdited = false;
 
         window.onload = function() {
-            const saved = localStorage.getItem('altaif_gold_state_v5');
+            const saved = localStorage.getItem('altaif_gold_state_v6');
             if(saved) { try { state = JSON.parse(saved); } catch(e){} }
             if(state.authenticated) {
                 document.getElementById('loginModal').classList.add('hidden');
@@ -325,11 +327,11 @@
             document.getElementById('priceK21').value = state.k21Price || 3800;
             document.getElementById('manualTotalNetProfitInput').value = state.manualProfit || 0;
             
-            buildSimpleCalcRows();
+            buildWideCalcRows();
             renderAllData();
         };
 
-        function saveState() { localStorage.setItem('altaif_gold_state_v5', JSON.stringify(state)); }
+        function saveState() { localStorage.setItem('altaif_gold_state_v6', JSON.stringify(state)); }
         function handleLogin() {
             if(document.getElementById('loginPasswordInput').value.trim() === '1234') {
                 state.authenticated = true;
@@ -360,7 +362,7 @@
         }
         function saveManualProfit(val) { state.manualProfit = parseFloat(val) || 0; saveState(); }
 
-        // Core weighing rule calculation function
+        // Weighing rule calculation
         function calculateItemPrice(weight, goldPrice, workmanship) {
             if (weight < 1) {
                 return (goldPrice * weight) + workmanship;
@@ -369,49 +371,67 @@
             }
         }
 
-        // 5 ROWS SIMPLE CALCULATOR
-        function buildSimpleCalcRows() {
-            // Buy rows (5)
+        // 5 WIDE ROWS CALCULATOR
+        function buildWideCalcRows() {
+            // Buy rows (5) - Wide & Spaced
             const buyCont = document.getElementById('calcBuyRowsContainer');
             buyCont.innerHTML = '';
             for(let i=1; i<=5; i++) {
                 buyCont.innerHTML += `
-                    <div class="grid grid-cols-4 gap-2 bg-dark-800 p-2.5 rounded-xl border border-gray-700 items-center text-xs">
-                        <div><input type="number" id="cb_weight_${i}" placeholder="الوزن جم" step="0.01" oninput="calcSimpleBuy()" class="w-full bg-dark-900 border border-gray-700 rounded p-2 text-white"></div>
-                        <div>
-                            <select id="cb_karat_${i}" onchange="calcSimpleBuy()" class="w-full bg-dark-900 border border-gray-700 rounded p-2 text-white">
-                                <option value="21">ع 21</option><option value="18">ع 18</option><option value="24">ع 24</option>
-                            </select>
+                    <div class="bg-dark-800 p-3.5 rounded-xl border border-gray-700 space-y-3">
+                        <div class="text-xs font-bold text-gray-400 flex justify-between items-center">
+                            <span>الصنف رقم (${i})</span>
+                            <span class="text-amber-400 font-black text-sm" id="cb_res_${i}">0 ج.م</span>
                         </div>
-                        <div><input type="number" id="cb_work_${i}" placeholder="المصنعية" step="1" value="0" oninput="calcSimpleBuy()" class="w-full bg-dark-900 border border-gray-700 rounded p-2 text-white"></div>
-                        <div class="font-black text-amber-400 text-left pl-2" id="cb_res_${i}">0 ج.م</div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-[10px] text-gray-400 mb-1">الوزن (جرام)</label>
+                                <input type="number" id="cb_weight_${i}" placeholder="مثال: 2.5 أو 0.5" step="0.01" oninput="calcWideBuy()" class="w-full bg-dark-900 border border-gray-700 rounded-xl p-2.5 text-white font-bold text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] text-gray-400 mb-1">العيار</label>
+                                <select id="cb_karat_${i}" onchange="calcWideBuy()" class="w-full bg-dark-900 border border-gray-700 rounded-xl p-2.5 text-white font-bold text-sm">
+                                    <option value="21">عيار 21</option><option value="18">عيار 18</option><option value="24">عيار 24</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] text-gray-400 mb-1">المصنعية للجرام</label>
+                                <input type="number" id="cb_work_${i}" placeholder="0" step="1" value="0" oninput="calcWideBuy()" class="w-full bg-dark-900 border border-gray-700 rounded-xl p-2.5 text-white font-bold text-sm">
+                            </div>
+                        </div>
                     </div>
                 `;
             }
 
-            // Swap rows (5 old, 5 new)
+            // Swap rows (5 old, 5 new) - Wide & Spaced
             const oldCont = document.getElementById('swapOldRowsContainer');
             const newCont = document.getElementById('swapNewRowsContainer');
             oldCont.innerHTML = ''; newCont.innerHTML = '';
             for(let i=1; i<=5; i++) {
                 oldCont.innerHTML += `
-                    <div class="grid grid-cols-3 gap-1.5 items-center">
-                        <input type="number" id="so_w_${i}" placeholder="وزن" step="0.01" oninput="calcSimpleSwap()" class="bg-dark-900 border border-gray-700 rounded p-1.5 text-white text-xs">
-                        <input type="number" id="so_p_${i}" placeholder="سعر" value="${Math.round(state.k21Price)}" oninput="calcSimpleSwap()" class="bg-dark-900 border border-gray-700 rounded p-1.5 text-white text-xs">
-                        <input type="number" id="so_d_${i}" placeholder="خصم" value="30" oninput="calcSimpleSwap()" class="bg-dark-900 border border-gray-700 rounded p-1.5 text-white text-xs">
+                    <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2">
+                        <span class="text-[11px] font-bold text-gray-400 block">قطعة قديمة (${i})</span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div><label class="block text-[9px] text-gray-500">الوزن</label><input type="number" id="so_w_${i}" placeholder="وزن" step="0.01" oninput="calcWideSwap()" class="w-full bg-dark-800 border border-gray-700 rounded-lg p-2 text-white text-xs font-bold"></div>
+                            <div><label class="block text-[9px] text-gray-500">السعر</label><input type="number" id="so_p_${i}" value="${Math.round(state.k21Price)}" oninput="calcWideSwap()" class="w-full bg-dark-800 border border-gray-700 rounded-lg p-2 text-white text-xs font-bold"></div>
+                            <div><label class="block text-[9px] text-gray-500">الخصم</label><input type="number" id="so_d_${i}" value="30" oninput="calcWideSwap()" class="w-full bg-dark-800 border border-gray-700 rounded-lg p-2 text-white text-xs font-bold"></div>
+                        </div>
                     </div>
                 `;
                 newCont.innerHTML += `
-                    <div class="grid grid-cols-3 gap-1.5 items-center">
-                        <input type="number" id="sn_w_${i}" placeholder="وزن" step="0.01" oninput="calcSimpleSwap()" class="bg-dark-900 border border-gray-700 rounded p-1.5 text-white text-xs">
-                        <input type="number" id="sn_p_${i}" placeholder="سعر" value="${Math.round(state.k21Price)}" oninput="calcSimpleSwap()" class="bg-dark-900 border border-gray-700 rounded p-1.5 text-white text-xs">
-                        <input type="number" id="sn_k_${i}" placeholder="مصنعية" value="100" oninput="calcSimpleSwap()" class="bg-dark-900 border border-gray-700 rounded p-1.5 text-white text-xs">
+                    <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2">
+                        <span class="text-[11px] font-bold text-gray-400 block">قطعة جديدة (${i})</span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div><label class="block text-[9px] text-gray-500">الوزن</label><input type="number" id="sn_w_${i}" placeholder="وزن" step="0.01" oninput="calcWideSwap()" class="w-full bg-dark-800 border border-gray-700 rounded-lg p-2 text-white text-xs font-bold"></div>
+                            <div><label class="block text-[9px] text-gray-500">السعر</label><input type="number" id="sn_p_${i}" value="${Math.round(state.k21Price)}" oninput="calcWideSwap()" class="w-full bg-dark-800 border border-gray-700 rounded-lg p-2 text-white text-xs font-bold"></div>
+                            <div><label class="block text-[9px] text-gray-500">المصنعية</label><input type="number" id="sn_k_${i}" value="100" oninput="calcWideSwap()" class="w-full bg-dark-800 border border-gray-700 rounded-lg p-2 text-white text-xs font-bold"></div>
+                        </div>
                     </div>
                 `;
             }
         }
 
-        function calcSimpleBuy() {
+        function calcWideBuy() {
             let grand = 0;
             const k21 = state.k21Price;
             for(let i=1; i<=5; i++) {
@@ -430,7 +450,7 @@
             document.getElementById('calcBuyGrandTotal').innerText = Math.round(grand).toLocaleString('ar-EG') + ' ج.م';
         }
 
-        function calcSimpleSwap() {
+        function calcWideSwap() {
             let oldTot = 0, newTot = 0;
             for(let i=1; i<=5; i++) {
                 const ow = parseFloat(document.getElementById(`so_w_${i}`).value) || 0;
