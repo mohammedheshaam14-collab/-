@@ -154,8 +154,11 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="bg-dark-800 p-5 rounded-2xl border border-emerald-500/40 shadow-lg space-y-2">
-                    <span class="text-gray-400 text-xs font-semibold block">إجمالي الأرباح الصافية (تحكم يدوي)</span>
-                    <input type="number" id="manualTotalNetProfitInput" value="0" step="1" oninput="saveManualProfit(this.value)" class="w-full bg-dark-900 border border-emerald-500/50 text-emerald-400 font-black text-xl rounded-xl p-2.5 text-center">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-400 text-xs font-semibold">صافي الأرباح (أوتوماتيكي + إمكانية التعديل)</span>
+                        <button onclick="toggleProfitEditMode()" id="profitEditBtn" class="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-bold hover:bg-emerald-900">تعديل يدوي</button>
+                    </div>
+                    <input type="number" id="manualTotalNetProfitInput" value="0" step="1" readonly oninput="saveManualProfit(this.value)" class="w-full bg-dark-900 border border-emerald-500/50 text-emerald-400 font-black text-xl rounded-xl p-2.5 text-center cursor-not-allowed">
                 </div>
                 <div onclick="switchTab('vault')" class="bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-emerald-500/50 cursor-pointer shadow-lg">
                     <span class="text-gray-400 text-xs font-semibold block mb-2">رصيد الخزينة النقدي</span>
@@ -392,32 +395,35 @@
     <script>
         let state = {
             authenticated: false, password: '1234', k21Price: 3800, capital: 0, vaultCash: 0, inventory: [], transactions: [], sales: [],
-            manualProfit: 0, archiveMonths: [], rent: { totalAmount: 5000, days: 30, payments: [] }
+            manualProfit: 0, isManualProfitEditable: false, archiveMonths: [], rent: { totalAmount: 5000, days: 30, payments: [] }
         };
         let manualTotalChanged = false;
         let sellTotalManuallyEdited = false;
 
         window.onload = function() {
-            const saved = localStorage.getItem('altaif_gold_state_v16');
+            const saved = localStorage.getItem('altaif_gold_state_v19');
             if(saved) { try { state = JSON.parse(saved); } catch(e){} }
             if(!state.password) state.password = '1234';
 
             if(state.authenticated) {
                 document.getElementById('loginModal').classList.add('hidden');
-                if(!state.capital || state.capital === 0) {
+                if(!state.capital || state.capital === 0 || isNaN(state.capital)) {
                     document.getElementById('capitalModal').classList.remove('hidden');
                 } else {
                     document.getElementById('capitalModal').classList.add('hidden');
                 }
+            } else {
+                document.getElementById('loginModal').classList.remove('hidden');
             }
+
             document.getElementById('priceK21').value = state.k21Price || 3800;
-            document.getElementById('manualTotalNetProfitInput').value = state.manualProfit || 0;
+            updateProfitDisplayState();
             
             buildCalcRows();
             renderAllData();
         };
 
-        function saveState() { localStorage.setItem('altaif_gold_state_v16', JSON.stringify(state)); }
+        function saveState() { localStorage.setItem('altaif_gold_state_v19', JSON.stringify(state)); }
         
         function exportBackup() {
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
@@ -431,18 +437,25 @@
             if(event.target.files[0]) {
                 fr.readAsText(event.target.files[0], "UTF-8");
                 fr.onload = function(e) {
-                    try { state = JSON.parse(e.target.result); saveState(); renderAllData(); alert('تم الاستعادة بنجاح!'); }
+                    try { 
+                        state = JSON.parse(e.target.result); 
+                        saveState(); 
+                        renderAllData(); 
+                        alert('تم الاستعادة بنجاح!'); 
+                        location.reload();
+                    }
                     catch (err) { alert('الملف غير صالح!'); }
                 };
             }
         }
 
         function handleLogin() {
-            if(document.getElementById('loginPasswordInput').value.trim() === state.password) {
+            const enteredPass = document.getElementById('loginPasswordInput').value.trim();
+            if(enteredPass === state.password) {
                 state.authenticated = true; 
                 document.getElementById('loginModal').classList.add('hidden');
                 
-                if(!state.capital || state.capital === 0) {
+                if(!state.capital || state.capital === 0 || isNaN(state.capital)) {
                     document.getElementById('capitalModal').classList.remove('hidden');
                 } else {
                     document.getElementById('capitalModal').classList.add('hidden');
@@ -463,20 +476,28 @@
         function saveInitialCapital() {
             const cap = parseFloat(document.getElementById('initialCapitalInput').value) || 0;
             if(cap <= 0) return alert('أدخل مبلغ رأس مال صحيح');
+            
             state.capital = cap; 
-            state.vaultCash = cap;
-            state.transactions.push({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'capital', desc: 'رأس المال الافتتاحي', amount: cap });
+            if(!state.vaultCash || state.vaultCash === 0) {
+                state.vaultCash = cap;
+            }
+            
+            if(!state.transactions.some(t => t.type === 'capital')) {
+                state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'capital', desc: 'رأس المال الافتتاحي', amount: cap });
+            }
+
             document.getElementById('capitalModal').classList.add('hidden'); 
             saveState(); 
             renderAllData();
-            alert('تم حفظ رأس المال الافتتاحي وبدء العمل بنجاح!');
+            alert('تم حفظ رأس المال وبدء العمل بنجاح!');
         }
 
         function openAddCapitalModal() { document.getElementById('addCapitalModal').classList.remove('hidden'); }
         function confirmAddCapital() {
             const amt = parseFloat(document.getElementById('additionalCapitalInput').value) || 0;
             if(amt <= 0) return alert('أدخل مبلغ صحيح');
-            state.capital += amt; state.vaultCash += amt;
+            state.capital += amt; 
+            state.vaultCash += amt;
             state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'capital', desc: 'إضافة رأس مال جديد', amount: amt });
             saveState(); renderAllData(); document.getElementById('addCapitalModal').classList.add('hidden'); document.getElementById('additionalCapitalInput').value = '';
             alert('تم إضافة رأس المال بنجاح وتحديث الخزينة!');
@@ -484,24 +505,83 @@
 
         function openProfitToCapitalModal() { document.getElementById('profitToCapitalModal').classList.remove('hidden'); }
         function confirmProfitToCapital() {
+            const currentProfit = getEffectiveProfit();
             const amt = parseFloat(document.getElementById('profitToCapitalInput').value) || 0;
-            if(amt <= 0 || amt > state.manualProfit) return alert('المبلغ غير متاح بالأرباح');
-            state.manualProfit -= amt; state.capital += amt; state.vaultCash += amt;
+            if(amt <= 0 || amt > currentProfit) return alert('المبلغ غير متاح بالأرباح');
+            
+            if(state.isManualProfitEditable) {
+                state.manualProfit -= amt;
+            } else {
+                // إذا كان أوتوماتيك، نسجل معاملة سحب أرباح لتعديل الصافي
+                state.manualProfit -= amt; // أو يمكن خصمها من مجموع أرباح المبيعات
+            }
+            state.capital += amt; 
+            state.vaultCash += amt;
             state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'profit', desc: 'تحويل أرباح لرأس المال', amount: amt });
-            document.getElementById('manualTotalNetProfitInput').value = state.manualProfit;
+            
             saveState(); renderAllData(); document.getElementById('profitToCapitalModal').classList.add('hidden'); document.getElementById('profitToCapitalInput').value = '';
             alert('تم ضخ الأرباح في رأس المال بنجاح!');
         }
 
         function openWithdrawProfitModal() { document.getElementById('withdrawProfitModal').classList.remove('hidden'); }
         function confirmWithdrawProfit() {
+            const currentProfit = getEffectiveProfit();
             const amt = parseFloat(document.getElementById('withdrawProfitInput').value) || 0;
-            if(amt <= 0 || amt > state.manualProfit) return alert('المبلغ غير متاح بالأرباح');
-            state.manualProfit -= amt; state.vaultCash -= amt;
+            if(amt <= 0 || amt > currentProfit) return alert('المبلغ غير متاح بالأرباح');
+            
+            state.manualProfit -= amt;
+            state.vaultCash -= amt;
             state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'withdraw', desc: 'سحب شخصي من الأرباح', amount: -amt });
-            document.getElementById('manualTotalNetProfitInput').value = state.manualProfit;
+            
             saveState(); renderAllData(); document.getElementById('withdrawProfitModal').classList.add('hidden'); document.getElementById('withdrawProfitInput').value = '';
             alert('تم سحب المبلغ من الأرباح بنجاح!');
+        }
+
+        function toggleProfitEditMode() {
+            state.isManualProfitEditable = !state.isManualProfitEditable;
+            saveState();
+            updateProfitDisplayState();
+        }
+
+        function updateProfitDisplayState() {
+            const input = document.getElementById('manualTotalNetProfitInput');
+            const btn = document.getElementById('profitEditBtn');
+            if(state.isManualProfitEditable) {
+                input.removeAttribute('readonly');
+                input.classList.remove('cursor-not-allowed');
+                input.classList.add('border-amber-500');
+                btn.innerText = "قفل التعديل";
+                btn.className = "text-[10px] bg-amber-950 text-amber-400 border border-amber-800 px-2 py-0.5 rounded font-bold hover:bg-amber-900";
+            } else {
+                input.setAttribute('readonly', 'true');
+                input.classList.add('cursor-not-allowed');
+                input.classList.remove('border-amber-500');
+                btn.innerText = "تعديل يدوي";
+                btn.className = "text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-bold hover:bg-emerald-900";
+            }
+            renderDashboard();
+        }
+
+        function calculateAutoProfit() {
+            let autoProfit = 0;
+            if(state.sales && state.sales.length > 0) {
+                state.sales.forEach(s => { autoProfit += s.profit; });
+            }
+            return autoProfit + (state.manualProfit || 0);
+        }
+
+        function getEffectiveProfit() {
+            if(state.isManualProfitEditable) {
+                return parseFloat(document.getElementById('manualTotalNetProfitInput').value) || 0;
+            }
+            return calculateAutoProfit();
+        }
+
+        function saveManualProfit(val) { 
+            if(state.isManualProfitEditable) {
+                state.manualProfit = parseFloat(val) || 0; 
+                saveState(); 
+            }
         }
 
         function updateKaratPricesFrom21(val) { state.k21Price = parseFloat(val) || 3800; saveState(); renderDashboard(); renderInventoryTable(); }
@@ -516,14 +596,13 @@
             document.getElementById('nav-' + tabId).classList.remove('text-gray-300');
         }
 
-        function saveManualProfit(val) { state.manualProfit = parseFloat(val) || 0; saveState(); }
-
         function closeCurrentMonth() {
             const monthName = prompt("أدخل اسم الشهر المراد قفله:", "شهر " + new Date().toLocaleString('ar-EG', {month: 'long', year: 'numeric'}));
             if(!monthName) return;
             let tw = 0; state.inventory.forEach(i => tw += i.weight);
-            state.archiveMonths.unshift({ id: Date.now(), monthName, date: new Date().toLocaleDateString('ar-EG'), vaultCash: state.vaultCash, netProfit: state.manualProfit, totalWeight: tw, itemCount: state.inventory.length });
-            state.manualProfit = 0; document.getElementById('manualTotalNetProfitInput').value = 0;
+            const currentProf = getEffectiveProfit();
+            state.archiveMonths.unshift({ id: Date.now(), monthName, date: new Date().toLocaleDateString('ar-EG'), vaultCash: state.vaultCash, netProfit: currentProf, totalWeight: tw, itemCount: state.inventory.length });
+            state.manualProfit = 0; state.sales = [];
             saveState(); renderAllData(); alert('تم قفل الشهر بنجاح!');
         }
 
@@ -681,6 +760,11 @@
             let finalTot = calculateItemPrice(item.weight, gp, work);
             if (sellTotalManuallyEdited) finalTot = parseFloat(document.getElementById('sellCustomTotalOverride').value) || finalTot;
 
+            // حساب ربح القطعة المباعة (سعر البيع - سعر التكلفة الشراء)
+            const itemProfit = finalTot - item.purchaseCost;
+            if(!state.sales) state.sales = [];
+            state.sales.push({ id: item.id, itemName: item.itemName, sellPrice: finalTot, cost: item.purchaseCost, profit: itemProfit, date: new Date().toLocaleString('ar-EG') });
+
             state.inventory = state.inventory.filter(i => i.id !== item.id);
             state.vaultCash += finalTot;
             state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'sell', desc: `بيع ${item.itemName}`, amount: finalTot });
@@ -690,7 +774,7 @@
             sellTotalManuallyEdited = false;
             
             saveState(); renderAllData(); switchTab('dashboard');
-            alert('تم بيع القطعة بنجاح وإزالتها من المخزون وعلب العرض!');
+            alert(`تم بيع القطعة بنجاح! ربح العملية: ${Math.round(itemProfit).toLocaleString('ar-EG')} ج.م`);
         }
 
         function saveRentData() {
@@ -718,11 +802,12 @@
         }
 
         function renderDashboard() {
-            let tw = 0; state.inventory.forEach(i => tw += i.weight);
-            document.getElementById('dashTotalWeight').innerText = tw.toFixed(2) + ' جم';
             document.getElementById('dashVaultCash').innerText = Math.round(state.vaultCash).toLocaleString('ar-EG') + ' ج.م';
             document.getElementById('dashItemCount').innerText = state.inventory.length + ' قطعة';
             document.getElementById('dashCapital').innerText = Math.round(state.capital).toLocaleString('ar-EG') + ' ج.م';
+            
+            const currentProf = state.isManualProfitEditable ? (state.manualProfit || 0) : calculateAutoProfit();
+            document.getElementById('manualTotalNetProfitInput').value = Math.round(currentProf);
 
             const archCont = document.getElementById('monthsArchiveContainer');
             if(state.archiveMonths && state.archiveMonths.length > 0) {
