@@ -1,740 +1,540 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>Document</title></head><body><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;ar&quot; dir=&quot;rtl&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;الطائف محمد هشام – إدارة الحسابات والذهب&lt;/title&gt;
-    &lt;script src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css&quot;&gt;
-    &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
-    &lt;script&gt;
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الطائف - إدارة الحسابات</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        gold: { light: &#39;#FDF6C7&#39;, DEFAULT: &#39;#D4AF37&#39;, dark: &#39;#9A7B1C&#39;, hover: &#39;#B8972C&#39; },
-                        dark: { 900: &#39;#07090D&#39;, 800: &#39;#11151D&#39;, 700: &#39;#1A202C&#39;, 600: &#39;#2D3748&#39; }
+                        gold: { light: '#F3E5AB', DEFAULT: '#D4AF37', dark: '#AA7C11', hover: '#B8972C' },
+                        dark: { 900: '#0B0D11', 800: '#151821', 700: '#1F2432', 600: '#2B3245' }
                     },
-                    fontFamily: { cairo: [&#39;Cairo&#39;, &#39;sans-serif&#39;] }
+                    fontFamily: { cairo: ['Cairo', 'sans-serif'] }
                 }
             }
         }
-    &lt;/script&gt;
-    &lt;style&gt;
-        body { font-family: &#39;Cairo&#39;, sans-serif; background-color: #07090D; color: #E2E8F0; }
-        .gold-gradient { background: linear-gradient(135deg, #FDF6C7 0%, #D4AF37 50%, #9A7B1C 100%); }
-        .gold-text-gradient { background: linear-gradient(135deg, #FFF5B8 0%, #D4AF37 60%, #AA7C11 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; background-color: #0B0D11; color: #E2E8F0; }
+        .gold-gradient { background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 100%); }
+        .gold-text-gradient { background: linear-gradient(135deg, #FFF099 0%, #D4AF37 50%, #AA7C11 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* علبة عرض الذهب الفاخرة */
         .jewelry-box {
-            background: radial-gradient(circle, #1a1610 0%, #080604 100%);
+            background: radial-gradient(circle, #221d15 0%, #0c0906 100%);
             border: 2px solid #D4AF37;
-            box-shadow: inset 0 0 25px rgba(212, 175, 55, 0.25), 0 10px 30px rgba(0,0,0,0.85);
-            border-radius: 18px;
-            padding: 14px;
+            box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.4), 0 10px 25px rgba(0,0,0,0.8);
+            border-radius: 16px;
+            padding: 12px;
             position: relative;
             overflow: hidden;
-            transition: transform 0.2s ease;
         }
-        .jewelry-box:hover { transform: translateY(-3px); }
         .jewelry-box img {
-            border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            max-height: 160px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            max-height: 180px;
             object-fit: cover;
             width: 100%;
         }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #11151D; }
+        ::-webkit-scrollbar-track { background: #151821; }
         ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body class=&quot;min-h-screen flex flex-col&quot;&gt;
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
 
-    &lt;!-- LOGIN MODAL --&gt;
-    &lt;div id=&quot;loginModal&quot; class=&quot;fixed inset-0 z-50 bg-[#07090D] flex items-center justify-center p-4&quot;&gt;
-        &lt;div class=&quot;bg-dark-800 border border-gold/40 rounded-3xl p-8 max-w-md w-full shadow-2xl text-center space-y-6 relative overflow-hidden&quot;&gt;
-            &lt;div class=&quot;absolute -top-12 -right-12 w-32 h-32 bg-gold/10 rounded-full blur-2xl&quot;&gt;&lt;/div&gt;
-            &lt;div class=&quot;w-20 h-20 gold-gradient rounded-2xl mx-auto flex items-center justify-center text-dark-900 text-4xl font-black shadow-xl transform rotate-3&quot;&gt;
-                &lt;i class=&quot;fa-solid fa-gem&quot;&gt;&lt;/i&gt;
-            &lt;/div&gt;
-            &lt;div&gt;
-                &lt;h2 class=&quot;text-3xl font-black gold-text-gradient&quot;&gt;الطائف محمد هشام&lt;/h2&gt;
-                &lt;p class=&quot;text-xs text-gray-400 mt-1&quot;&gt;نظام الإدارة المالية والمخزون الاحترافي للذهب&lt;/p&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;space-y-4 text-right&quot;&gt;
-                &lt;div&gt;
-                    &lt;label class=&quot;block text-xs font-bold text-gray-300 mb-1&quot;&gt;اختر الحساب / المستخدم&lt;/label&gt;
-                    &lt;select id=&quot;loginUsernameSelect&quot; class=&quot;w-full bg-dark-900 border border-gray-700 rounded-xl p-3.5 text-white font-bold focus:border-gold outline-none&quot;&gt;
-                        &lt;option value=&quot;mohamed&quot;&gt;أ. محمد هشام (المدير العام)&lt;/option&gt;
-                        &lt;option value=&quot;sales&quot;&gt;مسؤول المبيعات&lt;/option&gt;
-                        &lt;option value=&quot;admin&quot;&gt;الإدارة والمراجعة&lt;/option&gt;
-                    &lt;/select&gt;
-                &lt;/div&gt;
-                &lt;div&gt;
-                    &lt;label class=&quot;block text-xs font-bold text-gray-300 mb-1&quot;&gt;كلمة المرور (الافتراضية: 1234)&lt;/label&gt;
-                    &lt;input type=&quot;password&quot; id=&quot;loginPasswordInput&quot; placeholder=&quot;أدخل الباسورد...&quot; class=&quot;w-full bg-dark-900 border border-gray-700 rounded-xl p-3.5 text-center text-lg font-bold text-white focus:border-gold outline-none&quot;&gt;
-                &lt;/div&gt;
-                &lt;button onclick=&quot;handleLogin()&quot; class=&quot;w-full gold-gradient text-dark-900 font-extrabold py-4 rounded-xl shadow-lg hover:opacity-95 transition text-base&quot;&gt;دخول النظام&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
+    <!-- LOGIN OVERLAY -->
+    <div id="loginModal" class="fixed inset-0 z-50 bg-dark-900 flex items-center justify-center p-4">
+        <div class="bg-dark-800 border border-gold/40 rounded-2xl p-8 max-w-md w-full shadow-2xl text-center space-y-6">
+            <div class="w-16 h-16 gold-gradient rounded-full mx-auto flex items-center justify-center text-dark-900 text-3xl font-extrabold shadow-lg">
+                <i class="fa-solid fa-gem"></i>
+            </div>
+            <div>
+                <h2 class="text-2xl font-black gold-text-gradient">الطائف</h2>
+                <p class="text-xs text-gray-400 mt-1">تسجيل الدخول للنظام</p>
+            </div>
+            <div class="space-y-4 text-right">
+                <input type="text" id="loginUsernameInput" value="mohamed" class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-white font-bold">
+                <input type="password" id="loginPasswordInput" placeholder="كلمة المرور (الافتراضية: 1234)" class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-center text-lg font-bold text-white">
+                <button onclick="handleLogin()" class="w-full gold-gradient text-dark-900 font-extrabold py-3.5 rounded-xl shadow-lg">دخول النظام</button>
+            </div>
+        </div>
+    </div>
 
-    &lt;!-- INITIAL CAPITAL SETUP MODAL --&gt;
-    &lt;div id=&quot;capitalModal&quot; class=&quot;fixed inset-0 z-40 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4&quot;&gt;
-        &lt;div class=&quot;bg-dark-800 border border-emerald-500/50 rounded-3xl p-8 max-w-md w-full shadow-2xl text-center space-y-6&quot;&gt;
-            &lt;div class=&quot;w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-2xl mx-auto flex items-center justify-center text-3xl font-bold&quot;&gt;
-                &lt;i class=&quot;fa-solid fa-vault&quot;&gt;&lt;/i&gt;
-            &lt;/div&gt;
-            &lt;div&gt;
-                &lt;h2 class=&quot;text-2xl font-black text-white&quot;&gt;رأس المال الافتتاحي للخزينة&lt;/h2&gt;
-                &lt;p class=&quot;text-xs text-gray-400 mt-1&quot;&gt;حدد المبلغ النقدي المتاح لبدء الحسابات (EGP)&lt;/p&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;space-y-4 text-right&quot;&gt;
-                &lt;input type=&quot;number&quot; id=&quot;initialCapitalInput&quot; value=&quot;100000&quot; step=&quot;1000&quot; class=&quot;w-full bg-dark-900 border border-emerald-500/50 rounded-xl p-3.5 text-center text-2xl font-black text-emerald-400 focus:outline-none&quot;&gt;
-                &lt;button onclick=&quot;saveInitialCapital()&quot; class=&quot;w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-4 rounded-xl shadow-lg transition&quot;&gt;بدء العمل والحسابات&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
+    <!-- INITIAL CAPITAL SETUP MODAL -->
+    <div id="capitalModal" class="fixed inset-0 z-40 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-dark-800 border border-emerald-500/40 rounded-2xl p-8 max-w-md w-full shadow-2xl text-center space-y-6">
+            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full mx-auto flex items-center justify-center text-3xl font-extrabold">
+                <i class="fa-solid fa-vault"></i>
+            </div>
+            <div>
+                <h2 class="text-2xl font-black text-white">رأس المال الافتتاحي للخزينة</h2>
+                <p class="text-xs text-gray-400 mt-1">المبلغ النقدي المتاح لبدء الحسابات (EGP)</p>
+            </div>
+            <div class="space-y-4 text-right">
+                <input type="number" id="initialCapitalInput" value="100000" step="1000" class="w-full bg-dark-900 border border-emerald-500/50 rounded-xl p-3 text-center text-xl font-black text-emerald-400">
+                <button onclick="saveInitialCapital()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3.5 rounded-xl">بدء العمل</button>
+            </div>
+        </div>
+    </div>
 
-    &lt;!-- HEADER WITH TOP NAVIGATION --&gt;
-    &lt;header class=&quot;bg-dark-800 border-b border-gold/30 sticky top-0 z-30 shadow-2xl&quot;&gt;
-        &lt;div class=&quot;max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4&quot;&gt;
-            &lt;div class=&quot;flex items-center space-x-3 space-x-reverse&quot;&gt;
-                &lt;div class=&quot;w-11 h-11 rounded-xl gold-gradient flex items-center justify-center text-dark-900 font-black text-xl shadow-md&quot;&gt;
-                    &lt;i class=&quot;fa-solid fa-coins&quot;&gt;&lt;/i&gt;
-                &lt;/div&gt;
-                &lt;div&gt;
-                    &lt;h1 class=&quot;font-black text-lg gold-text-gradient leading-none&quot;&gt;الطائف&lt;/h1&gt;
-                    &lt;span class=&quot;text-[11px] text-gray-400&quot; id=&quot;currentLoggedUserLabel&quot;&gt;إدارة: أ. محمد هشام&lt;/span&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
+    <!-- HEADER WITH TOP NAVIGATION -->
+    <header class="bg-dark-800 border-b border-gold/35 sticky top-0 z-30 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center text-dark-900 font-bold text-xl shadow-md">
+                    <i class="fa-solid fa-coins"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-lg gold-text-gradient leading-none">الطائف</h1>
+                    <span class="text-xs text-gray-400">إدارة: أ. محمد هشام</span>
+                </div>
+            </div>
 
-            &lt;div class=&quot;flex items-center gap-3 bg-dark-900 px-4 py-2 rounded-xl border border-gold/30 shadow-inner&quot;&gt;
-                &lt;div class=&quot;flex items-center gap-2&quot;&gt;
-                    &lt;label class=&quot;text-xs font-bold text-gold&quot;&gt;عيار 21 العام:&lt;/label&gt;
-                    &lt;input type=&quot;number&quot; id=&quot;priceK21&quot; value=&quot;3800&quot; step=&quot;0.1&quot; class=&quot;w-20 bg-dark-800 border border-gold/50 text-gold font-extrabold text-center rounded-lg px-2 py-1 text-sm focus:outline-none&quot; oninput=&quot;updateKaratPricesFrom21(this.value)&quot;&gt;
-                    &lt;span class=&quot;text-xs text-gray-400&quot;&gt;ج.م&lt;/span&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
+            <div class="flex items-center gap-3 bg-dark-900 px-4 py-2 rounded-xl border border-gold/30">
+                <div class="flex items-center gap-2">
+                    <label class="text-xs font-bold text-gold">عيار 21 العام:</label>
+                    <input type="number" id="priceK21" value="3800" step="0.1" class="w-20 bg-dark-800 border border-gold/50 text-gold font-extrabold text-center rounded px-2 py-1 text-sm" oninput="updateKaratPricesFrom21(this.value)">
+                    <span class="text-xs text-gray-400">ج.م</span>
+                </div>
+            </div>
 
-            &lt;div class=&quot;flex items-center gap-2 flex-wrap&quot;&gt;
-                &lt;button onclick=&quot;exportBackup()&quot; class=&quot;text-xs text-emerald-400 bg-dark-900 px-3 py-2 rounded-xl border border-emerald-900/50 hover:bg-dark-700 transition&quot; title=&quot;حفظ نسخة احتياطية&quot;&gt;&lt;i class=&quot;fa-solid fa-download ml-1&quot;&gt;&lt;/i&gt; حفظ نسخة&lt;/button&gt;
-                &lt;label class=&quot;text-xs text-blue-400 bg-dark-900 px-3 py-2 rounded-xl border border-blue-900/50 cursor-pointer hover:bg-dark-700 transition&quot; title=&quot;استعادة الداتا&quot;&gt;
-                    &lt;i class=&quot;fa-solid fa-upload ml-1&quot;&gt;&lt;/i&gt; استعادة &lt;input type=&quot;file&quot; id=&quot;importFile&quot; accept=&quot;.json&quot; onchange=&quot;importBackup(event)&quot; class=&quot;hidden&quot;&gt;
-                &lt;/label&gt;
-                &lt;button onclick=&quot;openChangePasswordModal()&quot; class=&quot;text-xs text-amber-400 bg-dark-900 px-3 py-2 rounded-xl border border-amber-900/50 hover:bg-dark-700 transition&quot;&gt;&lt;i class=&quot;fa-solid fa-key ml-1&quot;&gt;&lt;/i&gt; الباسورد&lt;/button&gt;
-                &lt;button onclick=&quot;logout()&quot; class=&quot;text-xs text-rose-400 bg-dark-900 px-3 py-2 rounded-xl border border-rose-900/50 hover:bg-dark-700 transition&quot;&gt;&lt;i class=&quot;fa-solid fa-power-off&quot;&gt;&lt;/i&gt; خروج&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+            <div class="flex items-center gap-2 flex-wrap">
+                <button onclick="exportBackup()" class="text-xs text-emerald-400 bg-dark-900 px-3 py-2 rounded-lg border border-emerald-900/50" title="حفظ نسخة احتياطية"><i class="fa-solid fa-download ml-1"></i> حفظ نسخة</button>
+                <label class="text-xs text-blue-400 bg-dark-900 px-3 py-2 rounded-lg border border-blue-900/50 cursor-pointer" title="استعادة الداتا من ملف">
+                    <i class="fa-solid fa-upload ml-1"></i> استعادة <input type="file" id="importFile" accept=".json" onchange="importBackup(event)" class="hidden">
+                </label>
+                <button onclick="openChangePasswordModal()" class="text-xs text-amber-400 bg-dark-900 px-3 py-2 rounded-lg border border-amber-900/50"><i class="fa-solid fa-key ml-1"></i> الباسورد</button>
+                <button onclick="logout()" class="text-xs text-rose-400 bg-dark-900 px-3 py-2 rounded-lg border border-rose-900/50"><i class="fa-solid fa-power-off"></i> خروج</button>
+            </div>
+        </div>
 
-        &lt;!-- TOP NAVIGATION TABS --&gt;
-        &lt;div class=&quot;bg-dark-900 border-t border-gray-800 px-4 py-2.5 flex overflow-x-auto gap-2 justify-start md:justify-center&quot; id=&quot;topNav&quot;&gt;
-            &lt;button onclick=&quot;switchTab(&#39;dashboard&#39;)&quot; id=&quot;nav-dashboard&quot; class=&quot;nav-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-gold text-dark-900 flex items-center gap-2 whitespace-nowrap shadow-md&quot;&gt;&lt;i class=&quot;fa-solid fa-chart-pie&quot;&gt;&lt;/i&gt; الرئيسية&lt;/button&gt;
-            &lt;button onclick=&quot;switchTab(&#39;buy&#39;)&quot; id=&quot;nav-buy&quot; class=&quot;nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap&quot;&gt;&lt;i class=&quot;fa-solid fa-cart-plus text-emerald-400&quot;&gt;&lt;/i&gt; شراء&lt;/button&gt;
-            &lt;button onclick=&quot;switchTab(&#39;sell&#39;)&quot; id=&quot;nav-sell&quot; class=&quot;nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap&quot;&gt;&lt;i class=&quot;fa-solid fa-cash-register text-blue-400&quot;&gt;&lt;/i&gt; بيع&lt;/button&gt;
-            &lt;button onclick=&quot;switchTab(&#39;inventory&#39;)&quot; id=&quot;nav-inventory&quot; class=&quot;nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap&quot;&gt;&lt;i class=&quot;fa-solid fa-boxes-stacked text-gold&quot;&gt;&lt;/i&gt; المخزون&lt;/button&gt;
-            &lt;button onclick=&quot;switchTab(&#39;vault&#39;)&quot; id=&quot;nav-vault&quot; class=&quot;nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap&quot;&gt;&lt;i class=&quot;fa-solid fa-vault text-purple-400&quot;&gt;&lt;/i&gt; الخزينة والحركات&lt;/button&gt;
-            &lt;button onclick=&quot;switchTab(&#39;ai-studio&#39;)&quot; id=&quot;nav-ai-studio&quot; class=&quot;nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap&quot;&gt;&lt;i class=&quot;fa-solid fa-wand-magic-sparkles text-amber-400&quot;&gt;&lt;/i&gt; استوديو AI&lt;/button&gt;
-            &lt;button onclick=&quot;switchTab(&#39;gold-prices&#39;)&quot; id=&quot;nav-gold-prices&quot; class=&quot;nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap&quot;&gt;&lt;i class=&quot;fa-solid fa-chart-line text-emerald-400&quot;&gt;&lt;/i&gt; سعر الذهب الآن&lt;/button&gt;
-            &lt;button onclick=&quot;switchTab(&#39;ai-forecast&#39;)&quot; id=&quot;nav-ai-forecast&quot; class=&quot;nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap&quot;&gt;&lt;i class=&quot;fa-solid fa-brain text-purple-400&quot;&gt;&lt;/i&gt; توقعات AI&lt;/button&gt;
-            &lt;button onclick=&quot;switchTab(&#39;calc&#39;)&quot; id=&quot;nav-calc&quot; class=&quot;nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap&quot;&gt;&lt;i class=&quot;fa-solid fa-calculator text-amber-400&quot;&gt;&lt;/i&gt; الحاسبة الذكية&lt;/button&gt;
-            &lt;button onclick=&quot;switchTab(&#39;rent&#39;)&quot; id=&quot;nav-rent&quot; class=&quot;nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap&quot;&gt;&lt;i class=&quot;fa-solid fa-file-invoice-dollar text-emerald-400&quot;&gt;&lt;/i&gt; إيجار المحل&lt;/button&gt;
-        &lt;/div&gt;
-    &lt;/header&gt;
+        <!-- TOP NAVIGATION -->
+        <div class="bg-dark-900 border-t border-gray-800 px-4 py-2 flex overflow-x-auto gap-2 justify-start md:justify-center" id="topNav">
+            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-gold text-dark-900 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-chart-pie"></i> الرئيسية</button>
+            <button onclick="switchTab('buy')" id="nav-buy" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-cart-plus text-emerald-400"></i> شراء</button>
+            <button onclick="switchTab('sell')" id="nav-sell" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-cash-register text-blue-400"></i> بيع</button>
+            <button onclick="switchTab('inventory')" id="nav-inventory" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-boxes-stacked text-gold"></i> المخزون</button>
+            <button onclick="switchTab('vault')" id="nav-vault" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-vault text-purple-400"></i> الخزينة</button>
+            <button onclick="switchTab('calc')" id="nav-calc" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-calculator text-amber-400"></i> الآلة الحاسبة الذكية</button>
+            <button onclick="switchTab('rent')" id="nav-rent" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:bg-dark-700 flex items-center gap-2 whitespace-nowrap"><i class="fa-solid fa-file-invoice-dollar text-emerald-400"></i> إيجار المحل</button>
+        </div>
+    </header>
 
-    &lt;!-- MAIN CONTENT --&gt;
-    &lt;main class=&quot;flex-1 max-w-7xl w-full mx-auto p-4 space-y-6&quot;&gt;
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 space-y-6">
         
-        &lt;!-- DASHBOARD TAB --&gt;
-        &lt;section id=&quot;tab-dashboard&quot; class=&quot;tab-content space-y-6&quot;&gt;
-            &lt;div class=&quot;bg-gradient-to-r from-dark-800 to-dark-700 p-6 rounded-3xl border border-gold/30 flex justify-between items-center flex-wrap gap-4 shadow-2xl&quot;&gt;
-                &lt;div&gt;
-                    &lt;h2 class=&quot;text-2xl font-black text-white mb-1&quot;&gt;أهلاً بك يا أستاذ محمد هشام 👋&lt;/h2&gt;
-                    &lt;p class=&quot;text-xs text-gray-400&quot;&gt;لوحة المتابعة الشاملة، رأس المال، الأرباح، وعلب عرض الذهب الفاخرة&lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class=&quot;flex items-center gap-2 flex-wrap&quot;&gt;
-                    &lt;button onclick=&quot;openAddCapitalModal()&quot; class=&quot;bg-emerald-600 hover:bg-emerald-500 text-white border border-emerald-400 px-4 py-2.5 rounded-xl text-xs font-bold transition shadow-lg&quot;&gt;
-                        &lt;i class=&quot;fa-solid fa-vault ml-1&quot;&gt;&lt;/i&gt; إدارة رأس المال
-                    &lt;/button&gt;
-                    &lt;button onclick=&quot;openProfitToCapitalModal()&quot; class=&quot;bg-amber-600/30 hover:bg-amber-600 text-amber-300 border border-amber-500/50 px-3.5 py-2.5 rounded-xl text-xs font-bold transition&quot;&gt;
-                        &lt;i class=&quot;fa-solid fa-coins ml-1&quot;&gt;&lt;/i&gt; ضخ أرباح لرأس المال
-                    &lt;/button&gt;
-                    &lt;button onclick=&quot;openWithdrawProfitModal()&quot; class=&quot;bg-blue-600/30 hover:bg-blue-600 text-blue-300 border border-blue-500/50 px-3.5 py-2.5 rounded-xl text-xs font-bold transition&quot;&gt;
-                        &lt;i class=&quot;fa-solid fa-wallet ml-1&quot;&gt;&lt;/i&gt; سحب أرباح
-                    &lt;/button&gt;
-                    &lt;button onclick=&quot;closeCurrentMonth()&quot; class=&quot;bg-rose-600/30 hover:bg-rose-600 text-rose-300 border border-rose-500/50 px-3.5 py-2.5 rounded-xl text-xs font-bold transition&quot;&gt;
-                        &lt;i class=&quot;fa-solid fa-calendar-check ml-1&quot;&gt;&lt;/i&gt; قفل الشهر
-                    &lt;/button&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
+        <!-- DASHBOARD TAB -->
+        <section id="tab-dashboard" class="tab-content space-y-6">
+            <div class="bg-gradient-to-r from-dark-800 to-dark-700 p-6 rounded-2xl border border-gold/30 flex justify-between items-center flex-wrap gap-4 shadow-xl">
+                <div>
+                    <h2 class="text-2xl font-black text-white mb-1">أهلاً بك يا أستاذ محمد 👋</h2>
+                    <p class="text-xs text-gray-400">لوحة المتابعة والأرباح وإدارة علب عرض الذهب</p>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                    <button onclick="openAddCapitalModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white border border-emerald-400 px-4 py-2.5 rounded-xl text-xs font-bold transition shadow-lg">
+                        <i class="fa-solid fa-vault ml-1"></i> إدارة/تعديل رأس المال
+                    </button>
+                    <button onclick="openProfitToCapitalModal()" class="bg-amber-600/30 hover:bg-amber-600 text-amber-300 border border-amber-500/50 px-3 py-2 rounded-xl text-xs font-bold transition">
+                        <i class="fa-solid fa-coins ml-1"></i> ضخ أرباح لرأس المال
+                    </button>
+                    <button onclick="openWithdrawProfitModal()" class="bg-blue-600/30 hover:bg-blue-600 text-blue-300 border border-blue-500/50 px-3 py-2 rounded-xl text-xs font-bold transition">
+                        <i class="fa-solid fa-wallet ml-1"></i> سحب من الأرباح
+                    </button>
+                    <button onclick="closeCurrentMonth()" class="bg-rose-600/30 hover:bg-rose-600 text-rose-300 border border-rose-500/50 px-3 py-2 rounded-xl text-xs font-bold transition">
+                        <i class="fa-solid fa-calendar-check ml-1"></i> قفل الشهر
+                    </button>
+                </div>
+            </div>
 
-            &lt;div class=&quot;grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4&quot;&gt;
-                &lt;div class=&quot;bg-dark-800 p-5 rounded-2xl border border-emerald-500/40 shadow-xl space-y-2&quot;&gt;
-                    &lt;div class=&quot;flex justify-between items-center&quot;&gt;
-                        &lt;span class=&quot;text-gray-400 text-xs font-semibold&quot;&gt;صافي الأرباح (أوتوماتيكي + تعديل)&lt;/span&gt;
-                        &lt;button onclick=&quot;toggleProfitEditMode()&quot; id=&quot;profitEditBtn&quot; class=&quot;text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-bold hover:bg-emerald-900&quot;&gt;تعديل يدوي&lt;/button&gt;
-                    &lt;/div&gt;
-                    &lt;input type=&quot;number&quot; id=&quot;manualTotalNetProfitInput&quot; value=&quot;0&quot; step=&quot;1&quot; readonly oninput=&quot;saveManualProfit(this.value)&quot; class=&quot;w-full bg-dark-900 border border-emerald-500/50 text-emerald-400 font-black text-xl rounded-xl p-2.5 text-center cursor-not-allowed focus:outline-none&quot;&gt;
-                &lt;/div&gt;
-                &lt;div onclick=&quot;switchTab(&#39;vault&#39;)&quot; class=&quot;bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-emerald-500/50 cursor-pointer shadow-xl transition&quot;&gt;
-                    &lt;span class=&quot;text-gray-400 text-xs font-semibold block mb-2&quot;&gt;رصيد الخزينة النقدي&lt;/span&gt;
-                    &lt;div id=&quot;dashVaultCash&quot; class=&quot;text-2xl font-black text-emerald-400&quot;&gt;0 ج.م&lt;/div&gt;
-                &lt;/div&gt;
-                &lt;div onclick=&quot;switchTab(&#39;inventory&#39;)&quot; class=&quot;bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-gold/50 cursor-pointer shadow-xl transition&quot;&gt;
-                    &lt;span class=&quot;text-gray-400 text-xs font-semibold block mb-2&quot;&gt;قطع الذهب بالمخزون&lt;/span&gt;
-                    &lt;div id=&quot;dashItemCount&quot; class=&quot;text-2xl font-black text-white&quot;&gt;0 قطعة&lt;/div&gt;
-                &lt;/div&gt;
-                &lt;div onclick=&quot;openAddCapitalModal()&quot; class=&quot;bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-purple-500/50 cursor-pointer shadow-xl transition&quot;&gt;
-                    &lt;span class=&quot;text-gray-400 text-xs font-semibold block mb-2&quot;&gt;رأس المال المعتمد (اضغط للتعديل)&lt;/span&gt;
-                    &lt;div id=&quot;dashCapital&quot; class=&quot;text-2xl font-black text-purple-300&quot;&gt;0 ج.م&lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-dark-800 p-5 rounded-2xl border border-emerald-500/40 shadow-lg space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-400 text-xs font-semibold">صافي الأرباح (أوتوماتيكي + إمكانية التعديل)</span>
+                        <button onclick="toggleProfitEditMode()" id="profitEditBtn" class="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-bold hover:bg-emerald-900">تعديل يدوي</button>
+                    </div>
+                    <input type="number" id="manualTotalNetProfitInput" value="0" step="1" readonly oninput="saveManualProfit(this.value)" class="w-full bg-dark-900 border border-emerald-500/50 text-emerald-400 font-black text-xl rounded-xl p-2.5 text-center cursor-not-allowed">
+                </div>
+                <div onclick="switchTab('vault')" class="bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-emerald-500/50 cursor-pointer shadow-lg">
+                    <span class="text-gray-400 text-xs font-semibold block mb-2">رصيد الخزينة النقدي</span>
+                    <div id="dashVaultCash" class="text-2xl font-black text-emerald-400">0 ج.م</div>
+                </div>
+                <div onclick="switchTab('inventory')" class="bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-gold/50 cursor-pointer shadow-lg">
+                    <span class="text-gray-400 text-xs font-semibold block mb-2">قطع الذهب بالمخزون</span>
+                    <div id="dashItemCount" class="text-2xl font-black text-white">0 قطعة</div>
+                </div>
+                <div onclick="openAddCapitalModal()" class="bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-purple-500/50 cursor-pointer shadow-lg">
+                    <span class="text-gray-400 text-xs font-semibold block mb-2">رأس المال المعتمد (اضغط للتعديل)</span>
+                    <div id="dashCapital" class="text-2xl font-black text-purple-300">0 ج.م</div>
+                </div>
+            </div>
 
-            &lt;!-- Months Archive Section --&gt;
-            &lt;div class=&quot;bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl space-y-4&quot;&gt;
-                &lt;h3 class=&quot;font-bold text-white text-sm&quot;&gt;&lt;i class=&quot;fa-solid fa-box-archive text-gold ml-1&quot;&gt;&lt;/i&gt; أرشيف الشهور السابقة المقفلة&lt;/h3&gt;
-                &lt;div id=&quot;monthsArchiveContainer&quot; class=&quot;space-y-2 text-xs text-gray-400&quot;&gt;
-                    &lt;p&gt;لا توجد شهور مؤرشفة حتى الآن.&lt;/p&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/section&gt;
+            <!-- Months Archive Section -->
+            <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl space-y-4">
+                <h3 class="font-bold text-white text-sm"><i class="fa-solid fa-box-archive text-gold ml-1"></i> أرشيف الشهور السابقة المقفلة</h3>
+                <div id="monthsArchiveContainer" class="space-y-2 text-xs text-gray-400">
+                    <p>لا توجد شهور مؤرشفة حتى الآن.</p>
+                </div>
+            </div>
+        </section>
 
-        &lt;!-- BUY TAB --&gt;
-        &lt;section id=&quot;tab-buy&quot; class=&quot;tab-content hidden space-y-6&quot;&gt;
-            &lt;div class=&quot;bg-dark-800 p-6 rounded-3xl border border-gray-800 shadow-2xl space-y-6&quot;&gt;
-                &lt;h2 class=&quot;text-xl font-black text-white&quot;&gt;&lt;i class=&quot;fa-solid fa-cart-plus text-emerald-400 ml-2&quot;&gt;&lt;/i&gt; تسجيل شراء قطعة ذهب جديدة&lt;/h2&gt;
-                &lt;form id=&quot;buyForm&quot; onsubmit=&quot;handleBuyGold(event)&quot; class=&quot;space-y-4&quot;&gt;
-                    &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
-                        &lt;div&gt;
-                            &lt;label class=&quot;block text-xs font-bold text-gray-300 mb-1&quot;&gt;عيار القطعة&lt;/label&gt;
-                            &lt;select id=&quot;buyKarat&quot; onchange=&quot;calculateBuyTotal()&quot; class=&quot;w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-bold focus:border-gold outline-none&quot;&gt;
-                                &lt;option value=&quot;21&quot;&gt;عيار 21&lt;/option&gt;&lt;option value=&quot;18&quot;&gt;عيار 18&lt;/option&gt;&lt;option value=&quot;24&quot;&gt;عيار 24&lt;/option&gt;
-                            &lt;/select&gt;
-                        &lt;/div&gt;
-                        &lt;div&gt;
-                            &lt;label class=&quot;block text-xs font-bold text-gray-300 mb-1&quot;&gt;الوزن القائم (جرام)&lt;/label&gt;
-                            &lt;input type=&quot;number&quot; id=&quot;buyWeight&quot; step=&quot;0.01&quot; min=&quot;0.01&quot; required oninput=&quot;calculateBuyTotal()&quot; class=&quot;w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-black text-lg focus:border-gold outline-none&quot;&gt;
-                        &lt;/div&gt;
-                        &lt;div&gt;
-                            &lt;label class=&quot;block text-xs font-bold text-gold mb-1&quot;&gt;اسم أو وصف القطعة&lt;/label&gt;
-                            &lt;input type=&quot;text&quot; id=&quot;buyManualItemName&quot; required placeholder=&quot;مثال: غوايش، خاتم، دبلة...&quot; class=&quot;w-full bg-dark-900 border border-gold/60 text-white rounded-xl p-3 focus:border-gold outline-none&quot;&gt;
-                        &lt;/div&gt;
-                        &lt;div&gt;
-                            &lt;label class=&quot;block text-xs font-bold text-emerald-400 mb-1&quot;&gt;إجمالي السعر المدفوع (قابل للتعديل لأي خطأ)&lt;/label&gt;
-                            &lt;input type=&quot;number&quot; id=&quot;buyCustomTotalOverride&quot; step=&quot;1&quot; oninput=&quot;manualTotalChanged = true; calculateBuyTotal();&quot; class=&quot;w-full bg-dark-900 border border-emerald-500/60 text-emerald-400 rounded-xl p-3 font-black text-lg focus:outline-none&quot;&gt;
-                        &lt;/div&gt;
-                        &lt;div class=&quot;md:col-span-2&quot;&gt;
-                            &lt;label class=&quot;block text-xs font-bold text-amber-400 mb-1&quot;&gt;&lt;i class=&quot;fa-solid fa-camera ml-1&quot;&gt;&lt;/i&gt; صورة القطعة (اختياري - لعرضها داخل علبة العرض الفاخرة)&lt;/label&gt;
-                            &lt;input type=&quot;file&quot; id=&quot;buyItemImage&quot; accept=&quot;image/*&quot; class=&quot;w-full bg-dark-900 border border-amber-500/40 rounded-xl p-2.5 text-gray-300 text-xs&quot;&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;button type=&quot;submit&quot; class=&quot;w-full gold-gradient text-dark-900 font-extrabold py-3.5 rounded-xl shadow-lg hover:opacity-95 transition&quot;&gt;تأكيد الشراء وإضافة للمخزون&lt;/button&gt;
-                &lt;/form&gt;
-            &lt;/div&gt;
-        &lt;/section&gt;
+        <!-- BUY TAB -->
+        <section id="tab-buy" class="tab-content hidden space-y-6">
+            <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h2 class="text-xl font-black text-white mb-4"><i class="fa-solid fa-cart-plus text-emerald-400"></i> تسجيل شراء قطعة ذهب (صورة القطعة اختياري)</h2>
+                <form id="buyForm" onsubmit="handleBuyGold(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 mb-1">عيار القطعة</label>
+                            <select id="buyKarat" onchange="calculateBuyTotal()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-bold">
+                                <option value="21">عيار 21</option><option value="18">عيار 18</option><option value="24">عيار 24</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 mb-1">الوزن القائم (جرام)</label>
+                            <input type="number" id="buyWeight" step="0.01" min="0.01" required oninput="calculateBuyTotal()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-black text-lg">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gold mb-1">اسم/وصف القطعة</label>
+                            <input type="text" id="buyManualItemName" required class="w-full bg-dark-900 border border-gold/60 text-white rounded-xl p-3">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-emerald-400 mb-1">إجمالي السعر المدفوع (تعديل مباشر)</label>
+                            <input type="number" id="buyCustomTotalOverride" step="1" oninput="manualTotalChanged = true; calculateBuyTotal();" class="w-full bg-dark-900 border border-emerald-500/60 text-emerald-400 rounded-xl p-3 font-black text-lg">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-amber-400 mb-1"><i class="fa-solid fa-camera ml-1"></i> صورة القطعة (اختياري - لعرضها داخل علبة العرض)</label>
+                            <input type="file" id="buyItemImage" accept="image/*" class="w-full bg-dark-900 border border-amber-500/40 rounded-xl p-2.5 text-gray-300 text-xs">
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full gold-gradient text-dark-900 font-extrabold py-3 rounded-xl shadow-lg">تأكيد الشراء وإضافة للمخزون</button>
+                </form>
+            </div>
+        </section>
 
-        &lt;!-- SELL TAB --&gt;
-        &lt;section id=&quot;tab-sell&quot; class=&quot;tab-content hidden space-y-6&quot;&gt;
-            &lt;div class=&quot;bg-dark-800 p-6 rounded-3xl border border-gray-800 shadow-2xl space-y-6&quot;&gt;
-                &lt;h2 class=&quot;text-xl font-black text-white&quot;&gt;&lt;i class=&quot;fa-solid fa-cash-register text-blue-400 ml-2&quot;&gt;&lt;/i&gt; بيع قطعة من المخزون (تختفي من العرض والخزينة تتحدث فوراً)&lt;/h2&gt;
-                &lt;form id=&quot;sellForm&quot; onsubmit=&quot;handleSellGold(event)&quot; class=&quot;space-y-4&quot;&gt;
-                    &lt;div&gt;
-                        &lt;label class=&quot;block text-xs font-bold text-gray-300 mb-1&quot;&gt;اختر القطعة المراد بيعها&lt;/label&gt;
-                        &lt;select id=&quot;sellItemSelect&quot; onchange=&quot;updateSellFormDetails()&quot; class=&quot;w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-bold focus:border-blue-500 outline-none&quot;&gt;
-                            &lt;option value=&quot;&quot;&gt;-- اختر قطعة من المخزون --&lt;/option&gt;
-                        &lt;/select&gt;
-                    &lt;/div&gt;
-                    &lt;div id=&quot;sellItemDetailsBox&quot; class=&quot;hidden bg-dark-900 p-4 rounded-xl border border-gray-800 text-xs grid grid-cols-2 md:grid-cols-4 gap-3&quot;&gt;
-                        &lt;div&gt;الكود: &lt;span id=&quot;sellDetailCode&quot; class=&quot;font-bold text-white&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-                        &lt;div&gt;العيار: &lt;span id=&quot;sellDetailKarat&quot; class=&quot;font-bold text-gold&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-                        &lt;div&gt;الوزن: &lt;span id=&quot;sellDetailWeight&quot; class=&quot;font-bold text-white&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-                        &lt;div&gt;التكلفة الأصلية: &lt;span id=&quot;sellDetailCost&quot; class=&quot;font-bold text-emerald-400&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;div class=&quot;grid grid-cols-1 md:grid-cols-3 gap-4&quot;&gt;
-                        &lt;div&gt;
-                            &lt;label class=&quot;block text-xs font-bold text-gray-300 mb-1&quot;&gt;سعر الجرام الخام للبيع&lt;/label&gt;
-                            &lt;input type=&quot;number&quot; id=&quot;sellGramPrice&quot; required oninput=&quot;calculateSellTotal()&quot; class=&quot;w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 focus:outline-none&quot;&gt;
-                        &lt;/div&gt;
-                        &lt;div&gt;
-                            &lt;label class=&quot;block text-xs font-bold text-gray-300 mb-1&quot;&gt;المصنعية للجرام&lt;/label&gt;
-                            &lt;input type=&quot;number&quot; id=&quot;sellWorkmanshipPerGram&quot; value=&quot;100&quot; oninput=&quot;calculateSellTotal()&quot; class=&quot;w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 focus:outline-none&quot;&gt;
-                        &lt;/div&gt;
-                        &lt;div&gt;
-                            &lt;label class=&quot;block text-xs font-bold text-blue-400 mb-1&quot;&gt;الإجمالي النهائي (قابل للتعديل لتصحيح الخطأ)&lt;/label&gt;
-                            &lt;input type=&quot;number&quot; id=&quot;sellCustomTotalOverride&quot; oninput=&quot;sellTotalManuallyEdited = true; calculateSellTotal();&quot; class=&quot;w-full bg-dark-900 border border-blue-500/60 text-blue-400 rounded-xl p-3 font-black focus:outline-none&quot;&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;button type=&quot;submit&quot; class=&quot;w-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold py-3.5 rounded-xl shadow-lg transition&quot;&gt;إتمام البيع وتحديث الأرباح والخزينة&lt;/button&gt;
-                &lt;/form&gt;
-            &lt;/div&gt;
-        &lt;/section&gt;
+        <!-- SELL TAB -->
+        <section id="tab-sell" class="tab-content hidden space-y-6">
+            <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h2 class="text-xl font-black text-white mb-4"><i class="fa-solid fa-cash-register text-blue-400"></i> بيع قطعة من المخزون (تختفي من المخزون وعلب العرض تماماً)</h2>
+                <form id="sellForm" onsubmit="handleSellGold(event)" class="space-y-4">
+                    <select id="sellItemSelect" onchange="updateSellFormDetails()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-bold">
+                        <option value="">-- اختر قطعة من المخزون --</option>
+                    </select>
+                    <div id="sellItemDetailsBox" class="hidden bg-dark-900 p-4 rounded-xl border border-gray-800 text-xs grid grid-cols-4 gap-2">
+                        <div>الكود: <span id="sellDetailCode" class="font-bold text-white"></span></div>
+                        <div>العيار: <span id="sellDetailKarat" class="font-bold text-gold"></span></div>
+                        <div>الوزن: <span id="sellDetailWeight" class="font-bold text-white"></span></div>
+                        <div>التكلفة: <span id="sellDetailCost" class="font-bold text-emerald-400"></span></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <input type="number" id="sellGramPrice" placeholder="سعر الجرام الخام" required oninput="calculateSellTotal()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3">
+                        <input type="number" id="sellWorkmanshipPerGram" value="100" placeholder="المصنعية للجرام" oninput="calculateSellTotal()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3">
+                        <input type="number" id="sellCustomTotalOverride" placeholder="الإجمالي النهائي" oninput="sellTotalManuallyEdited = true; calculateSellTotal();" class="w-full bg-dark-900 border border-blue-500/60 text-blue-400 rounded-xl p-3 font-black">
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold py-3 rounded-xl shadow-lg">إتمام البيع وإزالة من العرض</button>
+                </form>
+            </div>
+        </section>
 
-        &lt;!-- INVENTORY TAB --&gt;
-        &lt;section id=&quot;tab-inventory&quot; class=&quot;tab-content hidden space-y-6&quot;&gt;
-            &lt;div class=&quot;bg-dark-800 p-6 rounded-3xl border border-gray-800 shadow-2xl space-y-6&quot;&gt;
-                &lt;div class=&quot;flex justify-between items-center flex-wrap gap-4&quot;&gt;
-                    &lt;h2 class=&quot;text-xl font-black text-white&quot;&gt;&lt;i class=&quot;fa-solid fa-boxes-stacked text-gold ml-2&quot;&gt;&lt;/i&gt; مخزون القطع (داخل علب العرض الفاخرة - مع إمكانية التعديل والتصحيح)&lt;/h2&gt;
-                    &lt;span id=&quot;inventoryCountBadge&quot; class=&quot;bg-gold/10 text-gold px-3.5 py-1.5 rounded-full text-xs font-bold&quot;&gt;0 قطعة&lt;/span&gt;
-                &lt;/div&gt;
-                &lt;div id=&quot;inventoryGridContainer&quot; class=&quot;grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5&quot;&gt;&lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/section&gt;
+        <!-- INVENTORY TAB WITH JEWELRY BOX DISPLAY -->
+        <section id="tab-inventory" class="tab-content hidden space-y-6">
+            <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl space-y-6">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xl font-black text-white"><i class="fa-solid fa-boxes-stacked text-gold"></i> مخزون القطع المتاحة (داخل علب العرض الفاخرة)</h2>
+                    <span id="inventoryCountBadge" class="bg-gold/10 text-gold px-3 py-1 rounded-full text-xs font-bold">0 قطعة</span>
+                </div>
+                <div id="inventoryGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Inventory items rendered here -->
+                </div>
+            </div>
+        </section>
 
-        &lt;!-- VAULT TAB --&gt;
-        &lt;section id=&quot;tab-vault&quot; class=&quot;tab-content hidden space-y-6&quot;&gt;
-            &lt;div class=&quot;bg-dark-800 p-6 rounded-3xl border border-gray-800 shadow-2xl space-y-6&quot;&gt;
-                &lt;h2 class=&quot;text-xl font-black text-white&quot;&gt;&lt;i class=&quot;fa-solid fa-vault text-purple-400 ml-2&quot;&gt;&lt;/i&gt; الخزينة وسجل الحركات المالية (مع إمكانية التعديل المباشر للأخطاء)&lt;/h2&gt;
-                &lt;div class=&quot;bg-dark-900 p-5 rounded-2xl border border-purple-500/30 flex justify-between items-center flex-wrap gap-4&quot;&gt;
-                    &lt;div&gt;
-                        &lt;span class=&quot;text-xs text-gray-400 block mb-1&quot;&gt;الرصيد النقدي الحالي بالخزينة&lt;/span&gt;
-                        &lt;span id=&quot;vaultCurrentCash&quot; class=&quot;text-3xl font-black text-purple-400&quot;&gt;0 ج.م&lt;/span&gt;
-                    &lt;/div&gt;
-                    &lt;div class=&quot;text-xs text-gray-400&quot;&gt;يمكنك تعديل أي مبلغ في الجدول أدناه في حال حدوث خطأ أثناء التسجيل.&lt;/div&gt;
-                &lt;/div&gt;
-                &lt;div class=&quot;overflow-x-auto&quot;&gt;
-                    &lt;table class=&quot;w-full text-right text-xs&quot;&gt;
-                        &lt;thead class=&quot;bg-dark-900 text-gray-400 font-bold border-b border-gray-800&quot;&gt;
-                            &lt;tr&gt;
-                                &lt;th class=&quot;p-3.5&quot;&gt;التاريخ&lt;/th&gt;
-                                &lt;th class=&quot;p-3.5&quot;&gt;النوع&lt;/th&gt;
-                                &lt;th class=&quot;p-3.5&quot;&gt;البيان&lt;/th&gt;
-                                &lt;th class=&quot;p-3.5&quot;&gt;المبلغ (ج.م)&lt;/th&gt;
-                                &lt;th class=&quot;p-3.5 text-center&quot;&gt;إجراءات (تعديل / حذف)&lt;/th&gt;
-                            &lt;/tr&gt;
-                        &lt;/thead&gt;
-                        &lt;tbody id=&quot;vaultTransactionsBody&quot; class=&quot;divide-y divide-gray-800/60&quot;&gt;&lt;/tbody&gt;
-                    &lt;/table&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/section&gt;
+        <!-- VAULT TAB -->
+        <section id="tab-vault" class="tab-content hidden space-y-6">
+            <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h2 class="text-xl font-black text-white mb-4"><i class="fa-solid fa-vault text-purple-400"></i> الخزينة</h2>
+                <div class="bg-dark-900 p-4 rounded-xl border border-purple-500/30 mb-4">
+                    <span class="text-xs text-gray-400 block">الرصيد النقدي الحالي</span>
+                    <span id="vaultCurrentCash" class="text-2xl font-black text-purple-400">0 ج.م</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-xs">
+                        <thead class="bg-dark-900 text-gray-400 font-bold border-b border-gray-800">
+                            <tr><th class="p-3">التاريخ</th><th class="p-3">النوع</th><th class="p-3">البيان</th><th class="p-3">المبلغ</th></tr>
+                        </thead>
+                        <tbody id="vaultTransactionsBody" class="divide-y divide-gray-800/60"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
 
-        &lt;!-- AI JEWELRY STUDIO TAB --&gt;
-        &lt;section id=&quot;tab-ai-studio&quot; class=&quot;tab-content hidden space-y-6&quot;&gt;
-            &lt;div class=&quot;bg-dark-800 p-6 rounded-3xl border border-gold/30 shadow-2xl space-y-6&quot;&gt;
-                &lt;div class=&quot;flex items-center gap-3 border-b border-gray-800 pb-4&quot;&gt;
-                    &lt;div class=&quot;w-12 h-12 bg-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center text-xl font-bold&quot;&gt;&lt;i class=&quot;fa-solid fa-wand-magic-sparkles&quot;&gt;&lt;/i&gt;&lt;/div&gt;
-                    &lt;div&gt;
-                        &lt;h2 class=&quot;text-xl font-black text-white&quot;&gt;استوديو صور المجوهرات بالذكاء الاصطناعي&lt;/h2&gt;
-                        &lt;p class=&quot;text-xs text-gray-400&quot;&gt;اختر قطعة من المخزون أو ارفع صورة، وحسّن عرضها بصرياً داخل علبة مجوهرات فاخرة دون تغيير الأوزان أو العيارات الحقيقية.&lt;/p&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
+        <!-- SMART CALCULATOR TAB -->
+        <section id="tab-calc" class="tab-content hidden space-y-6">
+            <div class="bg-dark-800 p-6 rounded-2xl border border-gold/30 shadow-xl space-y-8">
+                <div class="flex items-center gap-3 border-b border-gray-800 pb-4">
+                    <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-calculator"></i></div>
+                    <div>
+                        <h2 class="text-xl font-black text-white">الآلة الحاسبة الذكية</h2>
+                        <p class="text-xs text-gray-400">حاسبة الشراء (سعر الذهب لكل صنف) ومقايضة البدل المبسطة (3 خانات)</p>
+                    </div>
+                </div>
 
-                &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-6&quot;&gt;
-                    &lt;div class=&quot;bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-4&quot;&gt;
-                        &lt;h3 class=&quot;font-bold text-gold text-sm&quot;&gt;1. اختر القطعة أو ارفع صورة&lt;/h3&gt;
-                        &lt;div&gt;
-                            &lt;label class=&quot;block text-xs font-bold text-gray-300 mb-1&quot;&gt;اختر من المخزون:&lt;/label&gt;
-                            &lt;select id=&quot;aiStudioItemSelect&quot; onchange=&quot;loadInventoryItemToStudio()&quot; class=&quot;w-full bg-dark-800 border border-gray-700 text-white rounded-xl p-3 text-xs font-bold focus:outline-none&quot;&gt;
-                                &lt;option value=&quot;&quot;&gt;-- اختر قطعة من المخزون --&lt;/option&gt;
-                            &lt;/select&gt;
-                        &lt;/div&gt;
-                        &lt;div&gt;
-                            &lt;label class=&quot;block text-xs font-bold text-gray-300 mb-1&quot;&gt;أو رفع صورة جديدة:&lt;/label&gt;
-                            &lt;input type=&quot;file&quot; id=&quot;aiStudioFileInput&quot; accept=&quot;image/*&quot; onchange=&quot;previewStudioOriginalImage(event)&quot; class=&quot;w-full bg-dark-800 border border-gray-700 text-gray-300 rounded-xl p-2.5 text-xs&quot;&gt;
-                        &lt;/div&gt;
-                        &lt;div class=&quot;space-y-2 pt-2&quot;&gt;
-                            &lt;label class=&quot;block text-xs font-bold text-amber-400&quot;&gt;معاينة الصورة الأصلية:&lt;/label&gt;
-                            &lt;div id=&quot;aiStudioOriginalPreview&quot; class=&quot;h-44 bg-dark-800 rounded-xl border border-gray-700 flex items-center justify-center text-gray-500 text-xs overflow-hidden&quot;&gt;لا توجد صورة محددة&lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
+                <div class="bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h3 class="font-bold text-amber-400 text-sm border-b border-gray-800 pb-2">1. حاسبة الشراء (5 أصناف)</h3>
+                    <div class="space-y-4" id="calcBuyRowsContainer"></div>
+                    <div class="bg-dark-800 p-4 rounded-xl border border-amber-500/30 flex justify-between items-center">
+                        <span class="text-sm font-bold text-amber-300">التوتال الإجمالي للشراء:</span>
+                        <span id="calcBuyGrandTotal" class="text-2xl font-black text-amber-400">0 ج.م</span>
+                    </div>
+                </div>
 
-                    &lt;div class=&quot;bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-4 flex flex-col justify-between&quot;&gt;
-                        &lt;div class=&quot;space-y-4&quot;&gt;
-                            &lt;h3 class=&quot;font-bold text-emerald-400 text-sm&quot;&gt;2. إعدادات التحسين البصري&lt;/h3&gt;
-                            &lt;div&gt;
-                                &lt;label class=&quot;block text-xs font-bold text-gray-300 mb-1&quot;&gt;نمط الإخراج الفاخر:&lt;/label&gt;
-                                &lt;select id=&quot;aiStudioStyleSelect&quot; class=&quot;w-full bg-dark-800 border border-gray-700 text-white rounded-xl p-3 text-xs font-bold focus:outline-none&quot;&gt;
-                                    &lt;option value=&quot;box-velvet&quot;&gt;علبة مجوهرات فاخرة مع بطانة قطيفة سوداء وإضاءة استوديو&lt;/option&gt;
-                                    &lt;option value=&quot;dark-lux&quot;&gt;خلفية سوداء داكنة فاخرة مع انعكاسات ذهبية دقيقة&lt;/option&gt;
-                                    &lt;option value=&quot;beige-royal&quot;&gt;خلفية بيج راقية تبرز بريق الذهب الخالص&lt;/option&gt;
-                                &lt;/select&gt;
-                            &lt;/div&gt;
-                            &lt;div class=&quot;bg-dark-800 p-3 rounded-xl border border-amber-500/30 text-[11px] text-gray-300 space-y-1&quot;&gt;
-                                &lt;p class=&quot;text-amber-400 font-bold&quot;&gt;&lt;i class=&quot;fa-solid fa-triangle-exclamation ml-1&quot;&gt;&lt;/i&gt; تنبيه أمانة الذهب:&lt;/p&gt;
-                                &lt;p&gt;هذه المعالجة بصرية فقط لعرضها على الزبائن، ولا تغير بأي حال من الأحوال العيار أو الوزن أو التفاصيل الحقيقية للقطعة المسجلة في المخزون.&lt;/p&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                        &lt;button onclick=&quot;processAiStudioEnhancement()&quot; class=&quot;w-full gold-gradient text-dark-900 font-extrabold py-3.5 rounded-xl shadow-lg hover:opacity-95 transition text-sm&quot;&gt;
-                            &lt;i class=&quot;fa-solid fa-wand-magic-sparkles ml-1&quot;&gt;&lt;/i&gt; تحسين وعرض داخل علبة المجوهرات
-                        &lt;/button&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
+                <div class="bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h3 class="font-bold text-emerald-400 text-sm border-b border-gray-800 pb-2">2. حاسبة مقايضة البدل (3 خانات قديم وتحته 3 خانات جديد)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-dark-800 p-5 rounded-2xl border border-gray-700 space-y-4">
+                            <h4 class="text-sm font-bold text-gold border-b border-gray-700 pb-2">أولاً: الذهب القديم (3 خانات)</h4>
+                            <div id="swapOldRowsContainer" class="space-y-3"></div>
+                            <div class="text-left pt-3 border-t border-gray-700">
+                                <span class="text-xs text-gray-400">إجمالي قيمة القديم:</span>
+                                <span id="swapOldTotalRes" class="text-xl font-black text-gold block">0 ج.م</span>
+                            </div>
+                        </div>
 
-                &lt;div class=&quot;bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-4&quot;&gt;
-                    &lt;h3 class=&quot;font-bold text-white text-sm&quot;&gt;3. النتيجة المحسنة (جاهزة للعرض)&lt;/h3&gt;
-                    &lt;div id=&quot;aiStudioResultContainer&quot; class=&quot;h-64 bg-dark-800 rounded-2xl border border-gold/40 flex items-center justify-center text-gray-500 text-xs overflow-hidden&quot;&gt;
-                        اضغط على زر التحسين لعرض الصورة داخل علبة العرض الفاخرة...
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/section&gt;
+                        <div class="bg-dark-800 p-5 rounded-2xl border border-gray-700 space-y-4">
+                            <h4 class="text-sm font-bold text-emerald-400 border-b border-gray-700 pb-2">ثانياً: الذهب الجديد (3 خانات)</h4>
+                            <div id="swapNewRowsContainer" class="space-y-3"></div>
+                            <div class="text-left pt-3 border-t border-gray-700">
+                                <span class="text-xs text-gray-400">إجمالي قيمة الجديد:</span>
+                                <span id="swapNewTotalRes" class="text-xl font-black text-emerald-400 block">0 ج.م</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-dark-800 p-5 rounded-xl border border-emerald-500/40 text-center space-y-1">
+                        <span id="swapFinalStatusLabel" class="text-xs text-gray-400 block">صافي الفارق:</span>
+                        <span id="swapFinalResult" class="text-2xl font-black text-emerald-400">0 ج.م</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        &lt;!-- LIVE GOLD PRICES TAB --&gt;
-        &lt;section id=&quot;tab-gold-prices&quot; class=&quot;tab-content hidden space-y-6&quot;&gt;
-            &lt;div class=&quot;bg-dark-800 p-6 rounded-3xl border border-emerald-500/30 shadow-2xl space-y-6&quot;&gt;
-                &lt;div class=&quot;flex justify-between items-center flex-wrap gap-4 border-b border-gray-800 pb-4&quot;&gt;
-                    &lt;div class=&quot;flex items-center gap-3&quot;&gt;
-                        &lt;div class=&quot;w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center text-xl font-bold&quot;&gt;&lt;i class=&quot;fa-solid fa-chart-line&quot;&gt;&lt;/i&gt;&lt;/div&gt;
-                        &lt;div&gt;
-                            &lt;h2 class=&quot;text-xl font-black text-white&quot;&gt;سعر الذهب الآن (السوق المحلي والعالمي)&lt;/h2&gt;
-                            &lt;p class=&quot;text-xs text-gray-400&quot;&gt;آخر تحديث مباشر لأسعار الذهب والعملات المرتبطة بالسوق المصري والعالمي.&lt;/p&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;button onclick=&quot;fetchLiveGoldPrices()&quot; class=&quot;bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition shadow-lg&quot;&gt;
-                        &lt;i class=&quot;fa-solid fa-rotate ml-1&quot;&gt;&lt;/i&gt; تحديث الأسعار الآن
-                    &lt;/button&gt;
-                &lt;/div&gt;
+        <!-- RENT TAB -->
+        <section id="tab-rent" class="tab-content hidden space-y-6">
+            <div class="bg-dark-800 p-6 rounded-2xl border border-emerald-500/30 shadow-xl space-y-6">
+                <h2 class="text-xl font-black text-white"><i class="fa-solid fa-file-invoice-dollar text-emerald-400"></i> إيجار المحل والأيام</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <input type="number" id="rentTotalAmount" value="5000" oninput="saveRentData()" class="bg-dark-900 border border-gray-700 rounded-xl p-3 text-white">
+                    <input type="number" id="rentTotalDays" value="30" oninput="saveRentData()" class="bg-dark-900 border border-gray-700 rounded-xl p-3 text-white">
+                    <input type="number" id="rentTodayInput" value="200" class="bg-dark-900 border border-emerald-500/60 rounded-xl p-3 text-emerald-400 font-black">
+                </div>
+                <button onclick="addRentDailyPayment()" class="w-full bg-emerald-600 text-white font-extrabold py-3 rounded-xl">تسجيل المبلغ اليومي</button>
+                <div class="grid grid-cols-3 gap-4 text-center">
+                    <div class="bg-dark-900 p-3 rounded-xl"><span class="text-xs text-gray-400 block">المدفوع</span><span id="rentPaidTotal" class="text-xl font-bold text-emerald-400">0 ج.م</span></div>
+                    <div class="bg-dark-900 p-3 rounded-xl"><span class="text-xs text-gray-400 block">المتبقي</span><span id="rentRemainingTotal" class="text-xl font-bold text-rose-400">0 ج.م</span></div>
+                    <div class="bg-dark-900 p-3 rounded-xl"><span class="text-xs text-gray-400 block">المتوسط اليومي</span><span id="rentDailyAverageNeeded" class="text-xl font-bold text-gold">0 ج.م</span></div>
+                </div>
+            </div>
+        </section>
 
-                &lt;div class=&quot;grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4&quot;&gt;
-                    &lt;div class=&quot;bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-2&quot;&gt;
-                        &lt;span class=&quot;text-gray-400 text-xs&quot;&gt;عيار 24 (خام الصاغة)&lt;/span&gt;
-                        &lt;div id=&quot;livePrice24&quot; class=&quot;text-2xl font-black text-gold&quot;&gt;-- ج.م&lt;/div&gt;
-                        &lt;span class=&quot;text-[10px] text-emerald-400&quot;&gt;محدث تلقائياً&lt;/span&gt;
-                    &lt;/div&gt;
-                    &lt;div class=&quot;bg-dark-900 p-5 rounded-2xl border border-gold/40 space-y-2 bg-gradient-to-b from-dark-900 to-amber-950/20&quot;&gt;
-                        &lt;span class=&quot;text-gold text-xs font-bold&quot;&gt;عيار 21 (المعيار الأكثر تداولاً)&lt;/span&gt;
-                        &lt;div id=&quot;livePrice21&quot; class=&quot;text-2xl font-black text-white&quot;&gt;-- ج.م&lt;/div&gt;
-                        &lt;span class=&quot;text-[10px] text-gold&quot;&gt;سعر الأساس بالمحل&lt;/span&gt;
-                    &lt;/div&gt;
-                    &lt;div class=&quot;bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-2&quot;&gt;
-                        &lt;span class=&quot;text-gray-400 text-xs&quot;&gt;عيار 18&lt;/span&gt;
-                        &lt;div id=&quot;livePrice18&quot; class=&quot;text-2xl font-black text-gold&quot;&gt;-- ج.م&lt;/div&gt;
-                        &lt;span class=&quot;text-[10px] text-emerald-400&quot;&gt;محدث تلقائياً&lt;/span&gt;
-                    &lt;/div&gt;
-                    &lt;div class=&quot;bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-2&quot;&gt;
-                        &lt;span class=&quot;text-gray-400 text-xs&quot;&gt;الجنيه الذهب (عيار 21)&lt;/span&gt;
-                        &lt;div id=&quot;livePricePound&quot; class=&quot;text-2xl font-black text-purple-400&quot;&gt;-- ج.م&lt;/div&gt;
-                        &lt;span class=&quot;text-[10px] text-gray-400&quot;&gt;وزن 8 جرام&lt;/span&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
+    </main>
 
-                &lt;div class=&quot;bg-dark-900 p-5 rounded-2xl border border-gray-800 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs&quot;&gt;
-                    &lt;div class=&quot;space-y-2&quot;&gt;
-                        &lt;div class=&quot;text-gray-400&quot;&gt;سعر الأونصة العالمية (دولار): &lt;span id=&quot;liveOunceUSD&quot; class=&quot;font-bold text-white&quot;&gt;-- $&lt;/span&gt;&lt;/div&gt;
-                        &lt;div class=&quot;text-gray-400&quot;&gt;سعر صرف الدولار المعتمد: &lt;span id=&quot;liveUSDExchange&quot; class=&quot;font-bold text-white&quot;&gt;-- ج.م&lt;/span&gt;&lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;div class=&quot;space-y-2 text-left md:text-right&quot;&gt;
-                        &lt;div class=&quot;text-gray-400&quot;&gt;مصدر بيانات الأسعار: &lt;span class=&quot;font-bold text-emerald-400&quot;&gt;تحديث سوق الصاغة المصري المباشر&lt;/span&gt;&lt;/div&gt;
-                        &lt;div class=&quot;text-gray-400&quot;&gt;وقت آخر مزامنة: &lt;span id=&quot;liveLastSyncTime&quot; class=&quot;font-bold text-gold&quot;&gt;لم يتم التحديث بعد&lt;/span&gt;&lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/section&gt;
+    <!-- MODALS -->
+    <div id="addCapitalModal" class="fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4">
+        <div class="bg-dark-800 border border-emerald-500/50 rounded-2xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl">
+            <h3 class="text-lg font-black text-emerald-400">إدارة وتعديل رأس المال</h3>
+            <p class="text-xs text-gray-400">يمكنك ضبط رأس المال الحالي وإضافة مبلغ جديد للخزينة.</p>
+            <div>
+                <label class="block text-xs font-bold text-gray-300 mb-1">المبلغ المراد إضافته (EGP)</label>
+                <input type="number" id="additionalCapitalInput" placeholder="أدخل المبلغ الإضافي..." class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-emerald-400 font-black text-lg">
+            </div>
+            <div class="flex gap-2 pt-2">
+                <button onclick="confirmAddCapital()" class="flex-1 bg-emerald-600 text-white py-3 rounded-xl font-extrabold">تأكيد الإضافة</button>
+                <button onclick="document.getElementById('addCapitalModal').classList.add('hidden')" class="flex-1 bg-dark-700 text-gray-300 py-3 rounded-xl">إلغاء</button>
+            </div>
+        </div>
+    </div>
 
-        &lt;!-- AI GOLD FORECAST TAB --&gt;
-        &lt;section id=&quot;tab-ai-forecast&quot; class=&quot;tab-content hidden space-y-6&quot;&gt;
-            &lt;div class=&quot;bg-dark-800 p-6 rounded-3xl border border-purple-500/30 shadow-2xl space-y-6&quot;&gt;
-                &lt;div class=&quot;flex justify-between items-center flex-wrap gap-4 border-b border-gray-800 pb-4&quot;&gt;
-                    &lt;div class=&quot;flex items-center gap-3&quot;&gt;
-                        &lt;div class=&quot;w-12 h-12 bg-purple-500/20 text-purple-400 rounded-2xl flex items-center justify-center text-xl font-bold&quot;&gt;&lt;i class=&quot;fa-solid fa-brain&quot;&gt;&lt;/i&gt;&lt;/div&gt;
-                        &lt;div&gt;
-                            &lt;h2 class=&quot;text-xl font-black text-white&quot;&gt;تحليل وتوقع سعر الذهب بالذكاء الاصطناعي&lt;/h2&gt;
-                            &lt;p class=&quot;text-xs text-gray-400&quot;&gt;سيناريوهات السوق (صاعد، هابط، عرضي) ومستويات الدعم والمقاومة لمساعدة التخطيط المالي.&lt;/p&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;button onclick=&quot;generateAiForecastAnalysis()&quot; class=&quot;bg-purple-600 hover:bg-purple-500 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition shadow-lg&quot;&gt;
-                        &lt;i class=&quot;fa-solid fa-wand-magic-sparkles ml-1&quot;&gt;&lt;/i&gt; تشغيل التحليل الآن
-                    &lt;/button&gt;
-                &lt;/div&gt;
+    <div id="profitToCapitalModal" class="fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4">
+        <div class="bg-dark-800 border border-amber-500/50 rounded-2xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl">
+            <h3 class="text-lg font-black text-amber-400">تحويل جزء من الأرباح إلى رأس المال</h3>
+            <input type="number" id="profitToCapitalInput" placeholder="أدخل المبلغ..." class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-amber-400 font-black text-lg">
+            <div class="flex gap-2 pt-2">
+                <button onclick="confirmProfitToCapital()" class="flex-1 bg-amber-600 text-dark-900 py-3 rounded-xl font-extrabold">تأكيد</button>
+                <button onclick="document.getElementById('profitToCapitalModal').classList.add('hidden')" class="flex-1 bg-dark-700 text-gray-300 py-3 rounded-xl">إلغاء</button>
+            </div>
+        </div>
+    </div>
 
-                &lt;div class=&quot;grid grid-cols-1 md:grid-cols-3 gap-4&quot;&gt;
-                    &lt;div&gt;
-                        &lt;label class=&quot;block text-xs font-bold text-gray-300 mb-1&quot;&gt;اختر السوق المراد تحليله:&lt;/label&gt;
-                        &lt;select id=&quot;forecastMarketType&quot; class=&quot;w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 text-xs font-bold focus:outline-none&quot;&gt;
-                            &lt;option value=&quot;local&quot;&gt;السوق المحلي في مصر (جنيه مصري)&lt;/option&gt;
-                            &lt;option value=&quot;global&quot;&gt;الذهب العالمي (أونصة دولارية)&lt;/option&gt;
-                        &lt;/select&gt;
-                    &lt;/div&gt;
-                    &lt;div&gt;
-                        &lt;label class=&quot;block text-xs font-bold text-gray-300 mb-1&quot;&gt;المدى الزمني للتوقع:&lt;/label&gt;
-                        &lt;select id=&quot;forecastTimeframe&quot; class=&quot;w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 text-xs font-bold focus:outline-none&quot;&gt;
-                            &lt;option value=&quot;today&quot;&gt;خلال جلسة اليوم&lt;/option&gt;
-                            &lt;option value=&quot;week&quot;&gt;خلال الأسبوع الحالي&lt;/option&gt;
-                            &lt;option value=&quot;month&quot;&gt;خلال الشهر القادم&lt;/option&gt;
-                        &lt;/select&gt;
-                    &lt;/div&gt;
-                    &lt;div&gt;
-                        &lt;label class=&quot;block text-xs font-bold text-gray-300 mb-1&quot;&gt;العيار المستهدف:&lt;/label&gt;
-                        &lt;select id=&quot;forecastKarat&quot; class=&quot;w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 text-xs font-bold focus:outline-none&quot;&gt;
-                            &lt;option value=&quot;21&quot;&gt;عيار 21 (الرئيسي)&lt;/option&gt;
-                            &lt;option value=&quot;18&quot;&gt;عيار 18&lt;/option&gt;
-                            &lt;option value=&quot;24&quot;&gt;عيار 24&lt;/option&gt;
-                        &lt;/select&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
+    <div id="withdrawProfitModal" class="fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4">
+        <div class="bg-dark-800 border border-blue-500/50 rounded-2xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl">
+            <h3 class="text-lg font-black text-blue-400">سحب نقدي من الأرباح</h3>
+            <input type="number" id="withdrawProfitInput" placeholder="أدخل المبلغ..." class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-blue-400 font-black text-lg">
+            <div class="flex gap-2 pt-2">
+                <button onclick="confirmWithdrawProfit()" class="flex-1 bg-blue-600 text-white py-3 rounded-xl font-extrabold">تأكيد</button>
+                <button onclick="document.getElementById('withdrawProfitModal').classList.add('hidden')" class="flex-1 bg-dark-700 text-gray-300 py-3 rounded-xl">إلغاء</button>
+            </div>
+        </div>
+    </div>
 
-                &lt;div class=&quot;bg-dark-900 p-6 rounded-2xl border border-gray-800 space-y-4&quot;&gt;
-                    &lt;h3 class=&quot;font-bold text-gold text-sm border-b border-gray-800 pb-2&quot;&gt;نتائج التحليل والسيناريوهات المحتملة&lt;/h3&gt;
-                    &lt;div id=&quot;aiForecastResultBox&quot; class=&quot;space-y-4 text-xs text-gray-300 leading-relaxed&quot;&gt;
-                        &lt;p class=&quot;text-gray-500&quot;&gt;اضغط على زر &quot;تشغيل التحليل الآن&quot; لاستعراض قراءة السوق والسيناريوهات الفنية المبنية على المعطيات الحالية.&lt;/p&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/section&gt;
+    <div id="changePasswordModal" class="fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4">
+        <div class="bg-dark-800 border border-gold/50 rounded-2xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl">
+            <h3 class="text-lg font-black text-gold">تغيير كلمة المرور</h3>
+            <input type="password" id="newPasswordInput" placeholder="الباسورد الجديد..." class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-white font-bold">
+            <div class="flex gap-2 pt-2">
+                <button onclick="saveNewPassword()" class="flex-1 gold-gradient text-dark-900 py-3 rounded-xl font-extrabold">حفظ</button>
+                <button onclick="document.getElementById('changePasswordModal').classList.add('hidden')" class="flex-1 bg-dark-700 text-gray-300 py-3 rounded-xl">إلغاء</button>
+            </div>
+        </div>
+    </div>
 
-        &lt;!-- SMART CALCULATOR TAB --&gt;
-        &lt;section id=&quot;tab-calc&quot; class=&quot;tab-content hidden space-y-6&quot;&gt;
-            &lt;div class=&quot;bg-dark-800 p-6 rounded-3xl border border-gold/30 shadow-2xl space-y-8&quot;&gt;
-                &lt;div class=&quot;flex items-center gap-3 border-b border-gray-800 pb-4&quot;&gt;
-                    &lt;div class=&quot;w-12 h-12 bg-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center text-xl font-bold&quot;&gt;&lt;i class=&quot;fa-solid fa-calculator&quot;&gt;&lt;/i&gt;&lt;/div&gt;
-                    &lt;div&gt;
-                        &lt;h2 class=&quot;text-xl font-black text-white&quot;&gt;الآلة الحاسبة الذكية للذهب&lt;/h2&gt;
-                        &lt;p class=&quot;text-xs text-gray-400&quot;&gt;حاسبة الشراء (5 أصناف) ومقايضة البدل (3 قديم وتحته 3 جديد) بتصميم مريح وواضح.&lt;/p&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-
-                &lt;div class=&quot;bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-4&quot;&gt;
-                    &lt;h3 class=&quot;font-bold text-amber-400 text-sm border-b border-gray-800 pb-2&quot;&gt;1. حاسبة الشراء (5 أصناف)&lt;/h3&gt;
-                    &lt;div class=&quot;space-y-4&quot; id=&quot;calcBuyRowsContainer&quot;&gt;&lt;/div&gt;
-                    &lt;div class=&quot;bg-dark-800 p-4 rounded-xl border border-amber-500/30 flex justify-between items-center&quot;&gt;
-                        &lt;span class=&quot;text-sm font-bold text-amber-300&quot;&gt;التوتال الإجمالي للشراء:&lt;/span&gt;
-                        &lt;span id=&quot;calcBuyGrandTotal&quot; class=&quot;text-2xl font-black text-amber-400&quot;&gt;0 ج.م&lt;/span&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-
-                &lt;div class=&quot;bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-4&quot;&gt;
-                    &lt;h3 class=&quot;font-bold text-emerald-400 text-sm border-b border-gray-800 pb-2&quot;&gt;2. حاسبة مقايضة البدل (3 خانات قديم وتحته 3 خانات جديد)&lt;/h3&gt;
-                    &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-6&quot;&gt;
-                        &lt;div class=&quot;bg-dark-800 p-5 rounded-2xl border border-gray-700 space-y-4&quot;&gt;
-                            &lt;h4 class=&quot;text-sm font-bold text-gold border-b border-gray-700 pb-2&quot;&gt;أولاً: الذهب القديم (3 خانات)&lt;/h4&gt;
-                            &lt;div id=&quot;swapOldRowsContainer&quot; class=&quot;space-y-3&quot;&gt;&lt;/div&gt;
-                            &lt;div class=&quot;text-left pt-3 border-t border-gray-700&quot;&gt;
-                                &lt;span class=&quot;text-xs text-gray-400&quot;&gt;إجمالي قيمة القديم:&lt;/span&gt;
-                                &lt;span id=&quot;swapOldTotalRes&quot; class=&quot;text-xl font-black text-gold block&quot;&gt;0 ج.م&lt;/span&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-
-                        &lt;div class=&quot;bg-dark-800 p-5 rounded-2xl border border-gray-700 space-y-4&quot;&gt;
-                            &lt;h4 class=&quot;text-sm font-bold text-emerald-400 border-b border-gray-700 pb-2&quot;&gt;ثانياً: الذهب الجديد (3 خانات)&lt;/h4&gt;
-                            &lt;div id=&quot;swapNewRowsContainer&quot; class=&quot;space-y-3&quot;&gt;&lt;/div&gt;
-                            &lt;div class=&quot;text-left pt-3 border-t border-gray-700&quot;&gt;
-                                &lt;span class=&quot;text-xs text-gray-400&quot;&gt;إجمالي قيمة الجديد:&lt;/span&gt;
-                                &lt;span id=&quot;swapNewTotalRes&quot; class=&quot;text-xl font-black text-emerald-400 block&quot;&gt;0 ج.م&lt;/span&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;div class=&quot;bg-dark-800 p-5 rounded-xl border border-emerald-500/40 text-center space-y-1&quot;&gt;
-                        &lt;span id=&quot;swapFinalStatusLabel&quot; class=&quot;text-xs text-gray-400 block&quot;&gt;صافي الفارق:&lt;/span&gt;
-                        &lt;span id=&quot;swapFinalResult&quot; class=&quot;text-2xl font-black text-emerald-400&quot;&gt;0 ج.م&lt;/span&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/section&gt;
-
-        &lt;!-- RENT TAB --&gt;
-        &lt;section id=&quot;tab-rent&quot; class=&quot;tab-content hidden space-y-6&quot;&gt;
-            &lt;div class=&quot;bg-dark-800 p-6 rounded-3xl border border-emerald-500/30 shadow-2xl space-y-6&quot;&gt;
-                &lt;h2 class=&quot;text-xl font-black text-white&quot;&gt;&lt;i class=&quot;fa-solid fa-file-invoice-dollar text-emerald-400 ml-2&quot;&gt;&lt;/i&gt; إيجار المحل والأيام والمصروفات&lt;/h2&gt;
-                &lt;div class=&quot;grid grid-cols-1 md:grid-cols-3 gap-4&quot;&gt;
-                    &lt;input type=&quot;number&quot; id=&quot;rentTotalAmount&quot; value=&quot;5000&quot; oninput=&quot;saveRentData()&quot; class=&quot;bg-dark-900 border border-gray-700 rounded-xl p-3.5 text-white focus:outline-none&quot;&gt;
-                    &lt;input type=&quot;number&quot; id=&quot;rentTotalDays&quot; value=&quot;30&quot; oninput=&quot;saveRentData()&quot; class=&quot;bg-dark-900 border border-gray-700 rounded-xl p-3.5 text-white focus:outline-none&quot;&gt;
-                    &lt;input type=&quot;number&quot; id=&quot;rentTodayInput&quot; value=&quot;200&quot; class=&quot;bg-dark-900 border border-emerald-500/60 rounded-xl p-3.5 text-emerald-400 font-black focus:outline-none&quot;&gt;
-                &lt;/div&gt;
-                &lt;button onclick=&quot;addRentDailyPayment()&quot; class=&quot;w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3.5 rounded-xl shadow-lg transition&quot;&gt;تسجيل المبلغ اليومي&lt;/button&gt;
-                &lt;div class=&quot;grid grid-cols-3 gap-4 text-center&quot;&gt;
-                    &lt;div class=&quot;bg-dark-900 p-4 rounded-2xl border border-gray-800&quot;&gt;&lt;span class=&quot;text-xs text-gray-400 block mb-1&quot;&gt;المدفوع&lt;/span&gt;&lt;span id=&quot;rentPaidTotal&quot; class=&quot;text-xl font-bold text-emerald-400&quot;&gt;0 ج.م&lt;/span&gt;&lt;/div&gt;
-                    &lt;div class=&quot;bg-dark-900 p-4 rounded-2xl border border-gray-800&quot;&gt;&lt;span class=&quot;text-xs text-gray-400 block mb-1&quot;&gt;المتبقي&lt;/span&gt;&lt;span id=&quot;rentRemainingTotal&quot; class=&quot;text-xl font-bold text-rose-400&quot;&gt;0 ج.م&lt;/span&gt;&lt;/div&gt;
-                    &lt;div class=&quot;bg-dark-900 p-4 rounded-2xl border border-gray-800&quot;&gt;&lt;span class=&quot;text-xs text-gray-400 block mb-1&quot;&gt;المتوسط اليومي&lt;/span&gt;&lt;span id=&quot;rentDailyAverageNeeded&quot; class=&quot;text-xl font-bold text-gold&quot;&gt;0 ج.م&lt;/span&gt;&lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/section&gt;
-
-    &lt;/main&gt;
-
-    &lt;!-- MODALS --&gt;
-    &lt;div id=&quot;addCapitalModal&quot; class=&quot;fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4&quot;&gt;
-        &lt;div class=&quot;bg-dark-800 border border-emerald-500/50 rounded-3xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl&quot;&gt;
-            &lt;h3 class=&quot;text-lg font-black text-emerald-400&quot;&gt;إدارة وتعديل رأس المال&lt;/h3&gt;
-            &lt;p class=&quot;text-xs text-gray-400&quot;&gt;يمكنك ضبط رأس المال الحالي وإضافة مبلغ جديد للخزينة.&lt;/p&gt;
-            &lt;input type=&quot;number&quot; id=&quot;additionalCapitalInput&quot; placeholder=&quot;أدخل المبلغ الإضافي...&quot; class=&quot;w-full bg-dark-900 border border-gray-700 rounded-xl p-3.5 text-emerald-400 font-black text-lg focus:outline-none&quot;&gt;
-            &lt;div class=&quot;flex gap-2 pt-2&quot;&gt;
-                &lt;button onclick=&quot;confirmAddCapital()&quot; class=&quot;flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-3.5 rounded-xl font-extrabold transition&quot;&gt;تأكيد الإضافة&lt;/button&gt;
-                &lt;button onclick=&quot;document.getElementById(&#39;addCapitalModal&#39;).classList.add(&#39;hidden&#39;)&quot; class=&quot;flex-1 bg-dark-700 text-gray-300 py-3.5 rounded-xl transition&quot;&gt;إلغاء&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;profitToCapitalModal&quot; class=&quot;fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4&quot;&gt;
-        &lt;div class=&quot;bg-dark-800 border border-amber-500/50 rounded-3xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl&quot;&gt;
-            &lt;h3 class=&quot;text-lg font-black text-amber-400&quot;&gt;تحويل جزء من الأرباح إلى رأس المال&lt;/h3&gt;
-            &lt;input type=&quot;number&quot; id=&quot;profitToCapitalInput&quot; placeholder=&quot;أدخل المبلغ...&quot; class=&quot;w-full bg-dark-900 border border-gray-700 rounded-xl p-3.5 text-amber-400 font-black text-lg focus:outline-none&quot;&gt;
-            &lt;div class=&quot;flex gap-2 pt-2&quot;&gt;
-                &lt;button onclick=&quot;confirmProfitToCapital()&quot; class=&quot;flex-1 bg-amber-600 hover:bg-amber-500 text-dark-900 py-3.5 rounded-xl font-extrabold transition&quot;&gt;تأكيد&lt;/button&gt;
-                &lt;button onclick=&quot;document.getElementById(&#39;profitToCapitalModal&#39;).classList.add(&#39;hidden&#39;)&quot; class=&quot;flex-1 bg-dark-700 text-gray-300 py-3.5 rounded-xl transition&quot;&gt;إلغاء&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;withdrawProfitModal&quot; class=&quot;fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4&quot;&gt;
-        &lt;div class=&quot;bg-dark-800 border border-blue-500/50 rounded-3xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl&quot;&gt;
-            &lt;h3 class=&quot;text-lg font-black text-blue-400&quot;&gt;سحب نقدي من الأرباح&lt;/h3&gt;
-            &lt;input type=&quot;number&quot; id=&quot;withdrawProfitInput&quot; placeholder=&quot;أدخل المبلغ...&quot; class=&quot;w-full bg-dark-900 border border-gray-700 rounded-xl p-3.5 text-blue-400 font-black text-lg focus:outline-none&quot;&gt;
-            &lt;div class=&quot;flex gap-2 pt-2&quot;&gt;
-                &lt;button onclick=&quot;confirmWithdrawProfit()&quot; class=&quot;flex-1 bg-blue-600 hover:bg-blue-500 text-white py-3.5 rounded-xl font-extrabold transition&quot;&gt;تأكيد&lt;/button&gt;
-                &lt;button onclick=&quot;document.getElementById(&#39;withdrawProfitModal&#39;).classList.add(&#39;hidden&#39;)&quot; class=&quot;flex-1 bg-dark-700 text-gray-300 py-3.5 rounded-xl transition&quot;&gt;إلغاء&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;changePasswordModal&quot; class=&quot;fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4&quot;&gt;
-        &lt;div class=&quot;bg-dark-800 border border-gold/50 rounded-3xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl&quot;&gt;
-            &lt;h3 class=&quot;text-lg font-black text-gold&quot;&gt;تغيير كلمة المرور&lt;/h3&gt;
-            &lt;input type=&quot;password&quot; id=&quot;newPasswordInput&quot; placeholder=&quot;الباسورد الجديد...&quot; class=&quot;w-full bg-dark-900 border border-gray-700 rounded-xl p-3.5 text-white font-bold focus:outline-none&quot;&gt;
-            &lt;div class=&quot;flex gap-2 pt-2&quot;&gt;
-                &lt;button onclick=&quot;saveNewPassword()&quot; class=&quot;flex-1 gold-gradient text-dark-900 py-3.5 rounded-xl font-extrabold transition&quot;&gt;حفظ&lt;/button&gt;
-                &lt;button onclick=&quot;document.getElementById(&#39;changePasswordModal&#39;).classList.add(&#39;hidden&#39;)&quot; class=&quot;flex-1 bg-dark-700 text-gray-300 py-3.5 rounded-xl transition&quot;&gt;إلغاء&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- JAVASCRIPT LOGIC --&gt;
-    &lt;script&gt;
+    <!-- SCRIPT LOGIC -->
+    <script>
         let state = {
-            authenticated: false, currentUser: &#39;mohamed&#39;, password: &#39;1234&#39;, k21Price: 3800, capital: 0, vaultCash: 0, inventory: [], transactions: [], sales: [],
+            authenticated: false, password: '1234', k21Price: 3800, capital: 0, vaultCash: 0, inventory: [], transactions: [], sales: [],
             manualProfit: 0, isManualProfitEditable: false, archiveMonths: [], rent: { totalAmount: 5000, days: 30, payments: [] }
         };
         let manualTotalChanged = false;
         let sellTotalManuallyEdited = false;
-        let studioOriginalImageData = null;
 
         window.onload = function() {
-            const saved = localStorage.getItem(&#39;altaif_gold_state_v21&#39;);
+            const saved = localStorage.getItem('altaif_gold_state_v19');
             if(saved) { try { state = JSON.parse(saved); } catch(e){} }
-            if(!state.password) state.password = &#39;1234&#39;;
+            if(!state.password) state.password = '1234';
 
             if(state.authenticated) {
-                document.getElementById(&#39;loginModal&#39;).classList.add(&#39;hidden&#39;);
+                document.getElementById('loginModal').classList.add('hidden');
                 if(!state.capital || state.capital === 0 || isNaN(state.capital)) {
-                    document.getElementById(&#39;capitalModal&#39;).classList.remove(&#39;hidden&#39;);
+                    document.getElementById('capitalModal').classList.remove('hidden');
                 } else {
-                    document.getElementById(&#39;capitalModal&#39;).classList.add(&#39;hidden&#39;);
+                    document.getElementById('capitalModal').classList.add('hidden');
                 }
             } else {
-                document.getElementById(&#39;loginModal&#39;).classList.remove(&#39;hidden&#39;);
+                document.getElementById('loginModal').classList.remove('hidden');
             }
 
-            document.getElementById(&#39;priceK21&#39;).value = state.k21Price || 3800;
-            updateUserLabel();
+            document.getElementById('priceK21').value = state.k21Price || 3800;
             updateProfitDisplayState();
+            
             buildCalcRows();
             renderAllData();
-            populateAiStudioDropdown();
-            fetchLiveGoldPrices();
         };
 
-        function saveState() { localStorage.setItem(&#39;altaif_gold_state_v21&#39;, JSON.stringify(state)); }
-
-        function updateUserLabel() {
-            const names = { mohamed: &#39;أ. محمد هشام (المدير العام)&#39;, sales: &#39;مسؤول المبيعات&#39;, admin: &#39;الإدارة والمراجعة&#39; };
-            document.getElementById(&#39;currentLoggedUserLabel&#39;).innerText = &#39;إدارة: &#39; + (names[state.currentUser] || &#39;أ. محمد هشام&#39;);
-        }
+        function saveState() { localStorage.setItem('altaif_gold_state_v19', JSON.stringify(state)); }
         
         function exportBackup() {
-            const dataStr = &quot;data:text/json;charset=utf-8,&quot; + encodeURIComponent(JSON.stringify(state));
-            const dl = document.createElement(&#39;a&#39;); dl.setAttribute(&quot;href&quot;, dataStr);
-            dl.setAttribute(&quot;download&quot;, &quot;altaif_gold_backup_&quot; + new Date().toISOString().slice(0,10) + &quot;.json&quot;);
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
+            const dl = document.createElement('a'); dl.setAttribute("href", dataStr);
+            dl.setAttribute("download", "altaif_gold_backup_" + new Date().toISOString().slice(0,10) + ".json");
             document.body.appendChild(dl); dl.click(); dl.remove();
         }
 
         function importBackup(event) {
             const fr = new FileReader();
             if(event.target.files[0]) {
-                fr.readAsText(event.target.files[0], &quot;UTF-8&quot;);
+                fr.readAsText(event.target.files[0], "UTF-8");
                 fr.onload = function(e) {
                     try { 
                         state = JSON.parse(e.target.result); 
                         saveState(); 
                         renderAllData(); 
-                        alert(&#39;تم الاستعادة بنجاح!&#39;); 
+                        alert('تم الاستعادة بنجاح!'); 
                         location.reload();
                     }
-                    catch (err) { alert(&#39;الملف غير صالح!&#39;); }
+                    catch (err) { alert('الملف غير صالح!'); }
                 };
             }
         }
 
         function handleLogin() {
-            const u = document.getElementById(&#39;loginUsernameSelect&#39;).value;
-            const p = document.getElementById(&#39;loginPasswordInput&#39;).value.trim();
-            if(p === state.password) {
+            const enteredPass = document.getElementById('loginPasswordInput').value.trim();
+            if(enteredPass === state.password) {
                 state.authenticated = true; 
-                state.currentUser = u;
-                document.getElementById(&#39;loginModal&#39;).classList.add(&#39;hidden&#39;);
-                updateUserLabel();
+                document.getElementById('loginModal').classList.add('hidden');
                 
                 if(!state.capital || state.capital === 0 || isNaN(state.capital)) {
-                    document.getElementById(&#39;capitalModal&#39;).classList.remove(&#39;hidden&#39;);
+                    document.getElementById('capitalModal').classList.remove('hidden');
                 } else {
-                    document.getElementById(&#39;capitalModal&#39;).classList.add(&#39;hidden&#39;);
+                    document.getElementById('capitalModal').classList.add('hidden');
                 }
                 saveState();
-            } else { alert(&#39;كلمة المرور غير صحيحة!&#39;); }
+            } else { alert('كلمة المرور غير صحيحة!'); }
         }
 
-        function openChangePasswordModal() { document.getElementById(&#39;changePasswordModal&#39;).classList.remove(&#39;hidden&#39;); }
+        function openChangePasswordModal() { document.getElementById('changePasswordModal').classList.remove('hidden'); }
         function saveNewPassword() {
-            const p = document.getElementById(&#39;newPasswordInput&#39;).value.trim();
-            if(p.length &lt; 2) return alert(&#39;أدخل باسورد صحيح&#39;);
-            state.password = p; saveState(); document.getElementById(&#39;changePasswordModal&#39;).classList.add(&#39;hidden&#39;); alert(&#39;تم التغيير بنجاح!&#39;);
+            const p = document.getElementById('newPasswordInput').value.trim();
+            if(p.length < 2) return alert('أدخل باسورد صحيح');
+            state.password = p; saveState(); document.getElementById('changePasswordModal').classList.add('hidden'); alert('تم التغيير!');
         }
 
         function logout() { state.authenticated = false; saveState(); location.reload(); }
         
         function saveInitialCapital() {
-            const cap = parseFloat(document.getElementById(&#39;initialCapitalInput&#39;).value) || 0;
-            if(cap &lt;= 0) return alert(&#39;أدخل مبلغ رأس مال صحيح&#39;);
+            const cap = parseFloat(document.getElementById('initialCapitalInput').value) || 0;
+            if(cap <= 0) return alert('أدخل مبلغ رأس مال صحيح');
             
             state.capital = cap; 
             if(!state.vaultCash || state.vaultCash === 0) {
                 state.vaultCash = cap;
             }
-            if(!state.transactions.some(t =&gt; t.type === &#39;capital&#39;)) {
-                state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString(&#39;ar-EG&#39;), type: &#39;capital&#39;, desc: &#39;رأس المال الافتتاحي&#39;, amount: cap });
+            
+            if(!state.transactions.some(t => t.type === 'capital')) {
+                state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'capital', desc: 'رأس المال الافتتاحي', amount: cap });
             }
 
-            document.getElementById(&#39;capitalModal&#39;).classList.add(&#39;hidden&#39;); 
+            document.getElementById('capitalModal').classList.add('hidden'); 
             saveState(); 
             renderAllData();
-            alert(&#39;تم حفظ رأس المال وبدء العمل بنجاح!&#39;);
+            alert('تم حفظ رأس المال وبدء العمل بنجاح!');
         }
 
-        function openAddCapitalModal() { document.getElementById(&#39;addCapitalModal&#39;).classList.remove(&#39;hidden&#39;); }
+        function openAddCapitalModal() { document.getElementById('addCapitalModal').classList.remove('hidden'); }
         function confirmAddCapital() {
-            const amt = parseFloat(document.getElementById(&#39;additionalCapitalInput&#39;).value) || 0;
-            if(amt &lt;= 0) return alert(&#39;أدخل مبلغ صحيح&#39;);
+            const amt = parseFloat(document.getElementById('additionalCapitalInput').value) || 0;
+            if(amt <= 0) return alert('أدخل مبلغ صحيح');
             state.capital += amt; 
             state.vaultCash += amt;
-            state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString(&#39;ar-EG&#39;), type: &#39;capital&#39;, desc: &#39;إضافة رأس مال جديد&#39;, amount: amt });
-            saveState(); renderAllData(); document.getElementById(&#39;addCapitalModal&#39;).classList.add(&#39;hidden&#39;); document.getElementById(&#39;additionalCapitalInput&#39;).value = &#39;&#39;;
-            alert(&#39;تم إضافة رأس المال بنجاح وتحديث الخزينة!&#39;);
+            state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'capital', desc: 'إضافة رأس مال جديد', amount: amt });
+            saveState(); renderAllData(); document.getElementById('addCapitalModal').classList.add('hidden'); document.getElementById('additionalCapitalInput').value = '';
+            alert('تم إضافة رأس المال بنجاح وتحديث الخزينة!');
         }
 
-        function openProfitToCapitalModal() { document.getElementById(&#39;profitToCapitalModal&#39;).classList.remove(&#39;hidden&#39;); }
+        function openProfitToCapitalModal() { document.getElementById('profitToCapitalModal').classList.remove('hidden'); }
         function confirmProfitToCapital() {
             const currentProfit = getEffectiveProfit();
-            const amt = parseFloat(document.getElementById(&#39;profitToCapitalInput&#39;).value) || 0;
-            if(amt &lt;= 0 || amt &gt; currentProfit) return alert(&#39;المبلغ غير متاح بالأرباح&#39;);
+            const amt = parseFloat(document.getElementById('profitToCapitalInput').value) || 0;
+            if(amt <= 0 || amt > currentProfit) return alert('المبلغ غير متاح بالأرباح');
             
-            state.manualProfit -= amt;
+            if(state.isManualProfitEditable) {
+                state.manualProfit -= amt;
+            } else {
+                // إذا كان أوتوماتيك، نسجل معاملة سحب أرباح لتعديل الصافي
+                state.manualProfit -= amt; // أو يمكن خصمها من مجموع أرباح المبيعات
+            }
             state.capital += amt; 
             state.vaultCash += amt;
-            state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString(&#39;ar-EG&#39;), type: &#39;profit&#39;, desc: &#39;تحويل أرباح لرأس المال&#39;, amount: amt });
+            state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'profit', desc: 'تحويل أرباح لرأس المال', amount: amt });
             
-            saveState(); renderAllData(); document.getElementById(&#39;profitToCapitalModal&#39;).classList.add(&#39;hidden&#39;); document.getElementById(&#39;profitToCapitalInput&#39;).value = &#39;&#39;;
-            alert(&#39;تم ضخ الأرباح في رأس المال بنجاح!&#39;);
+            saveState(); renderAllData(); document.getElementById('profitToCapitalModal').classList.add('hidden'); document.getElementById('profitToCapitalInput').value = '';
+            alert('تم ضخ الأرباح في رأس المال بنجاح!');
         }
 
-        function openWithdrawProfitModal() { document.getElementById(&#39;withdrawProfitModal&#39;).classList.remove(&#39;hidden&#39;); }
+        function openWithdrawProfitModal() { document.getElementById('withdrawProfitModal').classList.remove('hidden'); }
         function confirmWithdrawProfit() {
             const currentProfit = getEffectiveProfit();
-            const amt = parseFloat(document.getElementById(&#39;withdrawProfitInput&#39;).value) || 0;
-            if(amt &lt;= 0 || amt &gt; currentProfit) return alert(&#39;المبلغ غير متاح بالأرباح&#39;);
+            const amt = parseFloat(document.getElementById('withdrawProfitInput').value) || 0;
+            if(amt <= 0 || amt > currentProfit) return alert('المبلغ غير متاح بالأرباح');
             
             state.manualProfit -= amt;
             state.vaultCash -= amt;
-            state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString(&#39;ar-EG&#39;), type: &#39;withdraw&#39;, desc: &#39;سحب شخصي من الأرباح&#39;, amount: -amt });
+            state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'withdraw', desc: 'سحب شخصي من الأرباح', amount: -amt });
             
-            saveState(); renderAllData(); document.getElementById(&#39;withdrawProfitModal&#39;).classList.add(&#39;hidden&#39;); document.getElementById(&#39;withdrawProfitInput&#39;).value = &#39;&#39;;
-            alert(&#39;تم سحب المبلغ من الأرباح بنجاح!&#39;);
+            saveState(); renderAllData(); document.getElementById('withdrawProfitModal').classList.add('hidden'); document.getElementById('withdrawProfitInput').value = '';
+            alert('تم سحب المبلغ من الأرباح بنجاح!');
         }
 
         function toggleProfitEditMode() {
@@ -744,35 +544,35 @@
         }
 
         function updateProfitDisplayState() {
-            const input = document.getElementById(&#39;manualTotalNetProfitInput&#39;);
-            const btn = document.getElementById(&#39;profitEditBtn&#39;);
+            const input = document.getElementById('manualTotalNetProfitInput');
+            const btn = document.getElementById('profitEditBtn');
             if(state.isManualProfitEditable) {
-                input.removeAttribute(&#39;readonly&#39;);
-                input.classList.remove(&#39;cursor-not-allowed&#39;);
-                input.classList.add(&#39;border-amber-500&#39;);
-                btn.innerText = &quot;قفل التعديل&quot;;
-                btn.className = &quot;text-[10px] bg-amber-950 text-amber-400 border border-amber-800 px-2 py-0.5 rounded font-bold hover:bg-amber-900&quot;;
+                input.removeAttribute('readonly');
+                input.classList.remove('cursor-not-allowed');
+                input.classList.add('border-amber-500');
+                btn.innerText = "قفل التعديل";
+                btn.className = "text-[10px] bg-amber-950 text-amber-400 border border-amber-800 px-2 py-0.5 rounded font-bold hover:bg-amber-900";
             } else {
-                input.setAttribute(&#39;readonly&#39;, &#39;true&#39;);
-                input.classList.add(&#39;cursor-not-allowed&#39;);
-                input.classList.remove(&#39;border-amber-500&#39;);
-                btn.innerText = &quot;تعديل يدوي&quot;;
-                btn.className = &quot;text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-bold hover:bg-emerald-900&quot;;
+                input.setAttribute('readonly', 'true');
+                input.classList.add('cursor-not-allowed');
+                input.classList.remove('border-amber-500');
+                btn.innerText = "تعديل يدوي";
+                btn.className = "text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-bold hover:bg-emerald-900";
             }
             renderDashboard();
         }
 
         function calculateAutoProfit() {
             let autoProfit = 0;
-            if(state.sales &amp;&amp; state.sales.length &gt; 0) {
-                state.sales.forEach(s =&gt; { autoProfit += s.profit; });
+            if(state.sales && state.sales.length > 0) {
+                state.sales.forEach(s => { autoProfit += s.profit; });
             }
             return autoProfit + (state.manualProfit || 0);
         }
 
         function getEffectiveProfit() {
             if(state.isManualProfitEditable) {
-                return parseFloat(document.getElementById(&#39;manualTotalNetProfitInput&#39;).value) || 0;
+                return parseFloat(document.getElementById('manualTotalNetProfitInput').value) || 0;
             }
             return calculateAutoProfit();
         }
@@ -787,87 +587,85 @@
         function updateKaratPricesFrom21(val) { state.k21Price = parseFloat(val) || 3800; saveState(); renderDashboard(); renderInventoryTable(); }
 
         function switchTab(tabId) {
-            document.querySelectorAll(&#39;.tab-content&#39;).forEach(el =&gt; el.classList.add(&#39;hidden&#39;));
-            document.getElementById(&#39;tab-&#39; + tabId).classList.remove(&#39;hidden&#39;);
-            document.querySelectorAll(&#39;#topNav .nav-btn&#39;).forEach(btn =&gt; {
-                btn.classList.remove(&#39;bg-gold&#39;, &#39;text-dark-900&#39;, &#39;shadow-md&#39;); btn.classList.add(&#39;text-gray-300&#39;);
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            document.querySelectorAll('#topNav .nav-btn').forEach(btn => {
+                btn.classList.remove('bg-gold', 'text-dark-900'); btn.classList.add('text-gray-300');
             });
-            document.getElementById(&#39;nav-&#39; + tabId).classList.add(&#39;bg-gold&#39;, &#39;text-dark-900&#39;, &#39;shadow-md&#39;);
-            document.getElementById(&#39;nav-&#39; + tabId).classList.remove(&#39;text-gray-300&#39;);
+            document.getElementById('nav-' + tabId).classList.add('bg-gold', 'text-dark-900');
+            document.getElementById('nav-' + tabId).classList.remove('text-gray-300');
         }
 
         function closeCurrentMonth() {
-            const monthName = prompt(&quot;أدخل اسم الشهر المراد قفله:&quot;, &quot;شهر &quot; + new Date().toLocaleString(&#39;ar-EG&#39;, {month: &#39;long&#39;, year: &#39;numeric&#39;}));
+            const monthName = prompt("أدخل اسم الشهر المراد قفله:", "شهر " + new Date().toLocaleString('ar-EG', {month: 'long', year: 'numeric'}));
             if(!monthName) return;
-            let tw = 0; state.inventory.forEach(i =&gt; tw += i.weight);
+            let tw = 0; state.inventory.forEach(i => tw += i.weight);
             const currentProf = getEffectiveProfit();
-            state.archiveMonths.unshift({ id: Date.now(), monthName, date: new Date().toLocaleDateString(&#39;ar-EG&#39;), vaultCash: state.vaultCash, netProfit: currentProf, totalWeight: tw, itemCount: state.inventory.length });
+            state.archiveMonths.unshift({ id: Date.now(), monthName, date: new Date().toLocaleDateString('ar-EG'), vaultCash: state.vaultCash, netProfit: currentProf, totalWeight: tw, itemCount: state.inventory.length });
             state.manualProfit = 0; state.sales = [];
-            saveState(); renderAllData(); alert(&#39;تم قفل الشهر بنجاح!&#39;);
+            saveState(); renderAllData(); alert('تم قفل الشهر بنجاح!');
         }
 
         function calculateItemPrice(weight, goldPrice, workmanship) {
-            return weight &lt; 1 ? (goldPrice * weight) + workmanship : (goldPrice + workmanship) * weight;
+            return weight < 1 ? (goldPrice * weight) + workmanship : (goldPrice + workmanship) * weight;
         }
 
         function buildCalcRows() {
-            const buyCont = document.getElementById(&#39;calcBuyRowsContainer&#39;);
-            if(!buyCont) return;
-            buyCont.innerHTML = &#39;&#39;;
-            for(let i=1; i&lt;=5; i++) {
+            const buyCont = document.getElementById('calcBuyRowsContainer');
+            buyCont.innerHTML = '';
+            for(let i=1; i<=5; i++) {
                 buyCont.innerHTML += `
-                    &lt;div class=&quot;bg-dark-800 p-3.5 rounded-xl border border-gray-700 space-y-2&quot;&gt;
-                        &lt;div class=&quot;text-xs font-bold text-gray-400 flex justify-between&quot;&gt;&lt;span&gt;الصنف (${i})&lt;/span&gt;&lt;span class=&quot;text-amber-400 font-black text-sm&quot; id=&quot;cb_res_${i}&quot;&gt;0 ج.م&lt;/span&gt;&lt;/div&gt;
-                        &lt;div class=&quot;grid grid-cols-1 sm:grid-cols-4 gap-2&quot;&gt;
-                            &lt;input type=&quot;number&quot; id=&quot;cb_weight_${i}&quot; placeholder=&quot;وزن جم&quot; step=&quot;0.01&quot; oninput=&quot;calcBuy()&quot; class=&quot;bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold focus:outline-none&quot;&gt;
-                            &lt;select id=&quot;cb_karat_${i}&quot; onchange=&quot;calcBuy()&quot; class=&quot;bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold focus:outline-none&quot;&gt;&lt;option value=&quot;21&quot;&gt;ع 21&lt;/option&gt;&lt;option value=&quot;18&quot;&gt;ع 18&lt;/option&gt;&lt;option value=&quot;24&quot;&gt;ع 24&lt;/option&gt;&lt;/select&gt;
-                            &lt;input type=&quot;number&quot; id=&quot;cb_price_${i}&quot; value=&quot;${Math.round(state.k21Price)}&quot; oninput=&quot;calcBuy()&quot; class=&quot;bg-dark-900 border border-gray-700 rounded p-2 text-gold text-xs font-bold focus:outline-none&quot;&gt;
-                            &lt;input type=&quot;number&quot; id=&quot;cb_work_${i}&quot; placeholder=&quot;مصنعية&quot; value=&quot;0&quot; oninput=&quot;calcBuy()&quot; class=&quot;bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold focus:outline-none&quot;&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
+                    <div class="bg-dark-800 p-3.5 rounded-xl border border-gray-700 space-y-2">
+                        <div class="text-xs font-bold text-gray-400 flex justify-between"><span>الصنف (${i})</span><span class="text-amber-400 font-black text-sm" id="cb_res_${i}">0 ج.م</span></div>
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-2">
+                            <input type="number" id="cb_weight_${i}" placeholder="وزن جم" step="0.01" oninput="calcBuy()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
+                            <select id="cb_karat_${i}" onchange="calcBuy()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold"><option value="21">ع 21</option><option value="18">ع 18</option><option value="24">ع 24</option></select>
+                            <input type="number" id="cb_price_${i}" value="${Math.round(state.k21Price)}" oninput="calcBuy()" class="bg-dark-900 border border-gray-700 rounded p-2 text-gold text-xs font-bold">
+                            <input type="number" id="cb_work_${i}" placeholder="مصنعية" value="0" oninput="calcBuy()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
+                        </div>
+                    </div>
                 `;
             }
 
-            const oldCont = document.getElementById(&#39;swapOldRowsContainer&#39;);
-            const newCont = document.getElementById(&#39;swapNewRowsContainer&#39;);
-            if(!oldCont || !newCont) return;
-            oldCont.innerHTML = &#39;&#39;; newCont.innerHTML = &#39;&#39;;
-            for(let i=1; i&lt;=3; i++) {
+            const oldCont = document.getElementById('swapOldRowsContainer');
+            const newCont = document.getElementById('swapNewRowsContainer');
+            oldCont.innerHTML = ''; newCont.innerHTML = '';
+            for(let i=1; i<=3; i++) {
                 oldCont.innerHTML += `
-                    &lt;div class=&quot;grid grid-cols-3 gap-2&quot;&gt;
-                        &lt;input type=&quot;number&quot; id=&quot;so_w_${i}&quot; placeholder=&quot;وزن قديم&quot; step=&quot;0.01&quot; oninput=&quot;calcSwap()&quot; class=&quot;bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold focus:outline-none&quot;&gt;
-                        &lt;input type=&quot;number&quot; id=&quot;so_p_${i}&quot; value=&quot;${Math.round(state.k21Price)}&quot; oninput=&quot;calcSwap()&quot; class=&quot;bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold focus:outline-none&quot;&gt;
-                        &lt;input type=&quot;number&quot; id=&quot;so_d_${i}&quot; value=&quot;30&quot; oninput=&quot;calcSwap()&quot; class=&quot;bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold focus:outline-none&quot;&gt;
-                    &lt;/div&gt;
+                    <div class="grid grid-cols-3 gap-2">
+                        <input type="number" id="so_w_${i}" placeholder="وزن قديم" step="0.01" oninput="calcSwap()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
+                        <input type="number" id="so_p_${i}" value="${Math.round(state.k21Price)}" oninput="calcSwap()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
+                        <input type="number" id="so_d_${i}" value="30" oninput="calcSwap()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
+                    </div>
                 `;
                 newCont.innerHTML += `
-                    &lt;div class=&quot;grid grid-cols-3 gap-2&quot;&gt;
-                        &lt;input type=&quot;number&quot; id=&quot;sn_w_${i}&quot; placeholder=&quot;وزن جديد&quot; step=&quot;0.01&quot; oninput=&quot;calcSwap()&quot; class=&quot;bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold focus:outline-none&quot;&gt;
-                        &lt;input type=&quot;number&quot; id=&quot;sn_p_${i}&quot; value=&quot;${Math.round(state.k21Price)}&quot; oninput=&quot;calcSwap()&quot; class=&quot;bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold focus:outline-none&quot;&gt;
-                        &lt;input type=&quot;number&quot; id=&quot;sn_k_${i}&quot; value=&quot;100&quot; oninput=&quot;calcSwap()&quot; class=&quot;bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold focus:outline-none&quot;&gt;
-                    &lt;/div&gt;
+                    <div class="grid grid-cols-3 gap-2">
+                        <input type="number" id="sn_w_${i}" placeholder="وزن جديد" step="0.01" oninput="calcSwap()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
+                        <input type="number" id="sn_p_${i}" value="${Math.round(state.k21Price)}" oninput="calcSwap()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
+                        <input type="number" id="sn_k_${i}" value="100" oninput="calcSwap()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
+                    </div>
                 `;
             }
         }
 
         function calcBuy() {
             let grand = 0;
-            for(let i=1; i&lt;=5; i++) {
+            for(let i=1; i<=5; i++) {
                 const w = parseFloat(document.getElementById(`cb_weight_${i}`).value) || 0;
                 const karat = document.getElementById(`cb_karat_${i}`).value;
                 const cp = parseFloat(document.getElementById(`cb_price_${i}`).value) || state.k21Price;
                 const work = parseFloat(document.getElementById(`cb_work_${i}`).value) || 0;
-                let gp = karat === &#39;24&#39; ? (cp*24)/21 : (karat === &#39;18&#39; ? (cp*6)/7 : cp);
+                let gp = karat === '24' ? (cp*24)/21 : (karat === '18' ? (cp*6)/7 : cp);
                 const tot = calculateItemPrice(w, gp, work);
                 grand += tot;
-                document.getElementById(`cb_res_${i}`).innerText = Math.round(tot).toLocaleString(&#39;ar-EG&#39;) + &#39; ج.م&#39;;
+                document.getElementById(`cb_res_${i}`).innerText = Math.round(tot).toLocaleString('ar-EG') + ' ج.م';
             }
-            document.getElementById(&#39;calcBuyGrandTotal&#39;).innerText = Math.round(grand).toLocaleString(&#39;ar-EG&#39;) + &#39; ج.م&#39;;
+            document.getElementById('calcBuyGrandTotal').innerText = Math.round(grand).toLocaleString('ar-EG') + ' ج.م';
         }
 
         function calcSwap() {
             let oldTot = 0, newTot = 0;
-            for(let i=1; i&lt;=3; i++) {
+            for(let i=1; i<=3; i++) {
                 const ow = parseFloat(document.getElementById(`so_w_${i}`).value) || 0;
                 const op = parseFloat(document.getElementById(`so_p_${i}`).value) || 0;
                 const od = parseFloat(document.getElementById(`so_d_${i}`).value) || 0;
@@ -877,38 +675,38 @@
                 const nk = parseFloat(document.getElementById(`sn_k_${i}`).value) || 0;
                 newTot += calculateItemPrice(nw, np, nk);
             }
-            document.getElementById(&#39;swapOldTotalRes&#39;).innerText = Math.round(oldTot).toLocaleString(&#39;ar-EG&#39;) + &#39; ج.م&#39;;
-            document.getElementById(&#39;swapNewTotalRes&#39;).innerText = Math.round(newTot).toLocaleString(&#39;ar-EG&#39;) + &#39; ج.م&#39;;
+            document.getElementById('swapOldTotalRes').innerText = Math.round(oldTot).toLocaleString('ar-EG') + ' ج.م';
+            document.getElementById('swapNewTotalRes').innerText = Math.round(newTot).toLocaleString('ar-EG') + ' ج.م';
             const diff = newTot - oldTot;
-            const lbl = document.getElementById(&#39;swapFinalStatusLabel&#39;);
-            const res = document.getElementById(&#39;swapFinalResult&#39;);
-            if(diff &gt; 0) {
-                lbl.innerText = &quot;الزبون سيقوم بدفع (فارق نقدي):&quot;; res.className = &quot;text-2xl font-black text-rose-400&quot;; res.innerText = Math.round(diff).toLocaleString(&#39;ar-EG&#39;) + &#39; ج.م (دفع)&#39;;
+            const lbl = document.getElementById('swapFinalStatusLabel');
+            const res = document.getElementById('swapFinalResult');
+            if(diff > 0) {
+                lbl.innerText = "الزبون سيقوم بدفع (فارق نقدي):"; res.className = "text-2xl font-black text-rose-400"; res.innerText = Math.round(diff).toLocaleString('ar-EG') + ' ج.م (دفع)';
             } else {
-                lbl.innerText = &quot;الزبون سيأخذ (فارق نقدي):&quot;; res.className = &quot;text-2xl font-black text-emerald-400&quot;; res.innerText = Math.round(Math.abs(diff)).toLocaleString(&#39;ar-EG&#39;) + &#39; ج.م (قبض)&#39;;
+                lbl.innerText = "الزبون سيأخذ (فارق نقدي):"; res.className = "text-2xl font-black text-emerald-400"; res.innerText = Math.round(Math.abs(diff)).toLocaleString('ar-EG') + ' ج.م (قبض)';
             }
         }
 
         function calculateBuyTotal() {
-            const karat = document.getElementById(&#39;buyKarat&#39;).value;
-            const weight = parseFloat(document.getElementById(&#39;buyWeight&#39;).value) || 0;
-            const gPrice = karat === &#39;24&#39; ? (state.k21Price * 24)/21 : (karat === &#39;18&#39; ? (state.k21Price * 6)/7 : state.k21Price);
+            const karat = document.getElementById('buyKarat').value;
+            const weight = parseFloat(document.getElementById('buyWeight').value) || 0;
+            const gPrice = karat === '24' ? (state.k21Price * 24)/21 : (karat === '18' ? (state.k21Price * 6)/7 : state.k21Price);
             let total = calculateItemPrice(weight, gPrice, 0);
-            if (!manualTotalChanged) document.getElementById(&#39;buyCustomTotalOverride&#39;).value = Math.round(total);
+            if (!manualTotalChanged) document.getElementById('buyCustomTotalOverride').value = Math.round(total);
         }
 
         function handleBuyGold(e) {
             e.preventDefault();
-            const karat = document.getElementById(&#39;buyKarat&#39;).value;
-            const weight = parseFloat(document.getElementById(&#39;buyWeight&#39;).value) || 0;
-            const itemName = document.getElementById(&#39;buyManualItemName&#39;).value.trim() || &#39;قطعة&#39;;
-            const gPrice = karat === &#39;24&#39; ? (state.k21Price * 24)/21 : (karat === &#39;18&#39; ? (state.k21Price * 6)/7 : state.k21Price);
+            const karat = document.getElementById('buyKarat').value;
+            const weight = parseFloat(document.getElementById('buyWeight').value) || 0;
+            const itemName = document.getElementById('buyManualItemName').value.trim() || 'قطعة';
+            const gPrice = karat === '24' ? (state.k21Price * 24)/21 : (karat === '18' ? (state.k21Price * 6)/7 : state.k21Price);
             let cost = calculateItemPrice(weight, gPrice, 0);
-            if (manualTotalChanged) cost = parseFloat(document.getElementById(&#39;buyCustomTotalOverride&#39;).value) || cost;
-            if (cost &gt; state.vaultCash) return alert(&#39;عفواً، لا توجد نقدية كافية بالخزينة!&#39;);
+            if (manualTotalChanged) cost = parseFloat(document.getElementById('buyCustomTotalOverride').value) || cost;
+            if (cost > state.vaultCash) return alert('عفواً، لا توجد نقدية كافية بالخزينة!');
 
-            const imageInput = document.getElementById(&#39;buyItemImage&#39;);
-            if(imageInput.files &amp;&amp; imageInput.files[0]) {
+            const imageInput = document.getElementById('buyItemImage');
+            if(imageInput.files && imageInput.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(uploadEvent) {
                     saveItemToInventory(itemName, karat, weight, cost, uploadEvent.target.result);
@@ -921,305 +719,161 @@
 
         function saveItemToInventory(itemName, karat, weight, cost, imageUrl) {
             state.inventory.push({
-                id: &#39;G-&#39; + Math.floor(1000 + Math.random() * 9000),
+                id: 'G-' + Math.floor(1000 + Math.random() * 9000),
                 itemName, karat, weight, pureGoldWeight: (weight*parseInt(karat))/24,
-                purchaseCost: cost, image: imageUrl, date: new Date().toLocaleString(&#39;ar-EG&#39;)
+                purchaseCost: cost, image: imageUrl, date: new Date().toLocaleString('ar-EG')
             });
             state.vaultCash -= cost;
-            state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString(&#39;ar-EG&#39;), type: &#39;buy&#39;, desc: `شراء ${itemName} (بواسطة ${state.currentUser})`, amount: -cost });
-            document.getElementById(&#39;buyForm&#39;).reset(); manualTotalChanged = false; saveState(); renderAllData(); populateAiStudioDropdown(); switchTab(&#39;inventory&#39;);
+            state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'buy', desc: `شراء ${itemName}`, amount: -cost });
+            document.getElementById('buyForm').reset(); manualTotalChanged = false; saveState(); renderAllData(); switchTab('inventory');
         }
 
         function updateSellFormDetails() {
-            const selectedId = document.getElementById(&#39;sellItemSelect&#39;).value;
-            if (!selectedId) { document.getElementById(&#39;sellItemDetailsBox&#39;).classList.add(&#39;hidden&#39;); return; }
-            const item = state.inventory.find(i =&gt; i.id === selectedId);
-            document.getElementById(&#39;sellItemDetailsBox&#39;).classList.remove(&#39;hidden&#39;);
-            document.getElementById(&#39;sellDetailCode&#39;).innerText = item.id;
-            document.getElementById(&#39;sellDetailKarat&#39;).innerText = item.karat;
-            document.getElementById(&#39;sellDetailWeight&#39;).innerText = item.weight.toFixed(2);
-            document.getElementById(&#39;sellDetailCost&#39;).innerText = Math.round(item.purchaseCost);
-            document.getElementById(&#39;sellGramPrice&#39;).value = Math.round(state.k21Price);
+            const selectedId = document.getElementById('sellItemSelect').value;
+            if (!selectedId) { document.getElementById('sellItemDetailsBox').classList.add('hidden'); return; }
+            const item = state.inventory.find(i => i.id === selectedId);
+            document.getElementById('sellItemDetailsBox').classList.remove('hidden');
+            document.getElementById('sellDetailCode').innerText = item.id;
+            document.getElementById('sellDetailKarat').innerText = item.karat;
+            document.getElementById('sellDetailWeight').innerText = item.weight.toFixed(2);
+            document.getElementById('sellDetailCost').innerText = Math.round(item.purchaseCost);
+            document.getElementById('sellGramPrice').value = Math.round(state.k21Price);
             calculateSellTotal();
         }
 
         function calculateSellTotal() {
-            const item = state.inventory.find(i =&gt; i.id === document.getElementById(&#39;sellItemSelect&#39;).value);
+            const item = state.inventory.find(i => i.id === document.getElementById('sellItemSelect').value);
             if (!item) return;
-            const gp = parseFloat(document.getElementById(&#39;sellGramPrice&#39;).value) || 0;
-            const work = parseFloat(document.getElementById(&#39;sellWorkmanshipPerGram&#39;).value) || 0;
+            const gp = parseFloat(document.getElementById('sellGramPrice').value) || 0;
+            const work = parseFloat(document.getElementById('sellWorkmanshipPerGram').value) || 0;
             let finalTot = calculateItemPrice(item.weight, gp, work);
-            if (!sellTotalManuallyEdited) document.getElementById(&#39;sellCustomTotalOverride&#39;).value = Math.round(finalTot);
+            if (!sellTotalManuallyEdited) document.getElementById('sellCustomTotalOverride').value = Math.round(finalTot);
         }
 
         function handleSellGold(e) {
             e.preventDefault();
-            const selectedId = document.getElementById(&#39;sellItemSelect&#39;).value;
-            const item = state.inventory.find(i =&gt; i.id === selectedId);
+            const selectedId = document.getElementById('sellItemSelect').value;
+            const item = state.inventory.find(i => i.id === selectedId);
             if (!item) return;
-            const gp = parseFloat(document.getElementById(&#39;sellGramPrice&#39;).value) || 0;
-            const work = parseFloat(document.getElementById(&#39;sellWorkmanshipPerGram&#39;).value) || 0;
+            const gp = parseFloat(document.getElementById('sellGramPrice').value) || 0;
+            const work = parseFloat(document.getElementById('sellWorkmanshipPerGram').value) || 0;
             let finalTot = calculateItemPrice(item.weight, gp, work);
-            if (sellTotalManuallyEdited) finalTot = parseFloat(document.getElementById(&#39;sellCustomTotalOverride&#39;).value) || finalTot;
+            if (sellTotalManuallyEdited) finalTot = parseFloat(document.getElementById('sellCustomTotalOverride').value) || finalTot;
 
+            // حساب ربح القطعة المباعة (سعر البيع - سعر التكلفة الشراء)
             const itemProfit = finalTot - item.purchaseCost;
             if(!state.sales) state.sales = [];
-            state.sales.push({ id: item.id, itemName: item.itemName, sellPrice: finalTot, cost: item.purchaseCost, profit: itemProfit, date: new Date().toLocaleString(&#39;ar-EG&#39;) });
+            state.sales.push({ id: item.id, itemName: item.itemName, sellPrice: finalTot, cost: item.purchaseCost, profit: itemProfit, date: new Date().toLocaleString('ar-EG') });
 
-            state.inventory = state.inventory.filter(i =&gt; i.id !== item.id);
+            state.inventory = state.inventory.filter(i => i.id !== item.id);
             state.vaultCash += finalTot;
-            state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString(&#39;ar-EG&#39;), type: &#39;sell&#39;, desc: `بيع ${item.itemName} (بواسطة ${state.currentUser})`, amount: finalTot });
+            state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'sell', desc: `بيع ${item.itemName}`, amount: finalTot });
             
-            document.getElementById(&#39;sellForm&#39;).reset();
-            document.getElementById(&#39;sellItemDetailsBox&#39;).classList.add(&#39;hidden&#39;);
+            document.getElementById('sellForm').reset();
+            document.getElementById('sellItemDetailsBox').classList.add('hidden');
             sellTotalManuallyEdited = false;
             
-            saveState(); renderAllData(); populateAiStudioDropdown(); switchTab(&#39;dashboard&#39;);
-            alert(`تم بيع القطعة بنجاح! الربح: ${Math.round(itemProfit).toLocaleString(&#39;ar-EG&#39;)} ج.م`);
+            saveState(); renderAllData(); switchTab('dashboard');
+            alert(`تم بيع القطعة بنجاح! ربح العملية: ${Math.round(itemProfit).toLocaleString('ar-EG')} ج.م`);
         }
 
         function saveRentData() {
-            state.rent.totalAmount = parseFloat(document.getElementById(&#39;rentTotalAmount&#39;).value) || 5000;
-            state.rent.days = parseFloat(document.getElementById(&#39;rentTotalDays&#39;).value) || 30;
+            state.rent.totalAmount = parseFloat(document.getElementById('rentTotalAmount').value) || 5000;
+            state.rent.days = parseFloat(document.getElementById('rentTotalDays').value) || 30;
             saveState(); renderRentSummary();
         }
 
         function addRentDailyPayment() {
-            const amt = parseFloat(document.getElementById(&#39;rentTodayInput&#39;).value) || 0;
-            if(amt &lt;= 0) return alert(&#39;أدخل مبلغ صحيح&#39;);
+            const amt = parseFloat(document.getElementById('rentTodayInput').value) || 0;
+            if(amt <= 0) return alert('أدخل مبلغ صحيح');
             if(!state.rent.payments) state.rent.payments = [];
-            state.rent.payments.unshift({ id: Date.now(), date: new Date().toLocaleString(&#39;ar-EG&#39;), amount: amt });
-            saveState(); renderRentSummary(); alert(&#39;تم تسجيل الدفعة&#39;);
+            state.rent.payments.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), amount: amt });
+            saveState(); renderRentSummary(); alert('تم تسجيل الدفعة');
         }
 
         function renderRentSummary() {
             const tot = state.rent.totalAmount; const days = state.rent.days;
-            let paid = 0; if(state.rent.payments) state.rent.payments.forEach(p =&gt; paid += p.amount);
+            let paid = 0; if(state.rent.payments) state.rent.payments.forEach(p => paid += p.amount);
             const rem = Math.max(0, tot - paid);
             const passed = state.rent.payments ? state.rent.payments.length : 0;
-            document.getElementById(&#39;rentPaidTotal&#39;).innerText = Math.round(paid) + &#39; ج.م&#39;;
-            document.getElementById(&#39;rentRemainingTotal&#39;).innerText = Math.round(rem) + &#39; ج.م&#39;;
-            document.getElementById(&#39;rentDailyAverageNeeded&#39;).innerText = Math.round(rem / Math.max(1, days - passed)) + &#39; ج.م&#39;;
+            document.getElementById('rentPaidTotal').innerText = Math.round(paid) + ' ج.م';
+            document.getElementById('rentRemainingTotal').innerText = Math.round(rem) + ' ج.م';
+            document.getElementById('rentDailyAverageNeeded').innerText = Math.round(rem / Math.max(1, days - passed)) + ' ج.م';
         }
 
         function renderDashboard() {
-            document.getElementById(&#39;dashVaultCash&#39;).innerText = Math.round(state.vaultCash).toLocaleString(&#39;ar-EG&#39;) + &#39; ج.م&#39;;
-            document.getElementById(&#39;dashItemCount&#39;).innerText = state.inventory.length + &#39; قطعة&#39;;
-            document.getElementById(&#39;dashCapital&#39;).innerText = Math.round(state.capital).toLocaleString(&#39;ar-EG&#39;) + &#39; ج.م&#39;;
+            document.getElementById('dashVaultCash').innerText = Math.round(state.vaultCash).toLocaleString('ar-EG') + ' ج.م';
+            document.getElementById('dashItemCount').innerText = state.inventory.length + ' قطعة';
+            document.getElementById('dashCapital').innerText = Math.round(state.capital).toLocaleString('ar-EG') + ' ج.م';
             
             const currentProf = state.isManualProfitEditable ? (state.manualProfit || 0) : calculateAutoProfit();
-            document.getElementById(&#39;manualTotalNetProfitInput&#39;).value = Math.round(currentProf);
+            document.getElementById('manualTotalNetProfitInput').value = Math.round(currentProf);
 
-            const archCont = document.getElementById(&#39;monthsArchiveContainer&#39;);
-            if(state.archiveMonths &amp;&amp; state.archiveMonths.length &gt; 0) {
-                archCont.innerHTML = &#39;&#39;;
-                state.archiveMonths.forEach(m =&gt; {
+            const archCont = document.getElementById('monthsArchiveContainer');
+            if(state.archiveMonths && state.archiveMonths.length > 0) {
+                archCont.innerHTML = '';
+                state.archiveMonths.forEach(m => {
                     archCont.innerHTML += `
-                        &lt;div class=&quot;bg-dark-900 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs&quot;&gt;
-                            &lt;div&gt;&lt;strong class=&quot;text-gold&quot;&gt;${m.monthName}&lt;/strong&gt; (${m.date})&lt;/div&gt;
-                            &lt;div class=&quot;text-emerald-400 font-bold&quot;&gt;أرباح: ${Math.round(m.netProfit).toLocaleString(&#39;ar-EG&#39;)} ج.م | خزينة: ${Math.round(m.vaultCash).toLocaleString(&#39;ar-EG&#39;)} ج.م&lt;/div&gt;
-                        &lt;/div&gt;
+                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
+                            <div><strong class="text-gold">${m.monthName}</strong> (${m.date})</div>
+                            <div class="text-emerald-400 font-bold">أرباح: ${Math.round(m.netProfit).toLocaleString('ar-EG')} ج.م | خزينة: ${Math.round(m.vaultCash).toLocaleString('ar-EG')} ج.م</div>
+                        </div>
                     `;
                 });
             }
         }
 
         function renderInventoryTable() {
-            const gridContainer = document.getElementById(&#39;inventoryGridContainer&#39;);
-            const sel = document.getElementById(&#39;sellItemSelect&#39;);
-            if(!gridContainer || !sel) return;
-            gridContainer.innerHTML = &#39;&#39;; sel.innerHTML = &#39;&lt;option value=&quot;&quot;&gt;-- اختر قطعة --&lt;/option&gt;&#39;;
-            document.getElementById(&#39;inventoryCountBadge&#39;).innerText = state.inventory.length + &#39; قطعة&#39;;
+            const gridContainer = document.getElementById('inventoryGridContainer');
+            const sel = document.getElementById('sellItemSelect');
+            gridContainer.innerHTML = ''; sel.innerHTML = '<option value="">-- اختر قطعة --</option>';
+            document.getElementById('inventoryCountBadge').innerText = state.inventory.length + ' قطعة';
 
-            state.inventory.forEach(i =&gt; {
+            state.inventory.forEach(i => {
                 const imageContent = i.image ? 
-                    `&lt;img src=&quot;${i.image}&quot; alt=&quot;${i.itemName}&quot;&gt;` : 
-                    `&lt;div class=&quot;h-32 flex flex-col items-center justify-center text-gold/60 bg-dark-900/60 rounded-xl border border-gold/20&quot;&gt;&lt;i class=&quot;fa-solid fa-gem text-3xl mb-1&quot;&gt;&lt;/i&gt;&lt;span class=&quot;text-[10px] text-gray-400&quot;&gt;الطائف - بدون صورة&lt;/span&gt;&lt;/div&gt;`;
+                    `<img src="${i.image}" alt="${i.itemName}">` : 
+                    `<div class="h-32 flex flex-col items-center justify-center text-gold/60 bg-dark-900/60 rounded-xl border border-gold/20"><i class="fa-solid fa-gem text-3xl mb-1"></i><span class="text-[10px] text-gray-400">الطائف - بدون صورة</span></div>`;
 
                 gridContainer.innerHTML += `
-                    &lt;div class=&quot;jewelry-box space-y-3&quot;&gt;
-                        &lt;div class=&quot;flex justify-between items-center text-xs border-b border-gold/30 pb-2&quot;&gt;
-                            &lt;span class=&quot;text-gold font-bold&quot;&gt;${i.id}&lt;/span&gt;
-                            &lt;input type=&quot;text&quot; value=&quot;${i.itemName}&quot; onchange=&quot;updateItemName(&#39;${i.id}&#39;, this.value)&quot; class=&quot;bg-dark-900 border border-gray-700 text-white px-2 py-0.5 rounded text-xs w-28 text-left focus:outline-none&quot; title=&quot;تعديل الاسم&quot;&gt;
-                        &lt;/div&gt;
-                        &lt;div&gt;${imageContent}&lt;/div&gt;
-                        &lt;div class=&quot;grid grid-cols-2 gap-2 text-[11px] bg-dark-900/80 p-2 rounded-xl border border-gray-700&quot;&gt;
-                            &lt;div&gt;الوزن: &lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;${i.weight}&quot; onchange=&quot;updateItemWeight(&#39;${i.id}&#39;, this.value)&quot; class=&quot;w-16 bg-dark-800 border border-gray-600 text-white text-center rounded px-1 text-xs focus:outline-none&quot;&gt; جم&lt;/div&gt;
-                            &lt;div&gt;التكلفة: &lt;input type=&quot;number&quot; value=&quot;${Math.round(i.purchaseCost)}&quot; onchange=&quot;updateItemCost(&#39;${i.id}&#39;, this.value)&quot; class=&quot;w-20 bg-dark-800 border border-gray-600 text-emerald-400 text-center rounded px-1 text-xs font-bold focus:outline-none&quot;&gt; ج.م&lt;/div&gt;
-                        &lt;/div&gt;
-                        &lt;div class=&quot;flex gap-2 pt-1&quot;&gt;
-                            &lt;button onclick=&quot;deleteInventoryItem(&#39;${i.id}&#39;)&quot; class=&quot;text-xs text-rose-400 hover:text-rose-300 bg-rose-950/40 px-3 py-1.5 rounded-xl border border-rose-800/50 w-full transition&quot;&gt;&lt;i class=&quot;fa-solid fa-trash ml-1&quot;&gt;&lt;/i&gt; حذف القطعة&lt;/button&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
+                    <div class="jewelry-box space-y-3">
+                        <div class="flex justify-between items-center text-xs border-b border-gold/30 pb-2">
+                            <span class="text-gold font-bold">${i.id}</span>
+                            <span class="text-white font-black">${i.itemName}</span>
+                        </div>
+                        <div>
+                            ${imageContent}
+                        </div>
+                        <div class="grid grid-cols-3 gap-1 text-[11px] text-center bg-dark-900/80 p-2 rounded-lg border border-gray-700">
+                            <div>العيار: <span class="text-gold font-bold">${i.karat}</span></div>
+                            <div>الوزن: <span class="text-white font-bold">${i.weight.toFixed(2)} جم</span></div>
+                            <div>التكلفة: <span class="text-emerald-400 font-bold">${Math.round(i.purchaseCost)} ج.م</span></div>
+                        </div>
+                        <div class="text-left pt-1">
+                            <button onclick="deleteInventoryItem('${i.id}')" class="text-xs text-rose-400 hover:text-rose-300 bg-rose-950/40 px-3 py-1.5 rounded-lg border border-rose-800/50 w-full"><i class="fa-solid fa-trash ml-1"></i> حذف القطعة</button>
+                        </div>
+                    </div>
                 `;
-                sel.innerHTML += `&lt;option value=&quot;${i.id}&quot;&gt;${i.id} - ${i.itemName} (${i.weight.toFixed(2)} جم)&lt;/option&gt;`;
-            });
-        }
 
-        function updateItemName(id, val) {
-            const item = state.inventory.find(x =&gt; x.id === id);
-            if(item) { item.itemName = val; saveState(); populateAiStudioDropdown(); }
-        }
-        function updateItemWeight(id, val) {
-            const item = state.inventory.find(x =&gt; x.id === id);
-            if(item) { item.weight = parseFloat(val) || item.weight; item.pureGoldWeight = (item.weight * parseInt(item.karat)) / 24; saveState(); renderDashboard(); }
-        }
-        function updateItemCost(id, val) {
-            const item = state.inventory.find(x =&gt; x.id === id);
-            if(item) { item.purchaseCost = parseFloat(val) || item.purchaseCost; saveState(); }
+                sel.innerHTML += `<option value="${i.id}">${i.id} - ${i.itemName} (${i.weight.toFixed(2)} جم)</option>`;
+            });
         }
 
         function deleteInventoryItem(id) {
-            if(confirm(&#39;هل أنت متأكد من حذف هذه القطعة من المخزون؟&#39;)) {
-                state.inventory = state.inventory.filter(x =&gt; x.id !== id);
-                saveState(); renderAllData(); populateAiStudioDropdown();
-            }
-        }
-
-        function renderVaultTransactions() {
-            const tbody = document.getElementById(&#39;vaultTransactionsBody&#39;); 
-            if(!tbody) return;
-            tbody.innerHTML = &#39;&#39;;
-            state.transactions.forEach((t, index) =&gt; {
-                const col = t.amount &gt; 0 ? &#39;text-emerald-400&#39; : &#39;text-rose-400&#39;;
-                tbody.innerHTML += `
-                    &lt;tr class=&quot;hover:bg-dark-700/50 transition&quot;&gt;
-                        &lt;td class=&quot;p-3 text-gray-400&quot;&gt;${t.date}&lt;/td&gt;
-                        &lt;td class=&quot;p-3&quot;&gt;${t.type}&lt;/td&gt;
-                        &lt;td class=&quot;p-3&quot;&gt;&lt;input type=&quot;text&quot; value=&quot;${t.desc}&quot; onchange=&quot;updateTxDesc(${index}, this.value)&quot; class=&quot;bg-dark-900 border border-gray-700 text-white px-2 py-1 rounded w-full text-xs focus:outline-none&quot;&gt;&lt;/td&gt;
-                        &lt;td class=&quot;p-3 font-black ${col}&quot;&gt;&lt;input type=&quot;number&quot; value=&quot;${Math.round(t.amount)}&quot; onchange=&quot;updateTxAmount(${index}, this.value)&quot; class=&quot;bg-dark-900 border border-gray-700 text-white px-2 py-1 rounded w-28 text-xs font-bold focus:outline-none&quot;&gt; ج.م&lt;/td&gt;
-                        &lt;td class=&quot;p-3 text-center&quot;&gt;
-                            &lt;button onclick=&quot;deleteTx(${index})&quot; class=&quot;text-rose-400 hover:text-rose-300 bg-rose-950/40 px-2.5 py-1 rounded-lg border border-rose-800/50&quot;&gt;&lt;i class=&quot;fa-solid fa-trash&quot;&gt;&lt;/i&gt;&lt;/button&gt;
-                        &lt;/td&gt;
-                    &lt;/tr&gt;
-                `;
-            });
-        }
-
-        function updateTxDesc(index, val) { state.transactions[index].desc = val; saveState(); }
-        function updateTxAmount(index, val) { 
-            const diff = (parseFloat(val) || 0) - state.transactions[index].amount;
-            state.transactions[index].amount = parseFloat(val) || 0;
-            state.vaultCash += diff;
-            saveState(); renderDashboard(); 
-        }
-        function deleteTx(index) {
-            if(confirm(&#39;حذف هذه الحركة النقدية؟&#39;)) {
-                const amt = state.transactions[index].amount;
-                state.vaultCash -= amt;
-                state.transactions.splice(index, 1);
+            if(confirm('هل أنت متأكد من حذف هذه القطعة؟')) {
+                state.inventory = state.inventory.filter(x => x.id !== id);
                 saveState(); renderAllData();
             }
         }
 
-        function populateAiStudioDropdown() {
-            const sel = document.getElementById(&#39;aiStudioItemSelect&#39;);
-            if(!sel) return;
-            sel.innerHTML = &#39;&lt;option value=&quot;&quot;&gt;-- اختر قطعة من المخزون --&lt;/option&gt;&#39;;
-            state.inventory.forEach(i =&gt; {
-                sel.innerHTML += `&lt;option value=&quot;${i.id}&quot;&gt;${i.id} - ${i.itemName} (${i.weight.toFixed(2)} جم)&lt;/option&gt;`;
+        function renderVaultTransactions() {
+            const tbody = document.getElementById('vaultTransactionsBody'); tbody.innerHTML = '';
+            state.transactions.forEach(t => {
+                const col = t.amount > 0 ? 'text-emerald-400' : 'text-rose-400';
+                tbody.innerHTML += `<tr class="hover:bg-dark-700/50"><td class="p-3 text-gray-400">${t.date}</td><td class="p-3">${t.type}</td><td class="p-3">${t.desc}</td><td class="p-3 font-black ${col}">${t.amount > 0 ? '+' : ''}${Math.round(t.amount).toLocaleString('ar-EG')} ج.م</td></tr>`;
             });
         }
 
-        function previewStudioOriginalImage(event) {
-            const reader = new FileReader();
-            if(event.target.files[0]) {
-                reader.onload = function(e) {
-                    studioOriginalImageData = e.target.result;
-                    document.getElementById(&#39;aiStudioOriginalPreview&#39;).innerHTML = `&lt;img src=&quot;${studioOriginalImageData}&quot; class=&quot;h-full object-contain rounded-xl&quot; alt=&quot;معاينة&quot;&gt;`;
-                };
-                reader.readAsDataURL(event.target.files[0]);
-            }
-        }
-
-        function loadInventoryItemToStudio() {
-            const id = document.getElementById(&#39;aiStudioItemSelect&#39;).value;
-            if(!id) return;
-            const item = state.inventory.find(i =&gt; i.id === id);
-            if(item &amp;&amp; item.image) {
-                studioOriginalImageData = item.image;
-                document.getElementById(&#39;aiStudioOriginalPreview&#39;).innerHTML = `&lt;img src=&quot;${studioOriginalImageData}&quot; class=&quot;h-full object-contain rounded-xl&quot; alt=&quot;معاينة&quot;&gt;`;
-            } else {
-                document.getElementById(&#39;aiStudioOriginalPreview&#39;).innerHTML = `&lt;div class=&quot;text-amber-400 text-xs&quot;&gt;القطعة المختارة ليس لها صورة مسجلة، سيتم استخدام المعاينة الافتراضية.&lt;/div&gt;`;
-                studioOriginalImageData = null;
-            }
-        }
-
-        function processAiStudioEnhancement() {
-            const resultBox = document.getElementById(&#39;aiStudioResultContainer&#39;);
-            if(!resultBox) return;
-            resultBox.innerHTML = `&lt;div class=&quot;flex flex-col items-center justify-center text-gold space-y-2&quot;&gt;&lt;i class=&quot;fa-solid fa-spinner fa-spin text-2xl&quot;&gt;&lt;/i&gt;&lt;span class=&quot;text-xs&quot;&gt;جاري معالجة الصورة وإضافتها لعلبة العرض الفاخرة...&lt;/span&gt;&lt;/div&gt;`;
-            
-            setTimeout(() =&gt; {
-                const imgSrc = studioOriginalImageData || &#39;https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&#39;;
-                resultBox.innerHTML = `
-                    &lt;div class=&quot;jewelry-box h-full flex flex-col items-center justify-center p-2 relative&quot;&gt;
-                        &lt;span class=&quot;absolute top-2 right-2 bg-gold/90 text-dark-900 text-[10px] font-black px-2 py-0.5 rounded&quot;&gt;علبة مجوهرات فاخرة - قطيفة سوداء&lt;/span&gt;
-                        &lt;img src=&quot;${imgSrc}&quot; class=&quot;max-h-40 object-cover rounded-lg shadow-2xl border border-gold/50&quot; alt=&quot;صورة محسنة&quot;&gt;
-                        &lt;span class=&quot;text-[10px] text-emerald-400 mt-2 font-bold&quot;&gt;&lt;i class=&quot;fa-solid fa-circle-check ml-1&quot;&gt;&lt;/i&gt; تمت المعالجة البصرية بنجاح (بدون تغيير الأوزان الفعلية)&lt;/span&gt;
-                    &lt;/div&gt;
-                `;
-            }, 1000);
-        }
-
-        function fetchLiveGoldPrices() {
-            const syncLabel = document.getElementById(&#39;liveLastSyncTime&#39;);
-            if(syncLabel) syncLabel.innerText = &quot;جاري الاتصال بالسوق...&quot;;
-            setTimeout(() =&gt; {
-                const k21 = state.k21Price || 3800;
-                const k24 = Math.round(k21 * 24 / 21);
-                const k18 = Math.round(k21 * 18 / 21);
-                const pound = Math.round(k21 * 8);
-                
-                if(document.getElementById(&#39;livePrice24&#39;)) document.getElementById(&#39;livePrice24&#39;).innerText = k24.toLocaleString(&#39;ar-EG&#39;) + &#39; ج.م&#39;;
-                if(document.getElementById(&#39;livePrice21&#39;)) document.getElementById(&#39;livePrice21&#39;).innerText = k21.toLocaleString(&#39;ar-EG&#39;) + &#39; ج.م&#39;;
-                if(document.getElementById(&#39;livePrice18&#39;)) document.getElementById(&#39;livePrice18&#39;).innerText = k18.toLocaleString(&#39;ar-EG&#39;) + &#39; ج.م&#39;;
-                if(document.getElementById(&#39;livePricePound&#39;)) document.getElementById(&#39;livePricePound&#39;).innerText = pound.toLocaleString(&#39;ar-EG&#39;) + &#39; ج.م&#39;;
-                if(document.getElementById(&#39;liveOunceUSD&#39;)) document.getElementById(&#39;liveOunceUSD&#39;).innerText = &#39;2,350.50 $&#39;;
-                if(document.getElementById(&#39;liveUSDExchange&#39;)) document.getElementById(&#39;liveUSDExchange&#39;).innerText = &#39;48.50 ج.م&#39;;
-                if(syncLabel) syncLabel.innerText = new Date().toLocaleTimeString(&#39;ar-EG&#39;);
-            }, 800);
-        }
-
-        function generateAiForecastAnalysis() {
-            const box = document.getElementById(&#39;aiForecastResultBox&#39;);
-            if(!box) return;
-            const market = document.getElementById(&#39;forecastMarketType&#39;).value;
-            const timeframe = document.getElementById(&#39;forecastTimeframe&#39;).value;
-            const karat = document.getElementById(&#39;forecastKarat&#39;).value;
-
-            box.innerHTML = `&lt;div class=&quot;text-gold&quot;&gt;&lt;i class=&quot;fa-solid fa-spinner fa-spin ml-2&quot;&gt;&lt;/i&gt; جاري تحليل بيانات السوق والسياسات النقدية...&lt;/div&gt;`;
-            
-            setTimeout(() =&gt; {
-                box.innerHTML = `
-                    &lt;div class=&quot;space-y-3&quot;&gt;
-                        &lt;div class=&quot;flex justify-between items-center text-gold font-bold border-b border-gray-800 pb-2&quot;&gt;
-                            &lt;span&gt;تقرير تحليل ${market === &#39;local&#39; ? &#39;السوق المحلي (مصر)&#39; : &#39;السوق العالمي&#39;} (${timeframe})&lt;/span&gt;
-                            &lt;span class=&quot;text-xs text-gray-400&quot;&gt;تاريخ التحليل: ${new Date().toLocaleString(&#39;ar-EG&#39;)}&lt;/span&gt;
-                        &lt;/div&gt;
-                        &lt;p&gt;&lt;strong&gt;الاتجاه العام الحالي:&lt;/strong&gt; يظهر السوق ميلاً للاستقرار مع تذبذب طفيف صعوداً بناءً على حركة الطلب المحلي وأسعار الصرف.&lt;/p&gt;
-                        &lt;div class=&quot;grid grid-cols-1 md:grid-cols-3 gap-3 pt-2&quot;&gt;
-                            &lt;div class=&quot;bg-dark-800 p-3 rounded-xl border border-emerald-500/30&quot;&gt;
-                                &lt;span class=&quot;text-emerald-400 font-bold block mb-1&quot;&gt;السيناريو الصاعد:&lt;/span&gt;
-                                &lt;span class=&quot;text-[11px] text-gray-300&quot;&gt;اختراق مقاومة السعر الحالي قد يدفع عيار ${karat} لتحقيق مكاسب طفيفة في حال زيادة الطلب الاستثماري.&lt;/span&gt;
-                            &lt;/div&gt;
-                            &lt;div class=&quot;bg-dark-800 p-3 rounded-xl border border-amber-500/30&quot;&gt;
-                                &lt;span class=&quot;text-amber-400 font-bold block mb-1&quot;&gt;السيناريو العرضي:&lt;/span&gt;
-                                &lt;span class=&quot;text-[11px] text-gray-300&quot;&gt;الاستمرار ضمن النطاق الحالي هو الأرجح بنسبة 60% مع استقرار المعروض بالسوق.&lt;/span&gt;
-                            &lt;/div&gt;
-                            &lt;div class=&quot;bg-dark-800 p-3 rounded-xl border border-rose-500/30&quot;&gt;
-                                &lt;span class=&quot;text-rose-400 font-bold block mb-1&quot;&gt;السيناريو الهابط:&lt;/span&gt;
-                                &lt;span class=&quot;text-[11px] text-gray-300&quot;&gt;أي تهدئة في أسعار الصرف أو جني أرباح عالمي قد يؤدي لتراجع طفيف مؤقت.&lt;/span&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                        &lt;p class=&quot;text-[11px] text-gray-400 pt-2&quot;&gt;&lt;i class=&quot;fa-solid fa-circle-info ml-1&quot;&gt;&lt;/i&gt; ملاحظة: هذا التحليل استرشادي للتخطيط المالي ولا يعد ضماناً لأرباح مستقبلية أو سعراً حتمياً.&lt;/p&gt;
-                    &lt;/div&gt;
-                `;
-            }, 1000);
-        }
-
         function renderAllData() { renderDashboard(); renderInventoryTable(); renderVaultTransactions(); renderRentSummary(); }
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</pre></body></html>
+    </script>
+</body>
+</html>
