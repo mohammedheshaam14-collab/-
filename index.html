@@ -384,65 +384,110 @@
             </div>
         </section>
 
-        <!-- الآلة الحاسبة الذكية والمقايضة المعدلة بالكامل مطابقة للشراء -->
+        <!-- الآلة الحاسبة الذكية والمقايضة (صنف واحد لكل قسم) -->
         <section id="tab-calc" class="tab-content hidden space-y-6">
-            <div class="card space-y-6">
+            <div class="card space-y-6 max-w-2xl mx-auto">
                 <div style="display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #1A202C; padding-bottom: 12px;">
                     <div style="width: 48px; height: 48px; background: rgba(212,175,55,0.2); color: var(--gold); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px;"><i class="fa-solid fa-calculator"></i></div>
                     <div>
                         <h2 style="font-size: 18px; font-weight: bold; color: #fff;">الآلة الحاسبة الذكية ومقايضة البدل</h2>
-                        <p style="font-size: 11px; color: var(--text-muted);">حاسبة الشراء، حاسبة البيع، ومقايضة البدل (أقسام متطابقة بـ 5 خانات تحت بعضها)</p>
+                        <p style="font-size: 11px; color: var(--text-muted);">حاسبة الشراء، البيع، والمقايضة (صنف واحد لكل قسم مرتب بدقة)</p>
                     </div>
                 </div>
 
-                <!-- 1. حاسبة الشراء (5 خانات تحت بعضها) -->
-                <div class="card" style="background: var(--bg-main);">
-                    <h3 style="font-size: 15px; font-weight: bold; color: var(--gold); margin-bottom: 14px; border-bottom: 1px solid #1A202C; padding-bottom: 8px;"><i class="fa-solid fa-cart-plus"></i> 1. حاسبة الشراء (5 أصناف)</h3>
-                    <div id="calcBuyRowsContainer" class="space-y-4"></div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 18px; border-radius: 12px; margin-top: 14px; border:1px solid var(--gold);">
-                        <span style="font-weight: bold; color: var(--gold); font-size: 17px;">التوتال الإجمالي للشراء:</span>
-                        <span id="calcBuyGrandTotal" style="font-size: 26px; font-weight: 950; color: var(--gold);">0 ج.م</span>
+                <!-- 1. حاسبة الشراء (صنف واحد) -->
+                <div class="card" style="background: var(--bg-main); space-y-3;">
+                    <h3 style="font-size: 15px; font-weight: bold; color: var(--gold); border-bottom: 1px solid #1A202C; padding-bottom: 6px;"><i class="fa-solid fa-cart-plus"></i> 1. حاسبة الشراء (صنف واحد)</h3>
+                    <div>
+                        <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">العيار</label>
+                        <select id="singleBuyKarat" onchange="calcSingleBuy()"><option value="21">عيار 21</option><option value="18">عيار 18</option><option value="24">عيار 24</option></select>
+                    </div>
+                    <div>
+                        <label style="font-size:11px; color:var(--gold); display:block; margin-bottom:3px; font-weight:bold;">سعر جرام الذهب</label>
+                        <input type="number" id="singleBuyPrice" value="3800" oninput="calcSingleBuy()" style="color:var(--gold); font-weight:bold;">
+                    </div>
+                    <div>
+                        <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">الوزن بالجرام</label>
+                        <input type="number" id="singleBuyWeight" placeholder="0.00" step="0.01" oninput="calcSingleBuy()" style="font-weight:bold;">
+                    </div>
+                    <div>
+                        <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">المصنعية</label>
+                        <input type="number" id="singleBuyWorkmanship" value="0" oninput="calcSingleBuy()">
+                    </div>
+                    <div style="background: #11151D; padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border:1px solid var(--gold);">
+                        <span style="font-size: 13px; font-weight: bold; color: var(--gold);">التوتال النهائي للشراء:</span>
+                        <span id="singleBuyResult" style="font-size: 20px; font-weight: 950; color: var(--gold);">0 ج.م</span>
                     </div>
                 </div>
 
-                <!-- 2. حاسبة البيع (5 خانات تحت بعضها) -->
-                <div class="card" style="background: var(--bg-main);">
-                    <h3 style="font-size: 15px; font-weight: bold; color: #60a5fa; margin-bottom: 14px; border-bottom: 1px solid #1A202C; padding-bottom: 8px;"><i class="fa-solid fa-cash-register"></i> 2. حاسبة البيع (5 أصناف)</h3>
-                    <div id="calcSellRowsContainer" class="space-y-4"></div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 18px; border-radius: 12px; margin-top: 14px; border:1px solid #60a5fa;">
-                        <span style="font-weight: bold; color: #60a5fa; font-size: 17px;">التوتال الإجمالي للبيع:</span>
-                        <span id="calcSellGrandTotal" style="font-size: 26px; font-weight: 950; color: #60a5fa;">0 ج.م</span>
+                <!-- 2. حاسبة البيع (صنف واحد) -->
+                <div class="card" style="background: var(--bg-main); space-y-3;">
+                    <h3 style="font-size: 15px; font-weight: bold; color: #60a5fa; border-bottom: 1px solid #1A202C; padding-bottom: 6px;"><i class="fa-solid fa-cash-register"></i> 2. حاسبة البيع (صنف واحد)</h3>
+                    <div>
+                        <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">العيار</label>
+                        <select id="singleSellKarat" onchange="calcSingleSell()"><option value="21">عيار 21</option><option value="18">عيار 18</option><option value="24">عيار 24</option></select>
+                    </div>
+                    <div>
+                        <label style="font-size:11px; color:var(--gold); display:block; margin-bottom:3px; font-weight:bold;">سعر جرام الذهب</label>
+                        <input type="number" id="singleSellPrice" value="3800" oninput="calcSingleSell()" style="color:var(--gold); font-weight:bold;">
+                    </div>
+                    <div>
+                        <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">الوزن بالجرام</label>
+                        <input type="number" id="singleSellWeight" placeholder="0.00" step="0.01" oninput="calcSingleSell()" style="font-weight:bold;">
+                    </div>
+                    <div>
+                        <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">الخصم</label>
+                        <input type="number" id="singleSellDiscount" value="0" oninput="calcSingleSell()">
+                    </div>
+                    <div style="background: #11151D; padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border:1px solid #60a5fa;">
+                        <span style="font-size: 13px; font-weight: bold; color: #60a5fa;">التوتال النهائي للبيع:</span>
+                        <span id="singleSellResult" style="font-size: 20px; font-weight: 950; color: #60a5fa;">0 ج.م</span>
                     </div>
                 </div>
 
-                <!-- 3. مقايضة البدل (مطابقة للشراء: 5 خانات للقديم وتحتها 5 خانات للجديد) -->
-                <div class="card" style="background: var(--bg-main); space-y-6;">
-                    <h3 style="font-size: 15px; font-weight: bold; color: #34d399; margin-bottom: 14px; border-bottom: 1px solid #1A202C; padding-bottom: 8px;"><i class="fa-solid fa-scale-balanced"></i> 3. حاسبة مقايضة البدل (مطابقة لحاسبة الشراء تماماً)</h3>
+                <!-- 3. مقايضة البدل (صنف واحد مرتب حسب طلبك) -->
+                <div class="card" style="background: var(--bg-main); space-y-4;">
+                    <h3 style="font-size: 15px; font-weight: bold; color: #34d399; border-bottom: 1px solid #1A202C; padding-bottom: 6px;"><i class="fa-solid fa-scale-balanced"></i> 3. حاسبة مقايضة البدل (صنف واحد)</h3>
                     
-                    <!-- أ) الذهب القديم (5 أصناف مطابقة) -->
-                    <div class="card" style="background: #07090D; space-y-4;">
-                        <h4 style="font-size: 14px; font-weight: bold; color: var(--gold); margin-bottom: 10px; border-bottom: 1px solid #1A202C; padding-bottom: 6px;">أولاً: الذهب القديم (5 أصناف - خصم الكسر)</h4>
-                        <div id="swapOldRowsContainer" class="space-y-4"></div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 14px; border-radius: 10px; border:1px solid var(--gold);">
-                            <span style="font-weight: bold; color: var(--gold); font-size: 15px;">إجمالي قيمة الذهب القديم:</span>
-                            <span id="swapOldTotalRes" style="font-size: 22px; font-weight: 950; color: var(--gold);">0 ج.م</span>
+                    <div>
+                        <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">العيار</label>
+                        <select id="swapKarat" onchange="calcSingleSwap()"><option value="21">عيار 21</option><option value="18">عيار 18</option><option value="24">عيار 24</option></select>
+                    </div>
+
+                    <!-- 1. سعر الذهب -->
+                    <div>
+                        <label style="font-size:11px; color:var(--gold); display:block; margin-bottom:3px; font-weight:bold;">1. سعر جرام الذهب</label>
+                        <input type="number" id="swapPrice" value="3800" oninput="calcSingleSwap()" style="color:var(--gold); font-weight:bold;">
+                    </div>
+
+                    <!-- 2. وزن القديم ووزن الجديد -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div>
+                            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px; font-weight:bold;">2 أ. وزن القديم (جم)</label>
+                            <input type="number" id="swapOldWeight" placeholder="0.00" step="0.01" oninput="calcSingleSwap()" style="font-weight:bold;">
+                        </div>
+                        <div>
+                            <label style="font-size:11px; color:#34d399; display:block; margin-bottom:3px; font-weight:bold;">2 ب. وزن الجديد (جم)</label>
+                            <input type="number" id="swapNewWeight" placeholder="0.00" step="0.01" oninput="calcSingleSwap()" style="font-weight:bold;">
                         </div>
                     </div>
 
-                    <!-- ب) الذهب الجديد (5 أصناف مطابقة) -->
-                    <div class="card" style="background: #07090D; space-y-4;">
-                        <h4 style="font-size: 14px; font-weight: bold; color: #34d399; margin-bottom: 10px; border-bottom: 1px solid #1A202C; padding-bottom: 6px;">ثانياً: الذهب الجديد (5 أصناف - المصنعية)</h4>
-                        <div id="swapNewRowsContainer" class="space-y-4"></div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 14px; border-radius: 10px; border:1px solid #34d399;">
-                            <span style="font-weight: bold; color: #34d399; font-size: 15px;">إجمالي قيمة الذهب الجديد:</span>
-                            <span id="swapNewTotalRes" style="font-size: 22px; font-weight: 950; color: #34d399;">0 ج.م</span>
+                    <!-- 3. خصم القديم ومصنعية الجديد -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div>
+                            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">3 أ. خصم القديم</label>
+                            <input type="number" id="swapOldDiscount" value="30" oninput="calcSingleSwap()">
+                        </div>
+                        <div>
+                            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">3 ب. مصنعية الجديد</label>
+                            <input type="number" id="swapNewWorkmanship" value="100" oninput="calcSingleSwap()">
                         </div>
                     </div>
 
-                    <!-- النتيجة النهائية للمقايضة -->
-                    <div class="card" style="background: var(--bg-card); text-align: center; border:2px solid #34d399; padding:20px;">
-                        <span id="swapFinalStatusLabel" style="font-size: 13px; color: var(--text-muted); display: block; margin-bottom: 6px;">صافي الفارق:</span>
-                        <span id="swapFinalResult" style="font-size: 26px; font-weight: 950; color: #34d399;">0 ج.م</span>
+                    <!-- 4. الفرق (له أو عليه) والتوتال النهائي -->
+                    <div class="card" style="background: #11151D; text-align: center; border:2px solid #34d399; padding:16px; display:flex; flex-direction:column; gap:6px;">
+                        <span id="swapStatusLabel" style="font-size: 13px; color: var(--text-muted); font-weight: bold;">4. الفرق النهائي (له أو عليه):</span>
+                        <span id="swapResult" style="font-size: 24px; font-weight: 950; color: #34d399;">0 ج.م</span>
                     </div>
                 </div>
             </div>
@@ -512,7 +557,16 @@
             document.getElementById('priceK21').value = state.k21Price || 3800;
             updateUserLabel();
             updateProfitDisplayState();
-            buildCalcRows();
+            
+            // تحديث قيم الآلة الحاسبة الافتراضية
+            document.getElementById('singleBuyPrice').value = Math.round(state.k21Price);
+            document.getElementById('singleSellPrice').value = Math.round(state.k21Price);
+            document.getElementById('swapPrice').value = Math.round(state.k21Price);
+
+            calcSingleBuy();
+            calcSingleSell();
+            calcSingleSwap();
+
             calculatePricesFromOunce();
             renderAllData();
         };
@@ -642,7 +696,7 @@
             saveState(); renderAllData(); alert('تم قفل الشهر وأرشفة البيانات بنجاح!');
         }
 
-        // المعادلة العامة لحساب القطعة (تدعم الأوزان أقل من جرام كقيمة ثابتة للمصنعية أو الخصم)
+        // المعادلة العامة لحساب القطعة (أقل من جرام بمبلغ ثابت، جرام فأكثر بالطريقة الطبيعية)
         function calculateItemPriceCustom(weight, goldPrice, workmanshipOrDiscount, isBuy) {
             let goldValue = goldPrice * weight;
             let finalTot = 0;
@@ -652,6 +706,61 @@
                 finalTot = isBuy ? ((goldPrice + workmanshipOrDiscount) * weight) : ((goldPrice - workmanshipOrDiscount) * weight);
             }
             return Math.max(0, finalTot);
+        }
+
+        // 1. حساب الشراء لصنف واحد
+        function calcSingleBuy() {
+            const k = document.getElementById('singleBuyKarat').value;
+            const p = parseFloat(document.getElementById('singleBuyPrice').value) || state.k21Price;
+            const w = parseFloat(document.getElementById('singleBuyWeight').value) || 0;
+            const m = parseFloat(document.getElementById('singleBuyWorkmanship').value) || 0;
+            let gp = k === '24' ? (p*24)/21 : (k === '18' ? (p*6)/7 : p);
+            let tot = calculateItemPriceCustom(w, gp, m, true);
+            document.getElementById('singleBuyResult').innerText = Math.round(tot).toLocaleString('ar-EG') + ' ج.م';
+        }
+
+        // 2. حساب البيع لصنف واحد
+        function calcSingleSell() {
+            const k = document.getElementById('singleSellKarat').value;
+            const p = parseFloat(document.getElementById('singleSellPrice').value) || state.k21Price;
+            const w = parseFloat(document.getElementById('singleSellWeight').value) || 0;
+            const d = parseFloat(document.getElementById('singleSellDiscount').value) || 0;
+            let gp = k === '24' ? (p*24)/21 : (k === '18' ? (p*6)/7 : p);
+            let tot = calculateItemPriceCustom(w, gp, d, false);
+            document.getElementById('singleSellResult').innerText = Math.round(tot).toLocaleString('ar-EG') + ' ج.م';
+        }
+
+        // 3. حساب المقايضة لصنف واحد بالترتيب الدقيق المطلوب
+        function calcSingleSwap() {
+            const k = document.getElementById('swapKarat').value;
+            const p = parseFloat(document.getElementById('swapPrice').value) || state.k21Price;
+            let gp = k === '24' ? (p*24)/21 : (k === '18' ? (p*6)/7 : p);
+
+            const ow = parseFloat(document.getElementById('swapOldWeight').value) || 0;
+            const od = parseFloat(document.getElementById('swapOldDiscount').value) || 0;
+            const ot = calculateItemPriceCustom(ow, gp, od, false);
+
+            const nw = parseFloat(document.getElementById('swapNewWeight').value) || 0;
+            const nm = parseFloat(document.getElementById('swapNewWorkmanship').value) || 0;
+            const nt = calculateItemPriceCustom(nw, gp, nm, true);
+
+            const diff = nt - ot;
+            const lbl = document.getElementById('swapStatusLabel');
+            const res = document.getElementById('swapResult');
+
+            if (diff > 0) {
+                lbl.innerText = "4. الفرق النهائي (الزبون سيدفع - عليه):";
+                res.style.color = "#fb7185";
+                res.innerText = Math.round(diff).toLocaleString('ar-EG') + ' ج.م';
+            } else if (diff < 0) {
+                lbl.innerText = "4. الفرق النهائي (الزبون سيقبض باقي - له):";
+                res.style.color = "#34d399";
+                res.innerText = Math.round(Math.abs(diff)).toLocaleString('ar-EG') + ' ج.م';
+            } else {
+                lbl.innerText = "4. الفرق النهائي (حساب خالص):";
+                res.style.color = "var(--gold)";
+                res.innerText = "0 ج.م";
+            }
         }
 
         function calculatePricesFromOunce() {
@@ -677,212 +786,6 @@
             saveState();
             renderDashboard();
             alert('تم اعتماد عيار 21 الناتج (' + gram21 + ' ج.م) في النظام الرئيسي للمحل بنجاح!');
-        }
-
-        function buildCalcRows() {
-            // 1. حاسبة الشراء (5 خانات)
-            const buyCont = document.getElementById('calcBuyRowsContainer');
-            buyCont.innerHTML = '';
-            for(let i=1; i<=5; i++) {
-                buyCont.innerHTML += `
-                    <div style="background: #07090D; padding: 16px; border-radius: 12px; border:1px solid #2d3748;">
-                        <div style="font-size: 14px; font-weight: bold; color: var(--gold); margin-bottom: 8px;">الصنف رقم (${i})</div>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">1. العيار</label>
-                                <select id="cb_k_${i}" onchange="calcBuy()" style="padding: 10px; font-size:14px;"><option value="21">عيار 21</option><option value="18">عيار 18</option><option value="24">عيار 24</option></select>
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">2. سعر جرام الذهب</label>
-                                <input type="number" id="cb_p_${i}" value="${Math.round(state.k21Price)}" oninput="calcBuy()" style="padding: 10px; font-size:14px; color:var(--gold); font-weight:bold;">
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">3. الوزن بالجرام</label>
-                                <input type="number" id="cb_w_${i}" placeholder="مثال: 0.35" step="0.01" oninput="calcBuy()" style="padding: 10px; font-size:14px; font-weight:bold;">
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">4. المصنعية</label>
-                                <input type="number" id="cb_m_${i}" placeholder="المصنعية" value="0" oninput="calcBuy()" style="padding: 10px; font-size:14px;">
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:#34d399; display:block; margin-bottom:3px; font-weight:bold;">5. الإجمالي النهائي</label>
-                                <input type="number" id="cb_res_${i}" readonly placeholder="0.00" style="padding: 10px; font-size:16px; font-weight:900; color:#34d399; background:#11151D; text-align:center;">
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            // 2. حاسبة البيع (5 خانات)
-            const sellCont = document.getElementById('calcSellRowsContainer');
-            sellCont.innerHTML = '';
-            for(let i=1; i<=5; i++) {
-                sellCont.innerHTML += `
-                    <div style="background: #07090D; padding: 16px; border-radius: 12px; border:1px solid #2d3748;">
-                        <div style="font-size: 14px; font-weight: bold; color: #60a5fa; margin-bottom: 8px;">صنف بيع رقم (${i})</div>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">1. العيار</label>
-                                <select id="cs_k_${i}" onchange="calcSellCalc()" style="padding: 10px; font-size:14px;"><option value="21">عيار 21</option><option value="18">عيار 18</option><option value="24">عيار 24</option></select>
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">2. سعر جرام الذهب</label>
-                                <input type="number" id="cs_p_${i}" value="${Math.round(state.k21Price)}" oninput="calcSellCalc()" style="padding: 10px; font-size:14px; color:var(--gold); font-weight:bold;">
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">3. الوزن بالجرام</label>
-                                <input type="number" id="cs_w_${i}" placeholder="مثال: 0.25" step="0.01" oninput="calcSellCalc()" style="padding: 10px; font-size:14px; font-weight:bold;">
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">4. الخصم</label>
-                                <input type="number" id="cs_d_${i}" placeholder="الخصم" value="0" oninput="calcSellCalc()" style="padding: 10px; font-size:14px;">
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:#60a5fa; display:block; margin-bottom:3px; font-weight:bold;">5. الإجمالي النهائي</label>
-                                <input type="number" id="cs_res_${i}" readonly placeholder="0.00" style="padding: 10px; font-size:16px; font-weight:900; color:#60a5fa; background:#11151D; text-align:center;">
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            // 3. مقايضة البدل (أ) الذهب القديم (5 أصناف متطابقة تماماً مع الشراء)
-            const oldCont = document.getElementById('swapOldRowsContainer');
-            oldCont.innerHTML = '';
-            for(let i=1; i<=5; i++) {
-                oldCont.innerHTML += `
-                    <div style="background: #11151D; padding: 14px; border-radius: 12px; border:1px solid #2d3748;">
-                        <div style="font-size: 13px; font-weight: bold; color: var(--gold); margin-bottom: 6px;">صنف قديم (${i})</div>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;">
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">1. العيار</label>
-                                <select id="so_k_${i}" onchange="calcSwap()" style="padding: 10px; font-size:13px;"><option value="21">عيار 21</option><option value="18">عيار 18</option><option value="24">عيار 24</option></select>
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">2. سعر الجرام</label>
-                                <input type="number" id="so_p_${i}" value="${Math.round(state.k21Price)}" oninput="calcSwap()" style="padding: 10px; font-size:13px; color:var(--gold); font-weight:bold;">
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">3. الوزن جم</label>
-                                <input type="number" id="so_w_${i}" placeholder="الوزن" step="0.01" oninput="calcSwap()" style="padding: 10px; font-size:13px; font-weight:bold;">
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">4. خصم الكسر</label>
-                                <input type="number" id="so_d_${i}" placeholder="خصم" value="30" oninput="calcSwap()" style="padding: 10px; font-size:13px;">
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:var(--gold); display:block; margin-bottom:3px; font-weight:bold;">5. القيمة النهائية</label>
-                                <input type="number" id="so_res_${i}" readonly placeholder="0.00" style="padding: 10px; font-size:15px; font-weight:900; color:var(--gold); background:#07090D; text-align:center;">
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            // 3. مقايضة البدل (ب) الذهب الجديد (5 أصناف متطابقة تماماً مع الشراء)
-            const newCont = document.getElementById('swapNewRowsContainer');
-            newCont.innerHTML = '';
-            for(let i=1; i<=5; i++) {
-                newCont.innerHTML += `
-                    <div style="background: #11151D; padding: 14px; border-radius: 12px; border:1px solid #2d3748;">
-                        <div style="font-size: 13px; font-weight: bold; color: #34d399; margin-bottom: 6px;">صنف جديد (${i})</div>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;">
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">1. العيار</label>
-                                <select id="sn_k_${i}" onchange="calcSwap()" style="padding: 10px; font-size:13px;"><option value="21">عيار 21</option><option value="18">عيار 18</option><option value="24">عيار 24</option></select>
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">2. سعر الجرام</label>
-                                <input type="number" id="sn_p_${i}" value="${Math.round(state.k21Price)}" oninput="calcSwap()" style="padding: 10px; font-size:13px; color:#34d399; font-weight:bold;">
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">3. الوزن جم</label>
-                                <input type="number" id="sn_w_${i}" placeholder="الوزن" step="0.01" oninput="calcSwap()" style="padding: 10px; font-size:13px; font-weight:bold;">
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">4. المصنعية</label>
-                                <input type="number" id="sn_m_${i}" placeholder="المصنعية" value="100" oninput="calcSwap()" style="padding: 10px; font-size:13px;">
-                            </div>
-                            <div>
-                                <label style="font-size:11px; color:#34d399; display:block; margin-bottom:3px; font-weight:bold;">5. القيمة النهائية</label>
-                                <input type="number" id="sn_res_${i}" readonly placeholder="0.00" style="padding: 10px; font-size:15px; font-weight:900; color:#34d399; background:#07090D; text-align:center;">
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-
-        // حساب الشراء
-        function calcBuy() {
-            let grand = 0;
-            for(let i=1; i<=5; i++) {
-                const w = parseFloat(document.getElementById(`cb_w_${i}`).value) || 0;
-                const k = document.getElementById(`cb_k_${i}`).value;
-                const p = parseFloat(document.getElementById(`cb_p_${i}`).value) || state.k21Price;
-                const m = parseFloat(document.getElementById(`cb_m_${i}`).value) || 0;
-                let gp = k === '24' ? (p*24)/21 : (k === '18' ? (p*6)/7 : p);
-                
-                const tot = calculateItemPriceCustom(w, gp, m, true);
-                grand += tot;
-                document.getElementById(`cb_res_${i}`).value = Math.round(tot);
-            }
-            document.getElementById('calcBuyGrandTotal').innerText = Math.round(grand).toLocaleString('ar-EG') + ' ج.م';
-        }
-
-        // حساب البيع
-        function calcSellCalc() {
-            let grand = 0;
-            for(let i=1; i<=5; i++) {
-                const w = parseFloat(document.getElementById(`cs_w_${i}`).value) || 0;
-                const k = document.getElementById(`cs_k_${i}`).value;
-                const p = parseFloat(document.getElementById(`cs_p_${i}`).value) || state.k21Price;
-                const d = parseFloat(document.getElementById(`cs_d_${i}`).value) || 0;
-                let gp = k === '24' ? (p*24)/21 : (k === '18' ? (p*6)/7 : p);
-                
-                const tot = calculateItemPriceCustom(w, gp, d, false);
-                grand += tot;
-                document.getElementById(`cs_res_${i}`).value = Math.round(tot);
-            }
-            document.getElementById('calcSellGrandTotal').innerText = Math.round(grand).toLocaleString('ar-EG') + ' ج.م';
-        }
-
-        // حساب المقايضة (القديم والجديد 5 أصناف مطابقة للشراء تماماً)
-        function calcSwap() {
-            let oldTot = 0, newTot = 0;
-            for(let i=1; i<=5; i++) {
-                // القديم
-                const ow = parseFloat(document.getElementById(`so_w_${i}`).value) || 0;
-                const ok = document.getElementById(`so_k_${i}`).value;
-                const op = parseFloat(document.getElementById(`so_p_${i}`).value) || state.k21Price;
-                const od = parseFloat(document.getElementById(`so_d_${i}`).value) || 0;
-                let ogp = ok === '24' ? (op*24)/21 : (ok === '18' ? (op*6)/7 : op);
-                const ot = calculateItemPriceCustom(ow, ogp, od, false);
-                oldTot += ot;
-                document.getElementById(`so_res_${i}`).value = Math.round(ot);
-
-                // الجديد
-                const nw = parseFloat(document.getElementById(`sn_w_${i}`).value) || 0;
-                const nk = document.getElementById(`sn_k_${i}`).value;
-                const np = parseFloat(document.getElementById(`sn_p_${i}`).value) || state.k21Price;
-                const nm = parseFloat(document.getElementById(`sn_m_${i}`).value) || 0;
-                let ngp = nk === '24' ? (np*24)/21 : (nk === '18' ? (np*6)/7 : np);
-                const nt = calculateItemPriceCustom(nw, ngp, nm, true);
-                newTot += nt;
-                document.getElementById(`sn_res_${i}`).value = Math.round(nt);
-            }
-
-            document.getElementById('swapOldTotalRes').innerText = Math.round(oldTot).toLocaleString('ar-EG') + ' ج.م';
-            document.getElementById('swapNewTotalRes').innerText = Math.round(newTot).toLocaleString('ar-EG') + ' ج.م';
-            
-            const diff = newTot - oldTot;
-            const lbl = document.getElementById('swapFinalStatusLabel');
-            const res = document.getElementById('swapFinalResult');
-            if(diff > 0) {
-                lbl.innerText = "الزبون سيقوم بدفع (فارق نقدي إضافي):"; res.style.color = "#fb7185"; res.innerText = Math.round(diff).toLocaleString('ar-EG') + ' ج.م';
-            } else {
-                lbl.innerText = "الزبون سيأخذ (فارق نقدي متبقي له):"; res.style.color = "#34d399"; res.innerText = Math.round(Math.abs(diff)).toLocaleString('ar-EG') + ' ج.م';
-            }
         }
 
         function calculateBuyTotal() {
