@@ -137,8 +137,8 @@
                     <p class="text-xs text-gray-400">لوحة المتابعة والأرباح وإدارة علب عرض الذهب</p>
                 </div>
                 <div class="flex items-center gap-2 flex-wrap">
-                    <button onclick="openAddCapitalModal()" class="bg-emerald-600/30 hover:bg-emerald-600 text-emerald-300 border border-emerald-500/50 px-3 py-2 rounded-xl text-xs font-bold transition">
-                        <i class="fa-solid fa-vault ml-1"></i> إضافة رأس مال
+                    <button onclick="openAddCapitalModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white border border-emerald-400 px-4 py-2.5 rounded-xl text-xs font-bold transition shadow-lg">
+                        <i class="fa-solid fa-vault ml-1"></i> إدارة/تعديل رأس المال
                     </button>
                     <button onclick="openProfitToCapitalModal()" class="bg-amber-600/30 hover:bg-amber-600 text-amber-300 border border-amber-500/50 px-3 py-2 rounded-xl text-xs font-bold transition">
                         <i class="fa-solid fa-coins ml-1"></i> ضخ أرباح لرأس المال
@@ -165,8 +165,8 @@
                     <span class="text-gray-400 text-xs font-semibold block mb-2">قطع الذهب بالمخزون</span>
                     <div id="dashItemCount" class="text-2xl font-black text-white">0 قطعة</div>
                 </div>
-                <div onclick="switchTab('vault')" class="bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-purple-500/50 cursor-pointer shadow-lg">
-                    <span class="text-gray-400 text-xs font-semibold block mb-2">رأس المال المعتمد</span>
+                <div onclick="openAddCapitalModal()" class="bg-dark-800 p-5 rounded-2xl border border-gray-800 hover:border-purple-500/50 cursor-pointer shadow-lg">
+                    <span class="text-gray-400 text-xs font-semibold block mb-2">رأس المال المعتمد (اضغط للتعديل)</span>
                     <div id="dashCapital" class="text-2xl font-black text-purple-300">0 ج.م</div>
                 </div>
             </div>
@@ -342,10 +342,14 @@
     <!-- MODALS -->
     <div id="addCapitalModal" class="fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4">
         <div class="bg-dark-800 border border-emerald-500/50 rounded-2xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl">
-            <h3 class="text-lg font-black text-emerald-400">إضافة رأس مال جديد للخزينة</h3>
-            <input type="number" id="additionalCapitalInput" placeholder="أدخل المبلغ..." class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-emerald-400 font-black text-lg">
+            <h3 class="text-lg font-black text-emerald-400">إدارة وتعديل رأس المال</h3>
+            <p class="text-xs text-gray-400">يمكنك ضبط رأس المال الحالي وإضافة مبلغ جديد للخزينة.</p>
+            <div>
+                <label class="block text-xs font-bold text-gray-300 mb-1">المبلغ المراد إضافته (EGP)</label>
+                <input type="number" id="additionalCapitalInput" placeholder="أدخل المبلغ الإضافي..." class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-emerald-400 font-black text-lg">
+            </div>
             <div class="flex gap-2 pt-2">
-                <button onclick="confirmAddCapital()" class="flex-1 bg-emerald-600 text-white py-3 rounded-xl font-extrabold">تأكيد</button>
+                <button onclick="confirmAddCapital()" class="flex-1 bg-emerald-600 text-white py-3 rounded-xl font-extrabold">تأكيد الإضافة</button>
                 <button onclick="document.getElementById('addCapitalModal').classList.add('hidden')" class="flex-1 bg-dark-700 text-gray-300 py-3 rounded-xl">إلغاء</button>
             </div>
         </div>
@@ -394,13 +398,17 @@
         let sellTotalManuallyEdited = false;
 
         window.onload = function() {
-            const saved = localStorage.getItem('altaif_gold_state_v14');
+            const saved = localStorage.getItem('altaif_gold_state_v16');
             if(saved) { try { state = JSON.parse(saved); } catch(e){} }
             if(!state.password) state.password = '1234';
 
             if(state.authenticated) {
                 document.getElementById('loginModal').classList.add('hidden');
-                if(!state.capital || state.capital === 0) document.getElementById('capitalModal').classList.remove('hidden');
+                if(!state.capital || state.capital === 0) {
+                    document.getElementById('capitalModal').classList.remove('hidden');
+                } else {
+                    document.getElementById('capitalModal').classList.add('hidden');
+                }
             }
             document.getElementById('priceK21').value = state.k21Price || 3800;
             document.getElementById('manualTotalNetProfitInput').value = state.manualProfit || 0;
@@ -409,7 +417,7 @@
             renderAllData();
         };
 
-        function saveState() { localStorage.setItem('altaif_gold_state_v14', JSON.stringify(state)); }
+        function saveState() { localStorage.setItem('altaif_gold_state_v16', JSON.stringify(state)); }
         
         function exportBackup() {
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
@@ -431,8 +439,14 @@
 
         function handleLogin() {
             if(document.getElementById('loginPasswordInput').value.trim() === state.password) {
-                state.authenticated = true; document.getElementById('loginModal').classList.add('hidden');
-                if(!state.capital || state.capital === 0) document.getElementById('capitalModal').classList.remove('hidden');
+                state.authenticated = true; 
+                document.getElementById('loginModal').classList.add('hidden');
+                
+                if(!state.capital || state.capital === 0) {
+                    document.getElementById('capitalModal').classList.remove('hidden');
+                } else {
+                    document.getElementById('capitalModal').classList.add('hidden');
+                }
                 saveState();
             } else { alert('كلمة المرور غير صحيحة!'); }
         }
@@ -448,9 +462,14 @@
         
         function saveInitialCapital() {
             const cap = parseFloat(document.getElementById('initialCapitalInput').value) || 0;
-            state.capital = cap; state.vaultCash = cap;
+            if(cap <= 0) return alert('أدخل مبلغ رأس مال صحيح');
+            state.capital = cap; 
+            state.vaultCash = cap;
             state.transactions.push({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'capital', desc: 'رأس المال الافتتاحي', amount: cap });
-            document.getElementById('capitalModal').classList.add('hidden'); saveState(); renderAllData();
+            document.getElementById('capitalModal').classList.add('hidden'); 
+            saveState(); 
+            renderAllData();
+            alert('تم حفظ رأس المال الافتتاحي وبدء العمل بنجاح!');
         }
 
         function openAddCapitalModal() { document.getElementById('addCapitalModal').classList.remove('hidden'); }
@@ -460,6 +479,7 @@
             state.capital += amt; state.vaultCash += amt;
             state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'capital', desc: 'إضافة رأس مال جديد', amount: amt });
             saveState(); renderAllData(); document.getElementById('addCapitalModal').classList.add('hidden'); document.getElementById('additionalCapitalInput').value = '';
+            alert('تم إضافة رأس المال بنجاح وتحديث الخزينة!');
         }
 
         function openProfitToCapitalModal() { document.getElementById('profitToCapitalModal').classList.remove('hidden'); }
@@ -470,6 +490,7 @@
             state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'profit', desc: 'تحويل أرباح لرأس المال', amount: amt });
             document.getElementById('manualTotalNetProfitInput').value = state.manualProfit;
             saveState(); renderAllData(); document.getElementById('profitToCapitalModal').classList.add('hidden'); document.getElementById('profitToCapitalInput').value = '';
+            alert('تم ضخ الأرباح في رأس المال بنجاح!');
         }
 
         function openWithdrawProfitModal() { document.getElementById('withdrawProfitModal').classList.remove('hidden'); }
@@ -480,6 +501,7 @@
             state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'withdraw', desc: 'سحب شخصي من الأرباح', amount: -amt });
             document.getElementById('manualTotalNetProfitInput').value = state.manualProfit;
             saveState(); renderAllData(); document.getElementById('withdrawProfitModal').classList.add('hidden'); document.getElementById('withdrawProfitInput').value = '';
+            alert('تم سحب المبلغ من الأرباح بنجاح!');
         }
 
         function updateKaratPricesFrom21(val) { state.k21Price = parseFloat(val) || 3800; saveState(); renderDashboard(); renderInventoryTable(); }
@@ -659,7 +681,6 @@
             let finalTot = calculateItemPrice(item.weight, gp, work);
             if (sellTotalManuallyEdited) finalTot = parseFloat(document.getElementById('sellCustomTotalOverride').value) || finalTot;
 
-            // حذف القطعة تماماً من المخزون (تختفي صورتها من علب العرض)
             state.inventory = state.inventory.filter(i => i.id !== item.id);
             state.vaultCash += finalTot;
             state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'sell', desc: `بيع ${item.itemName}`, amount: finalTot });
