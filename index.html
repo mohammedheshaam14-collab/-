@@ -24,6 +24,23 @@
         body { font-family: 'Cairo', sans-serif; background-color: #0B0D11; color: #E2E8F0; }
         .gold-gradient { background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 100%); }
         .gold-text-gradient { background: linear-gradient(135deg, #FFF099 0%, #D4AF37 50%, #AA7C11 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* علبة عرض الذهب الفاخرة */
+        .jewelry-box {
+            background: radial-gradient(circle, #221d15 0%, #0c0906 100%);
+            border: 2px solid #D4AF37;
+            box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.4), 0 10px 25px rgba(0,0,0,0.8);
+            border-radius: 16px;
+            padding: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        .jewelry-box img {
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            max-height: 180px;
+            object-fit: cover;
+            width: 100%;
+        }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #151821; }
         ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
@@ -117,15 +134,20 @@
             <div class="bg-gradient-to-r from-dark-800 to-dark-700 p-6 rounded-2xl border border-gold/30 flex justify-between items-center flex-wrap gap-4 shadow-xl">
                 <div>
                     <h2 class="text-2xl font-black text-white mb-1">أهلاً بك يا أستاذ محمد 👋</h2>
-                    <p class="text-xs text-gray-400">لوحة المتابعة والأرباح وحفظ البيانات التلقائي</p>
+                    <p class="text-xs text-gray-400">لوحة المتابعة والأرباح وإدارة علب عرض الذهب</p>
                 </div>
-                <div class="flex items-center gap-3">
-                    <div class="bg-dark-900/90 px-4 py-2 rounded-xl border border-gold/20 text-center">
-                        <span class="text-xs text-gray-400 block">إجمالي أوزان المخزون</span>
-                        <span id="dashTotalWeight" class="text-xl font-extrabold text-gold">0.00 جم</span>
-                    </div>
-                    <button onclick="closeCurrentMonth()" class="bg-rose-600/30 hover:bg-rose-600 text-rose-300 border border-rose-500/50 px-4 py-3 rounded-xl text-xs font-bold transition">
-                        <i class="fa-solid fa-calendar-check ml-1"></i> قفل الشهر الحالي وترحيله
+                <div class="flex items-center gap-2 flex-wrap">
+                    <button onclick="openAddCapitalModal()" class="bg-emerald-600/30 hover:bg-emerald-600 text-emerald-300 border border-emerald-500/50 px-3 py-2 rounded-xl text-xs font-bold transition">
+                        <i class="fa-solid fa-vault ml-1"></i> إضافة رأس مال
+                    </button>
+                    <button onclick="openProfitToCapitalModal()" class="bg-amber-600/30 hover:bg-amber-600 text-amber-300 border border-amber-500/50 px-3 py-2 rounded-xl text-xs font-bold transition">
+                        <i class="fa-solid fa-coins ml-1"></i> ضخ أرباح لرأس المال
+                    </button>
+                    <button onclick="openWithdrawProfitModal()" class="bg-blue-600/30 hover:bg-blue-600 text-blue-300 border border-blue-500/50 px-3 py-2 rounded-xl text-xs font-bold transition">
+                        <i class="fa-solid fa-wallet ml-1"></i> سحب من الأرباح
+                    </button>
+                    <button onclick="closeCurrentMonth()" class="bg-rose-600/30 hover:bg-rose-600 text-rose-300 border border-rose-500/50 px-3 py-2 rounded-xl text-xs font-bold transition">
+                        <i class="fa-solid fa-calendar-check ml-1"></i> قفل الشهر
                     </button>
                 </div>
             </div>
@@ -161,7 +183,7 @@
         <!-- BUY TAB -->
         <section id="tab-buy" class="tab-content hidden space-y-6">
             <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl">
-                <h2 class="text-xl font-black text-white mb-4"><i class="fa-solid fa-cart-plus text-emerald-400"></i> تسجيل شراء قطعة ذهب</h2>
+                <h2 class="text-xl font-black text-white mb-4"><i class="fa-solid fa-cart-plus text-emerald-400"></i> تسجيل شراء قطعة ذهب (صورة القطعة اختياري)</h2>
                 <form id="buyForm" onsubmit="handleBuyGold(event)" class="space-y-4">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -182,8 +204,12 @@
                             <label class="block text-xs font-bold text-emerald-400 mb-1">إجمالي السعر المدفوع (تعديل مباشر)</label>
                             <input type="number" id="buyCustomTotalOverride" step="1" oninput="manualTotalChanged = true; calculateBuyTotal();" class="w-full bg-dark-900 border border-emerald-500/60 text-emerald-400 rounded-xl p-3 font-black text-lg">
                         </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-amber-400 mb-1"><i class="fa-solid fa-camera ml-1"></i> صورة القطعة (اختياري - لعرضها داخل علبة العرض)</label>
+                            <input type="file" id="buyItemImage" accept="image/*" class="w-full bg-dark-900 border border-amber-500/40 rounded-xl p-2.5 text-gray-300 text-xs">
+                        </div>
                     </div>
-                    <button type="submit" class="w-full gold-gradient text-dark-900 font-extrabold py-3 rounded-xl shadow-lg">تأكيد الشراء</button>
+                    <button type="submit" class="w-full gold-gradient text-dark-900 font-extrabold py-3 rounded-xl shadow-lg">تأكيد الشراء وإضافة للمخزون</button>
                 </form>
             </div>
         </section>
@@ -191,7 +217,7 @@
         <!-- SELL TAB -->
         <section id="tab-sell" class="tab-content hidden space-y-6">
             <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl">
-                <h2 class="text-xl font-black text-white mb-4"><i class="fa-solid fa-cash-register text-blue-400"></i> بيع قطعة من المخزون</h2>
+                <h2 class="text-xl font-black text-white mb-4"><i class="fa-solid fa-cash-register text-blue-400"></i> بيع قطعة من المخزون (تختفي من المخزون وعلب العرض تماماً)</h2>
                 <form id="sellForm" onsubmit="handleSellGold(event)" class="space-y-4">
                     <select id="sellItemSelect" onchange="updateSellFormDetails()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3 font-bold">
                         <option value="">-- اختر قطعة من المخزون --</option>
@@ -207,25 +233,20 @@
                         <input type="number" id="sellWorkmanshipPerGram" value="100" placeholder="المصنعية للجرام" oninput="calculateSellTotal()" class="w-full bg-dark-900 border border-gray-700 text-white rounded-xl p-3">
                         <input type="number" id="sellCustomTotalOverride" placeholder="الإجمالي النهائي" oninput="sellTotalManuallyEdited = true; calculateSellTotal();" class="w-full bg-dark-900 border border-blue-500/60 text-blue-400 rounded-xl p-3 font-black">
                     </div>
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold py-3 rounded-xl shadow-lg">إتمام البيع</button>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold py-3 rounded-xl shadow-lg">إتمام البيع وإزالة من العرض</button>
                 </form>
             </div>
         </section>
 
-        <!-- INVENTORY TAB -->
+        <!-- INVENTORY TAB WITH JEWELRY BOX DISPLAY -->
         <section id="tab-inventory" class="tab-content hidden space-y-6">
-            <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-black text-white"><i class="fa-solid fa-boxes-stacked text-gold"></i> المخزون</h2>
+            <div class="bg-dark-800 p-6 rounded-2xl border border-gray-800 shadow-xl space-y-6">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xl font-black text-white"><i class="fa-solid fa-boxes-stacked text-gold"></i> مخزون القطع المتاحة (داخل علب العرض الفاخرة)</h2>
                     <span id="inventoryCountBadge" class="bg-gold/10 text-gold px-3 py-1 rounded-full text-xs font-bold">0 قطعة</span>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-right text-xs">
-                        <thead class="bg-dark-900 text-gray-400 font-bold border-b border-gray-800">
-                            <tr><th class="p-3">الكود</th><th class="p-3">الاسم</th><th class="p-3">العيار</th><th class="p-3">الوزن</th><th class="p-3">صافي 24</th><th class="p-3">التكلفة</th><th class="p-3">إجراء</th></tr>
-                        </thead>
-                        <tbody id="inventoryTableBody" class="divide-y divide-gray-800/60"></tbody>
-                    </table>
+                <div id="inventoryGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Inventory items rendered here -->
                 </div>
             </div>
         </section>
@@ -249,20 +270,19 @@
             </div>
         </section>
 
-        <!-- SMART CALCULATOR TAB (WITH GOLD PRICE FIELD FOR EACH BUY ROW) -->
+        <!-- SMART CALCULATOR TAB -->
         <section id="tab-calc" class="tab-content hidden space-y-6">
             <div class="bg-dark-800 p-6 rounded-2xl border border-gold/30 shadow-xl space-y-8">
                 <div class="flex items-center gap-3 border-b border-gray-800 pb-4">
                     <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-calculator"></i></div>
                     <div>
                         <h2 class="text-xl font-black text-white">الآلة الحاسبة الذكية</h2>
-                        <p class="text-xs text-gray-400">حاسبة الشراء (مع خانة مستقلة لسعر الذهب لكل صنف) ومقايضة البدل المبسطة</p>
+                        <p class="text-xs text-gray-400">حاسبة الشراء (سعر الذهب لكل صنف) ومقايضة البدل المبسطة (3 خانات)</p>
                     </div>
                 </div>
 
-                <!-- 1. BUY CALCULATOR (5 ROWS WITH GOLD PRICE FIELD) -->
                 <div class="bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-4">
-                    <h3 class="font-bold text-amber-400 text-sm border-b border-gray-800 pb-2">1. حاسبة الشراء (5 أصناف - سعر الذهب لكل صنف)</h3>
+                    <h3 class="font-bold text-amber-400 text-sm border-b border-gray-800 pb-2">1. حاسبة الشراء (5 أصناف)</h3>
                     <div class="space-y-4" id="calcBuyRowsContainer"></div>
                     <div class="bg-dark-800 p-4 rounded-xl border border-amber-500/30 flex justify-between items-center">
                         <span class="text-sm font-bold text-amber-300">التوتال الإجمالي للشراء:</span>
@@ -270,12 +290,9 @@
                     </div>
                 </div>
 
-                <!-- 2. SIMPLIFIED SWAP CALCULATOR (3 ROWS OLD & 3 ROWS NEW) -->
                 <div class="bg-dark-900 p-5 rounded-2xl border border-gray-800 space-y-4">
                     <h3 class="font-bold text-emerald-400 text-sm border-b border-gray-800 pb-2">2. حاسبة مقايضة البدل (3 خانات قديم وتحته 3 خانات جديد)</h3>
-                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Old Gold (3 rows) -->
                         <div class="bg-dark-800 p-5 rounded-2xl border border-gray-700 space-y-4">
                             <h4 class="text-sm font-bold text-gold border-b border-gray-700 pb-2">أولاً: الذهب القديم (3 خانات)</h4>
                             <div id="swapOldRowsContainer" class="space-y-3"></div>
@@ -285,7 +302,6 @@
                             </div>
                         </div>
 
-                        <!-- New Gold (3 rows) -->
                         <div class="bg-dark-800 p-5 rounded-2xl border border-gray-700 space-y-4">
                             <h4 class="text-sm font-bold text-emerald-400 border-b border-gray-700 pb-2">ثانياً: الذهب الجديد (3 خانات)</h4>
                             <div id="swapNewRowsContainer" class="space-y-3"></div>
@@ -295,7 +311,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="bg-dark-800 p-5 rounded-xl border border-emerald-500/40 text-center space-y-1">
                         <span id="swapFinalStatusLabel" class="text-xs text-gray-400 block">صافي الفارق:</span>
                         <span id="swapFinalResult" class="text-2xl font-black text-emerald-400">0 ج.م</span>
@@ -324,16 +339,46 @@
 
     </main>
 
-    <!-- CHANGE PASSWORD MODAL -->
+    <!-- MODALS -->
+    <div id="addCapitalModal" class="fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4">
+        <div class="bg-dark-800 border border-emerald-500/50 rounded-2xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl">
+            <h3 class="text-lg font-black text-emerald-400">إضافة رأس مال جديد للخزينة</h3>
+            <input type="number" id="additionalCapitalInput" placeholder="أدخل المبلغ..." class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-emerald-400 font-black text-lg">
+            <div class="flex gap-2 pt-2">
+                <button onclick="confirmAddCapital()" class="flex-1 bg-emerald-600 text-white py-3 rounded-xl font-extrabold">تأكيد</button>
+                <button onclick="document.getElementById('addCapitalModal').classList.add('hidden')" class="flex-1 bg-dark-700 text-gray-300 py-3 rounded-xl">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="profitToCapitalModal" class="fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4">
+        <div class="bg-dark-800 border border-amber-500/50 rounded-2xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl">
+            <h3 class="text-lg font-black text-amber-400">تحويل جزء من الأرباح إلى رأس المال</h3>
+            <input type="number" id="profitToCapitalInput" placeholder="أدخل المبلغ..." class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-amber-400 font-black text-lg">
+            <div class="flex gap-2 pt-2">
+                <button onclick="confirmProfitToCapital()" class="flex-1 bg-amber-600 text-dark-900 py-3 rounded-xl font-extrabold">تأكيد</button>
+                <button onclick="document.getElementById('profitToCapitalModal').classList.add('hidden')" class="flex-1 bg-dark-700 text-gray-300 py-3 rounded-xl">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="withdrawProfitModal" class="fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4">
+        <div class="bg-dark-800 border border-blue-500/50 rounded-2xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl">
+            <h3 class="text-lg font-black text-blue-400">سحب نقدي من الأرباح</h3>
+            <input type="number" id="withdrawProfitInput" placeholder="أدخل المبلغ..." class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-blue-400 font-black text-lg">
+            <div class="flex gap-2 pt-2">
+                <button onclick="confirmWithdrawProfit()" class="flex-1 bg-blue-600 text-white py-3 rounded-xl font-extrabold">تأكيد</button>
+                <button onclick="document.getElementById('withdrawProfitModal').classList.add('hidden')" class="flex-1 bg-dark-700 text-gray-300 py-3 rounded-xl">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
     <div id="changePasswordModal" class="fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4">
         <div class="bg-dark-800 border border-gold/50 rounded-2xl p-6 max-w-md w-full space-y-4 text-right shadow-2xl">
             <h3 class="text-lg font-black text-gold">تغيير كلمة المرور</h3>
-            <div>
-                <label class="block text-xs font-bold text-gray-300 mb-1">كلمة المرور الجديدة</label>
-                <input type="password" id="newPasswordInput" placeholder="أدخل الباسورد الجديد..." class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-white font-bold">
-            </div>
+            <input type="password" id="newPasswordInput" placeholder="الباسورد الجديد..." class="w-full bg-dark-900 border border-gray-700 rounded-xl p-3 text-white font-bold">
             <div class="flex gap-2 pt-2">
-                <button onclick="saveNewPassword()" class="flex-1 gold-gradient text-dark-900 py-3 rounded-xl font-extrabold">حفظ الباسورد الجديد</button>
+                <button onclick="saveNewPassword()" class="flex-1 gold-gradient text-dark-900 py-3 rounded-xl font-extrabold">حفظ</button>
                 <button onclick="document.getElementById('changePasswordModal').classList.add('hidden')" class="flex-1 bg-dark-700 text-gray-300 py-3 rounded-xl">إلغاء</button>
             </div>
         </div>
@@ -349,7 +394,7 @@
         let sellTotalManuallyEdited = false;
 
         window.onload = function() {
-            const saved = localStorage.getItem('altaif_gold_state_v9');
+            const saved = localStorage.getItem('altaif_gold_state_v14');
             if(saved) { try { state = JSON.parse(saved); } catch(e){} }
             if(!state.password) state.password = '1234';
 
@@ -364,40 +409,29 @@
             renderAllData();
         };
 
-        function saveState() { localStorage.setItem('altaif_gold_state_v9', JSON.stringify(state)); }
+        function saveState() { localStorage.setItem('altaif_gold_state_v14', JSON.stringify(state)); }
         
         function exportBackup() {
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", "altaif_gold_backup_" + new Date().toISOString().slice(0,10) + ".json");
-            document.body.appendChild(downloadAnchor);
-            downloadAnchor.click();
-            downloadAnchor.remove();
+            const dl = document.createElement('a'); dl.setAttribute("href", dataStr);
+            dl.setAttribute("download", "altaif_gold_backup_" + new Date().toISOString().slice(0,10) + ".json");
+            document.body.appendChild(dl); dl.click(); dl.remove();
         }
 
         function importBackup(event) {
-            const fileReader = new FileReader();
+            const fr = new FileReader();
             if(event.target.files[0]) {
-                fileReader.readAsText(event.target.files[0], "UTF-8");
-                fileReader.onload = function(e) {
-                    try {
-                        state = JSON.parse(e.target.result);
-                        saveState();
-                        renderAllData();
-                        alert('تم استعادة البيانات بنجاح تام!');
-                    } catch (error) {
-                        alert('ملف النسخة الاحتياطية غير صالح!');
-                    }
+                fr.readAsText(event.target.files[0], "UTF-8");
+                fr.onload = function(e) {
+                    try { state = JSON.parse(e.target.result); saveState(); renderAllData(); alert('تم الاستعادة بنجاح!'); }
+                    catch (err) { alert('الملف غير صالح!'); }
                 };
             }
         }
 
         function handleLogin() {
-            const pass = document.getElementById('loginPasswordInput').value.trim();
-            if(pass === state.password) {
-                state.authenticated = true;
-                document.getElementById('loginModal').classList.add('hidden');
+            if(document.getElementById('loginPasswordInput').value.trim() === state.password) {
+                state.authenticated = true; document.getElementById('loginModal').classList.add('hidden');
                 if(!state.capital || state.capital === 0) document.getElementById('capitalModal').classList.remove('hidden');
                 saveState();
             } else { alert('كلمة المرور غير صحيحة!'); }
@@ -405,12 +439,9 @@
 
         function openChangePasswordModal() { document.getElementById('changePasswordModal').classList.remove('hidden'); }
         function saveNewPassword() {
-            const newP = document.getElementById('newPasswordInput').value.trim();
-            if(newP.length < 2) return alert('أدخل كلمة مرور صحيحة');
-            state.password = newP;
-            saveState();
-            document.getElementById('changePasswordModal').classList.add('hidden');
-            alert('تم تغيير كلمة المرور بنجاح!');
+            const p = document.getElementById('newPasswordInput').value.trim();
+            if(p.length < 2) return alert('أدخل باسورد صحيح');
+            state.password = p; saveState(); document.getElementById('changePasswordModal').classList.add('hidden'); alert('تم التغيير!');
         }
 
         function logout() { state.authenticated = false; saveState(); location.reload(); }
@@ -422,10 +453,36 @@
             document.getElementById('capitalModal').classList.add('hidden'); saveState(); renderAllData();
         }
 
-        function updateKaratPricesFrom21(val) {
-            state.k21Price = parseFloat(val) || 3800;
-            saveState(); renderDashboard(); renderInventoryTable();
+        function openAddCapitalModal() { document.getElementById('addCapitalModal').classList.remove('hidden'); }
+        function confirmAddCapital() {
+            const amt = parseFloat(document.getElementById('additionalCapitalInput').value) || 0;
+            if(amt <= 0) return alert('أدخل مبلغ صحيح');
+            state.capital += amt; state.vaultCash += amt;
+            state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'capital', desc: 'إضافة رأس مال جديد', amount: amt });
+            saveState(); renderAllData(); document.getElementById('addCapitalModal').classList.add('hidden'); document.getElementById('additionalCapitalInput').value = '';
         }
+
+        function openProfitToCapitalModal() { document.getElementById('profitToCapitalModal').classList.remove('hidden'); }
+        function confirmProfitToCapital() {
+            const amt = parseFloat(document.getElementById('profitToCapitalInput').value) || 0;
+            if(amt <= 0 || amt > state.manualProfit) return alert('المبلغ غير متاح بالأرباح');
+            state.manualProfit -= amt; state.capital += amt; state.vaultCash += amt;
+            state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'profit', desc: 'تحويل أرباح لرأس المال', amount: amt });
+            document.getElementById('manualTotalNetProfitInput').value = state.manualProfit;
+            saveState(); renderAllData(); document.getElementById('profitToCapitalModal').classList.add('hidden'); document.getElementById('profitToCapitalInput').value = '';
+        }
+
+        function openWithdrawProfitModal() { document.getElementById('withdrawProfitModal').classList.remove('hidden'); }
+        function confirmWithdrawProfit() {
+            const amt = parseFloat(document.getElementById('withdrawProfitInput').value) || 0;
+            if(amt <= 0 || amt > state.manualProfit) return alert('المبلغ غير متاح بالأرباح');
+            state.manualProfit -= amt; state.vaultCash -= amt;
+            state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'withdraw', desc: 'سحب شخصي من الأرباح', amount: -amt });
+            document.getElementById('manualTotalNetProfitInput').value = state.manualProfit;
+            saveState(); renderAllData(); document.getElementById('withdrawProfitModal').classList.add('hidden'); document.getElementById('withdrawProfitInput').value = '';
+        }
+
+        function updateKaratPricesFrom21(val) { state.k21Price = parseFloat(val) || 3800; saveState(); renderDashboard(); renderInventoryTable(); }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -440,36 +497,16 @@
         function saveManualProfit(val) { state.manualProfit = parseFloat(val) || 0; saveState(); }
 
         function closeCurrentMonth() {
-            const monthName = prompt("أدخل اسم الشهر المراد قفله وترحيله (مثلاً: شهر أكتوبر 2026):", "شهر " + new Date().toLocaleString('ar-EG', {month: 'long', year: 'numeric'}));
+            const monthName = prompt("أدخل اسم الشهر المراد قفله:", "شهر " + new Date().toLocaleString('ar-EG', {month: 'long', year: 'numeric'}));
             if(!monthName) return;
-
             let tw = 0; state.inventory.forEach(i => tw += i.weight);
-            const archiveRecord = {
-                id: Date.now(),
-                monthName: monthName,
-                date: new Date().toLocaleDateString('ar-EG'),
-                vaultCash: state.vaultCash,
-                netProfit: state.manualProfit,
-                totalWeight: tw,
-                itemCount: state.inventory.length
-            };
-
-            if(!state.archiveMonths) state.archiveMonths = [];
-            state.archiveMonths.unshift(archiveRecord);
-            
-            state.manualProfit = 0;
-            document.getElementById('manualTotalNetProfitInput').value = 0;
-            saveState();
-            renderAllData();
-            alert('تم قفل الشهر وترحيله للأرشيف بنجاح!');
+            state.archiveMonths.unshift({ id: Date.now(), monthName, date: new Date().toLocaleDateString('ar-EG'), vaultCash: state.vaultCash, netProfit: state.manualProfit, totalWeight: tw, itemCount: state.inventory.length });
+            state.manualProfit = 0; document.getElementById('manualTotalNetProfitInput').value = 0;
+            saveState(); renderAllData(); alert('تم قفل الشهر بنجاح!');
         }
 
         function calculateItemPrice(weight, goldPrice, workmanship) {
-            if (weight < 1) {
-                return (goldPrice * weight) + workmanship;
-            } else {
-                return (goldPrice + workmanship) * weight;
-            }
+            return weight < 1 ? (goldPrice * weight) + workmanship : (goldPrice + workmanship) * weight;
         }
 
         function buildCalcRows() {
@@ -480,22 +517,10 @@
                     <div class="bg-dark-800 p-3.5 rounded-xl border border-gray-700 space-y-2">
                         <div class="text-xs font-bold text-gray-400 flex justify-between"><span>الصنف (${i})</span><span class="text-amber-400 font-black text-sm" id="cb_res_${i}">0 ج.م</span></div>
                         <div class="grid grid-cols-1 sm:grid-cols-4 gap-2">
-                            <div>
-                                <label class="block text-[9px] text-gray-500 mb-1">الوزن جم</label>
-                                <input type="number" id="cb_weight_${i}" placeholder="وزن" step="0.01" oninput="calcBuy()" class="w-full bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
-                            </div>
-                            <div>
-                                <label class="block text-[9px] text-gray-500 mb-1">العيار</label>
-                                <select id="cb_karat_${i}" onchange="calcBuy()" class="w-full bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold"><option value="21">ع 21</option><option value="18">ع 18</option><option value="24">ع 24</option></select>
-                            </div>
-                            <div>
-                                <label class="block text-[9px] text-gray-500 mb-1">سعر الذهب</label>
-                                <input type="number" id="cb_price_${i}" value="${Math.round(state.k21Price)}" oninput="calcBuy()" class="w-full bg-dark-900 border border-gray-700 rounded p-2 text-gold text-xs font-bold">
-                            </div>
-                            <div>
-                                <label class="block text-[9px] text-gray-500 mb-1">المصنعية</label>
-                                <input type="number" id="cb_work_${i}" placeholder="مصنعية" value="0" oninput="calcBuy()" class="w-full bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
-                            </div>
+                            <input type="number" id="cb_weight_${i}" placeholder="وزن جم" step="0.01" oninput="calcBuy()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
+                            <select id="cb_karat_${i}" onchange="calcBuy()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold"><option value="21">ع 21</option><option value="18">ع 18</option><option value="24">ع 24</option></select>
+                            <input type="number" id="cb_price_${i}" value="${Math.round(state.k21Price)}" oninput="calcBuy()" class="bg-dark-900 border border-gray-700 rounded p-2 text-gold text-xs font-bold">
+                            <input type="number" id="cb_work_${i}" placeholder="مصنعية" value="0" oninput="calcBuy()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
                         </div>
                     </div>
                 `;
@@ -507,16 +532,16 @@
             for(let i=1; i<=3; i++) {
                 oldCont.innerHTML += `
                     <div class="grid grid-cols-3 gap-2">
-                        <div><label class="block text-[9px] text-gray-500">وزن قديم (${i})</label><input type="number" id="so_w_${i}" placeholder="وزن" step="0.01" oninput="calcSwap()" class="w-full bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold"></div>
-                        <div><label class="block text-[9px] text-gray-500">السعر</label><input type="number" id="so_p_${i}" value="${Math.round(state.k21Price)}" oninput="calcSwap()" class="w-full bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold"></div>
-                        <div><label class="block text-[9px] text-gray-500">الخصم</label><input type="number" id="so_d_${i}" value="30" oninput="calcSwap()" class="w-full bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold"></div>
+                        <input type="number" id="so_w_${i}" placeholder="وزن قديم" step="0.01" oninput="calcSwap()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
+                        <input type="number" id="so_p_${i}" value="${Math.round(state.k21Price)}" oninput="calcSwap()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
+                        <input type="number" id="so_d_${i}" value="30" oninput="calcSwap()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
                     </div>
                 `;
                 newCont.innerHTML += `
                     <div class="grid grid-cols-3 gap-2">
-                        <div><label class="block text-[9px] text-gray-500">وزن جديد (${i})</label><input type="number" id="sn_w_${i}" placeholder="وزن" step="0.01" oninput="calcSwap()" class="w-full bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold"></div>
-                        <div><label class="block text-[9px] text-gray-500">السعر</label><input type="number" id="sn_p_${i}" value="${Math.round(state.k21Price)}" oninput="calcSwap()" class="w-full bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold"></div>
-                        <div><label class="block text-[9px] text-gray-500">المصنعية</label><input type="number" id="sn_k_${i}" value="100" oninput="calcSwap()" class="w-full bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold"></div>
+                        <input type="number" id="sn_w_${i}" placeholder="وزن جديد" step="0.01" oninput="calcSwap()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
+                        <input type="number" id="sn_p_${i}" value="${Math.round(state.k21Price)}" oninput="calcSwap()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
+                        <input type="number" id="sn_k_${i}" value="100" oninput="calcSwap()" class="bg-dark-900 border border-gray-700 rounded p-2 text-white text-xs font-bold">
                     </div>
                 `;
             }
@@ -527,14 +552,10 @@
             for(let i=1; i<=5; i++) {
                 const w = parseFloat(document.getElementById(`cb_weight_${i}`).value) || 0;
                 const karat = document.getElementById(`cb_karat_${i}`).value;
-                const customP = parseFloat(document.getElementById(`cb_price_${i}`).value) || state.k21Price;
+                const cp = parseFloat(document.getElementById(`cb_price_${i}`).value) || state.k21Price;
                 const work = parseFloat(document.getElementById(`cb_work_${i}`).value) || 0;
-                
-                let gPrice = customP;
-                if(karat === '24') gPrice = (customP * 24) / 21;
-                if(karat === '18') gPrice = (customP * 6) / 7;
-
-                const tot = calculateItemPrice(w, gPrice, work);
+                let gp = karat === '24' ? (cp*24)/21 : (karat === '18' ? (cp*6)/7 : cp);
+                const tot = calculateItemPrice(w, gp, work);
                 grand += tot;
                 document.getElementById(`cb_res_${i}`).innerText = Math.round(tot).toLocaleString('ar-EG') + ' ج.م';
             }
@@ -548,27 +569,20 @@
                 const op = parseFloat(document.getElementById(`so_p_${i}`).value) || 0;
                 const od = parseFloat(document.getElementById(`so_d_${i}`).value) || 0;
                 oldTot += calculateItemPrice(ow, Math.max(0, op - od), 0);
-
                 const nw = parseFloat(document.getElementById(`sn_w_${i}`).value) || 0;
                 const np = parseFloat(document.getElementById(`sn_p_${i}`).value) || 0;
                 const nk = parseFloat(document.getElementById(`sn_k_${i}`).value) || 0;
                 newTot += calculateItemPrice(nw, np, nk);
             }
-
             document.getElementById('swapOldTotalRes').innerText = Math.round(oldTot).toLocaleString('ar-EG') + ' ج.م';
             document.getElementById('swapNewTotalRes').innerText = Math.round(newTot).toLocaleString('ar-EG') + ' ج.م';
-
             const diff = newTot - oldTot;
             const lbl = document.getElementById('swapFinalStatusLabel');
             const res = document.getElementById('swapFinalResult');
             if(diff > 0) {
-                lbl.innerText = "الزبون سيقوم بدفع (فارق نقدي للمحل):";
-                res.className = "text-2xl font-black text-rose-400";
-                res.innerText = Math.round(diff).toLocaleString('ar-EG') + ' ج.م (دفع)';
+                lbl.innerText = "الزبون سيقوم بدفع (فارق نقدي):"; res.className = "text-2xl font-black text-rose-400"; res.innerText = Math.round(diff).toLocaleString('ar-EG') + ' ج.م (دفع)';
             } else {
-                lbl.innerText = "الزبون سيأخذ (فارق نقدي من المحل):";
-                res.className = "text-2xl font-black text-emerald-400";
-                res.innerText = Math.round(Math.abs(diff)).toLocaleString('ar-EG') + ' ج.م (قبض)';
+                lbl.innerText = "الزبون سيأخذ (فارق نقدي):"; res.className = "text-2xl font-black text-emerald-400"; res.innerText = Math.round(Math.abs(diff)).toLocaleString('ar-EG') + ' ج.م (قبض)';
             }
         }
 
@@ -588,9 +602,26 @@
             const gPrice = karat === '24' ? (state.k21Price * 24)/21 : (karat === '18' ? (state.k21Price * 6)/7 : state.k21Price);
             let cost = calculateItemPrice(weight, gPrice, 0);
             if (manualTotalChanged) cost = parseFloat(document.getElementById('buyCustomTotalOverride').value) || cost;
-
             if (cost > state.vaultCash) return alert('عفواً، لا توجد نقدية كافية بالخزينة!');
-            state.inventory.push({ id: 'G-' + Math.floor(1000 + Math.random() * 9000), itemName, karat, weight, pureGoldWeight: (weight*parseInt(karat))/24, purchaseCost: cost, date: new Date().toLocaleString('ar-EG') });
+
+            const imageInput = document.getElementById('buyItemImage');
+            if(imageInput.files && imageInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(uploadEvent) {
+                    saveItemToInventory(itemName, karat, weight, cost, uploadEvent.target.result);
+                };
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                saveItemToInventory(itemName, karat, weight, cost, null);
+            }
+        }
+
+        function saveItemToInventory(itemName, karat, weight, cost, imageUrl) {
+            state.inventory.push({
+                id: 'G-' + Math.floor(1000 + Math.random() * 9000),
+                itemName, karat, weight, pureGoldWeight: (weight*parseInt(karat))/24,
+                purchaseCost: cost, image: imageUrl, date: new Date().toLocaleString('ar-EG')
+            });
             state.vaultCash -= cost;
             state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'buy', desc: `شراء ${itemName}`, amount: -cost });
             document.getElementById('buyForm').reset(); manualTotalChanged = false; saveState(); renderAllData(); switchTab('inventory');
@@ -620,17 +651,25 @@
 
         function handleSellGold(e) {
             e.preventDefault();
-            const item = state.inventory.find(i => i.id === document.getElementById('sellItemSelect').value);
+            const selectedId = document.getElementById('sellItemSelect').value;
+            const item = state.inventory.find(i => i.id === selectedId);
             if (!item) return;
             const gp = parseFloat(document.getElementById('sellGramPrice').value) || 0;
             const work = parseFloat(document.getElementById('sellWorkmanshipPerGram').value) || 0;
             let finalTot = calculateItemPrice(item.weight, gp, work);
             if (sellTotalManuallyEdited) finalTot = parseFloat(document.getElementById('sellCustomTotalOverride').value) || finalTot;
 
+            // حذف القطعة تماماً من المخزون (تختفي صورتها من علب العرض)
             state.inventory = state.inventory.filter(i => i.id !== item.id);
             state.vaultCash += finalTot;
             state.transactions.unshift({ id: Date.now(), date: new Date().toLocaleString('ar-EG'), type: 'sell', desc: `بيع ${item.itemName}`, amount: finalTot });
+            
+            document.getElementById('sellForm').reset();
+            document.getElementById('sellItemDetailsBox').classList.add('hidden');
+            sellTotalManuallyEdited = false;
+            
             saveState(); renderAllData(); switchTab('dashboard');
+            alert('تم بيع القطعة بنجاح وإزالتها من المخزون وعلب العرض!');
         }
 
         function saveRentData() {
@@ -679,13 +718,45 @@
         }
 
         function renderInventoryTable() {
-            const tbody = document.getElementById('inventoryTableBody'); const sel = document.getElementById('sellItemSelect');
-            tbody.innerHTML = ''; sel.innerHTML = '<option value="">-- اختر قطعة --</option>';
+            const gridContainer = document.getElementById('inventoryGridContainer');
+            const sel = document.getElementById('sellItemSelect');
+            gridContainer.innerHTML = ''; sel.innerHTML = '<option value="">-- اختر قطعة --</option>';
             document.getElementById('inventoryCountBadge').innerText = state.inventory.length + ' قطعة';
+
             state.inventory.forEach(i => {
-                tbody.innerHTML += `<tr class="hover:bg-dark-700/50"><td class="p-3 text-gold font-bold">${i.id}</td><td class="p-3 font-bold">${i.itemName}</td><td class="p-3">ع ${i.karat}</td><td class="p-3">${i.weight.toFixed(2)} جم</td><td class="p-3 text-gold">${i.pureGoldWeight.toFixed(2)} جم</td><td class="p-3 text-emerald-400">${Math.round(i.purchaseCost)} ج.م</td><td class="p-3"><button onclick="state.inventory=state.inventory.filter(x=>x.id!='${i.id}');saveState();renderAllData();" class="text-rose-400"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+                const imageContent = i.image ? 
+                    `<img src="${i.image}" alt="${i.itemName}">` : 
+                    `<div class="h-32 flex flex-col items-center justify-center text-gold/60 bg-dark-900/60 rounded-xl border border-gold/20"><i class="fa-solid fa-gem text-3xl mb-1"></i><span class="text-[10px] text-gray-400">الطائف - بدون صورة</span></div>`;
+
+                gridContainer.innerHTML += `
+                    <div class="jewelry-box space-y-3">
+                        <div class="flex justify-between items-center text-xs border-b border-gold/30 pb-2">
+                            <span class="text-gold font-bold">${i.id}</span>
+                            <span class="text-white font-black">${i.itemName}</span>
+                        </div>
+                        <div>
+                            ${imageContent}
+                        </div>
+                        <div class="grid grid-cols-3 gap-1 text-[11px] text-center bg-dark-900/80 p-2 rounded-lg border border-gray-700">
+                            <div>العيار: <span class="text-gold font-bold">${i.karat}</span></div>
+                            <div>الوزن: <span class="text-white font-bold">${i.weight.toFixed(2)} جم</span></div>
+                            <div>التكلفة: <span class="text-emerald-400 font-bold">${Math.round(i.purchaseCost)} ج.م</span></div>
+                        </div>
+                        <div class="text-left pt-1">
+                            <button onclick="deleteInventoryItem('${i.id}')" class="text-xs text-rose-400 hover:text-rose-300 bg-rose-950/40 px-3 py-1.5 rounded-lg border border-rose-800/50 w-full"><i class="fa-solid fa-trash ml-1"></i> حذف القطعة</button>
+                        </div>
+                    </div>
+                `;
+
                 sel.innerHTML += `<option value="${i.id}">${i.id} - ${i.itemName} (${i.weight.toFixed(2)} جم)</option>`;
             });
+        }
+
+        function deleteInventoryItem(id) {
+            if(confirm('هل أنت متأكد من حذف هذه القطعة؟')) {
+                state.inventory = state.inventory.filter(x => x.id !== id);
+                saveState(); renderAllData();
+            }
         }
 
         function renderVaultTransactions() {
